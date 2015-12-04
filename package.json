@@ -1,0 +1,23 @@
+{
+  "name": "da_intranet",
+  "version": "1.0.0",
+  "description": "DAIICT's intranet and webmail app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kepta/daintranet.git"
+  },
+  "keywords": [
+    "DAIICT",
+    "webmail",
+    "intranet",
+    "kushan",
+    "joshi",
+    "kepta"
+  ],
+  "author": "Kushan Joshi",
+  "license": "ISC"
+}
