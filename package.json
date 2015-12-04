@@ -21,7 +21,16 @@
   "author": "Kushan Joshi",
   "license": "ISC",
   "devDependencies": {
-    "jspm": "^0.16.15"
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.11.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "jspm": "^0.16.15",
+    "node-sass": "^3.4.2",
+    "run-sequence": "^1.1.5"
   },
   "jspm": {
     "devDependencies": {
