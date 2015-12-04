@@ -37,7 +37,7 @@ gulp.task('deploy', function() {
 });
 gulp.task('jspm-bundle', function(done) {
     jspm.setPackagePath('.');
-    jspm.bundleSFX('app/main', dist+'/main.js', {
+    jspm.bundleSFX('app/', dist+'/main.js', {
         sourceMaps: true,
         minify : true,
         mangle : true
@@ -67,7 +67,6 @@ gulp.task('server', ['sass'], function() {
         server: './',
         browser: 'google chrome'
     });
-
     gulp.watch('app/**/*.scss',['sass']);
     gulp.watch(['*.html', '*.css', 'app/**/*.js']
       , browserSync.reload);
