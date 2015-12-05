@@ -19,6 +19,8 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "react": "npm:react@0.14.3",
     "react-dom": "npm:react-dom@0.14.3",
+    "react-redux": "npm:react-redux@4.0.0",
+    "redux": "npm:redux@3.0.4",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -99,6 +101,10 @@ System.config({
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:invariant@2.2.0": {
+      "loose-envify": "npm:loose-envify@1.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:jstransform@10.1.0": {
       "base62": "npm:base62@0.1.1",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -126,6 +132,13 @@ System.config({
     "npm:react-dom@0.14.3": {
       "react": "npm:react@0.14.3"
     },
+    "npm:react-redux@4.0.0": {
+      "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.3",
+      "invariant": "npm:invariant@2.2.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.3",
+      "redux": "npm:redux@3.0.4"
+    },
     "npm:react@0.14.3": {
       "envify": "npm:envify@3.4.0",
       "fbjs": "npm:fbjs@0.3.2",
@@ -140,6 +153,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "stream-browserify": "npm:stream-browserify@1.0.0",
       "string_decoder": "npm:string_decoder@0.10.31"
+    },
+    "npm:redux@3.0.4": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:source-map@0.1.31": {
       "amdefine": "npm:amdefine@1.0.0",
