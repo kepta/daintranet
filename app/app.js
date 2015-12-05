@@ -18,6 +18,7 @@ function mapStateToProps(state) {
   console.log(state);
   return {login: state.login};
 }
+
 /**
  * Maps state to props
  * @param {obj} dispatch The global state
