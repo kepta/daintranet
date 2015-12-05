@@ -32,10 +32,13 @@ export default class Login extends React.Component {
     return (
       <div style={this.styles.main}>
         <div>
-          <input style={this.styles.input} ref="userId" type="text" placeholder="id"/>
+          <input style={this.styles.input}
+            ref="userId" type="text" placeholder="id"/>
         </div>
         <div>
-          <input style={this.styles.input} ref="password" type="password" placeholder="password"/>
+          <input style={this.styles.input}
+              ref="password" type="password"
+              placeholder="password"/>
         </div>
         <div style={this.styles.checkbox} className="checker layout-row">
           <div style={{
