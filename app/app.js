@@ -8,33 +8,24 @@ import { LOGGED_IN, LOGGED_OUT, LOGGING, LOGIN_ERROR } from './state/actions';
 import Login from './components/login';
 import Loading from './components/loading';
 import MainWrapper from './components/MainWrapper';
-/**
- * Maps state to props
- * @param {obj} state The global state
- * @return {login} mapped to state
- */
+
 function mapStateToProps(state) {
   console.log(state);
   return { login: state.login };
 }
 
-/**
- * Maps state to props
- * @param {obj} dispatch The global state
- * @return {obj} bindActionCreators mapped to state
- */
 function mapDispatchToProps(dispatch) {
-  console.log(Actions);
   return bindActionCreators(Actions, dispatch);
 }
-
 class App extends Component {
   constructor (props, context) {
     super(props, context);
     this.state = {
-      user: null,
+      inbox: null,
+      mails: null,
     };
     this.setLogin = this.setLogin.bind(this);
+    this.setInbox = this.setInbox.bind(this);
   }
   setLogin (userId, password) {
     this.setState({
@@ -45,23 +36,37 @@ class App extends Component {
     });
     this.props.setLogging();
   }
+  setInbox (inbox, mails) {
+    this.setState({
+      inbox, mails,
+    });
+  }
   render () {
     console.log(this.props.login);
-    switch (this.props.login) {
+    const user = { id: this.props.login.ID, pass: this.props.login.PASS };
+    console.log(user);
+    const props = {
+      setLogging: this.props.setLogging,
+      loginState: this.props.login.STATUS,
+      setLogout: this.props.setLogout,
+      user,
+      dbPromise: this.props.dbPromise,
+    };
+    switch (this.props.login.STATUS) {
       case LOGGED_OUT:
       case LOGIN_ERROR:
-        return (<Login actions={this.props.setLogging}
-                       setLogin={this.setLogin}
-                       loginState={this.props.login}/>);
+        return (<Login {...props}/>);
       case LOGGED_IN:
-        return (<MainWrapper logout={this.props.setLogout}
-                             dbPromise={this.props.dbPromise}/>);
+        return (<MainWrapper {...props}
+                              inbox={this.state.inbox}
+                              mails={this.state.mails
+                              }/>);
       case LOGGING:
         return (
-          <Loading user={this.state.user}
-                        actionLoggedIn={this.props.setLoggedIn}
-                        actionLoginError={this.props.setLoginError}
-                        dbPromise={this.props.dbPromise}
+          <Loading {...props}
+                    actionLoggedIn={this.props.setLoggedIn}
+                    setLoginError={this.props.setLoginError}
+                    setInbox={this.setInbox}
           />
         );
       default:

@@ -8,8 +8,9 @@ export default class Login extends Base {
     this.state = {
       checked: false,
     };
-    this.HandleLogin = this.HandleLogin.bind(this);
-    this.HandleChange = this.HandleChange.bind(this);
+    // this.HandleLogin = this.HandleLogin.bind(this);
+    // this.HandleChange = this.HandleChange.bind(this);
+    this._bind('HandleLogin', 'HandleChange');
     this.styles = this.styles();
   }
   componentDidMount() {}
@@ -23,10 +24,7 @@ export default class Login extends Base {
   HandleLogin() {
     const id = (this.refs.userId.value);
     const pass = (this.refs.password.value);
-    // const save = this.refs.checker.checked;
-    // console.log(email, pass, save);
-    this.props.setLogin(id, pass);
-    this.props.actions();
+    this.props.setLogging({ id, pass });
   }
   HandleChange() {
     // const check = this.refs.checker.getDOMNode().checked;
@@ -39,6 +37,7 @@ export default class Login extends Base {
     return (
       <div style={this.styles.main}>
         {error}
+        <form>
         <div>
           <input style={this.styles.input}
             ref="userId" type="text" placeholder="id"/>
@@ -48,6 +47,7 @@ export default class Login extends Base {
               ref="password" type="password"
               placeholder="password"/>
         </div>
+        </form>
         {/*<div style={this.styles.checkbox} className="checker layout-row">
           <div style={{
             paddingRight: '10px',

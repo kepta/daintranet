@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import gulp from  'gulp';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
@@ -38,7 +39,7 @@ gulp.task('deploy', function() {
 gulp.task('jspm-bundle', function(done) {
     jspm.setPackagePath('.');
     jspm.bundleSFX('app/index', dist+'/main.js', {
-        sourceMaps: true,
+        sourceMaps: false,
         minify : true,
         mangle : true
     }).then(() => {
@@ -77,3 +78,5 @@ gulp.task('build-deploy',function(done) {
 });
 
 gulp.task('build', ['sass-build','jspm-bundle','html-build']);
+
+gulp.task('jspm', ['jspm-bundle']);
