@@ -49,7 +49,7 @@ gulp.task('html-build', function() {
     gulp.src('index.html')
         .pipe(replace('jspm_packages/system.js', ''))
         .pipe(replace('<script src="config.js"></script>', ''))
-        .pipe(replace('<script>System.import("app/main");</script>', '<script src="main.js"></script>'))
+        .pipe(replace('<script>System.import("app/index.js");</script>', '<script src="main.js"></script>'))
         .pipe(gulp.dest(dist));
 });
 gulp.task('sass-build', function() {
