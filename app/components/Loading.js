@@ -3,7 +3,7 @@ import Base from './Base';
 import LoadingDumb from './Loading.dumb';
 import db from '../localdb/indexdb';
 import { getInbox } from '../network/Fetch';
-const LASTEMAILS = 50;
+const LASTEMAILS = 5;
 
 export default class Loading extends Base {
   constructor (props) {
@@ -18,7 +18,7 @@ export default class Loading extends Base {
     this.props.dbPromise.then(() => {
       getInbox(this.props.user).then((res, rej) => {
         const ids = this.extractId(res, res.length - LASTEMAILS, res.length);
-        Promise.all(db.getAll(ids, this.props.user)).then(mails => {
+        Promise.race(db.getAll(ids, this.props.user)).then(mails => {
           console.log(mails);
           this.props.setInbox(res, mails);
           this.props.actionLoggedIn();

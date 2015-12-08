@@ -1,20 +1,26 @@
 import Request from 'superagent';
+import { MailParser } from 'mailparser';
+
 export const BASEURL = 'http://localhost:1337/webmail.daiict.ac.in';
-const TIMER = 3000;
+const TIMER = 7000;
 const TIMER_INBOX = 3000;
 
 export function fetchEmail(id, user) {
   return new Promise((resolve, reject) => {
     Request.get(
-      `${BASEURL}/home/~/?id=${id}&fmt=json`)
+      `${BASEURL}/home/~/?id=${id}`)
           .auth(user.id, user.pass)
           .timeout(TIMER)
           .end((err, resp) => {
             if (err) {
               reject(err);
             } else {
-              console.log(typeof resp);
-              resolve(resp.text);
+              const mailparser = new MailParser();
+              mailparser.write(resp.text);
+              mailparser.end();
+              mailparser.on('end', (mailObject) => {
+                return resolve((mailObject));
+              });
             }
           });
   });
