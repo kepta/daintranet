@@ -13,23 +13,25 @@ export default class SideBar extends Base {
         mails: [],
       };
       this.populateInbox = this.populateInbox.bind(this);
-      this.styles= this.styles();
+      this.style= this.style();
     }
     populateInbox(mailArg) {
       return mailArg.map((mail, iter) => {
+        console.log(mail);
         const secondaryText = (
           <p>
             <span style={{ color: 'black' }}> { mail.su } </span><br/>
             {mail.fr}
           </p>
         );
+        const from = mail.e[0].d || mail.e[0].a;
         return (
           <div key={iter} onClick={this.props.showEmail.bind(this, mail.id)}>
             <ListItem
             primaryText={mail.e[0].p}
             secondaryText={secondaryText}
             secondaryTextLines={2}
-            leftAvatar={<Avatar>{mail.e[0].a[0].toUpperCase()}</Avatar>}
+            leftAvatar={<Avatar>{ from[0].toUpperCase() + from[1] }</Avatar>}
             />
             <ListDivider/>
           </div>
@@ -38,23 +40,30 @@ export default class SideBar extends Base {
     }
     render() {
       return (
-            <div style={this.styles} className="mui-col-sm-4 mui-col-md-4">
-                <List>
+            <div style={this.style.main} className="mui-col-sm-4 mui-col-md-4">
+                <List subheader="Webmail">
+                  <ListDivider/>
+                </List>
+                <List style={this.style.inbox}>
                   {this.populateInbox(this.props.inbox)}
                 </List>
             </div>
       );
     }
-    styles() {
+    style() {
       return {
-        height: '100%',
-        wordWrap: 'break-word',
-        paddingLeft: '0',
-        overflowY: 'scroll',
-        display: 'flex',
-        flexDirection: 'column',
-        borderRadius: '5px',
-        padding: '0',
+        main: {
+          height: '100%',
+          wordWrap: 'break-word',
+          paddingLeft: '0',
+          display: 'flex',
+          flexDirection: 'column',
+          borderRadius: '5px',
+          padding: '0',
+        },
+        inbox: {
+          overflowY: 'scroll',
+        },
       };
     }
 }

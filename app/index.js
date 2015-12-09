@@ -16,6 +16,7 @@ function handleChange() {
 
 store.subscribe(handleChange);
 const node = document.createElement('div');
+node.setAttribute('id', 'node');
 document.body.appendChild(node);
 
 // DB promise, resolves if db connection established

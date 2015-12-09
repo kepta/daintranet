@@ -20,8 +20,7 @@ export default class Email extends React.Component {
     });
   }
   render() {
-    return (
-      <DumbEmail email={this.state.email}/>
-    );
+    const dumbEmail = <DumbEmail email={this.state.email}/>;
+    return this.state.email ? dumbEmail: null;
   }
 }

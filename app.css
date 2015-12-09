@@ -1,10 +1,71 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 html * {
   font-family: 'Robot', sans-serif;
+}
+
+iframe {
+  display: block;
+  border: none;
+  height: calc(100vh - 139px) !important;
+  width: 100%;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  background-color: #f8f8f8;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 body {
   color: inherit;
 }
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3N0ZGluIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLHdFQUFZO0FBQ1o7RUFFRyxpQ0FBaUM7Q0FDbkM7O0FBSkQ7RUFDRSxlQUFlO0NBQ2hCIiwiZmlsZSI6ImFwcC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJib2R5IHtcbiAgY29sb3I6IGluaGVyaXQ7XG59XG4iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0= */
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3N0ZGluIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBRUcsaUNBQWlDO0NBQ25DOztBQUVEO0VBQ0ksZUFBZTtFQUNmLGFBQWE7RUFDYix1Q0FBc0M7RUFDdEMsWUFBWTtDQUNmOztBQUVEOzs7RUFHRTtBQUVGOzs7Ozs7Ozs7Ozs7O0VBYUMsVUFBVTtFQUNWLFdBQVc7RUFDWCxVQUFVO0VBQ1YsZ0JBQWdCO0VBQ2hCLGNBQWM7RUFDZCx5QkFBeUI7Q0FDekI7O0FBQ0QsaURBQWlEO0FBQ2pEOztFQUVDLGVBQWU7Q0FDZjs7QUFDRDtFQUNDLGVBQWU7RUFDZCwwQkFBMEI7Q0FDM0I7O0FBQ0Q7RUFDQyxpQkFBaUI7Q0FDakI7O0FBQ0Q7RUFDQyxhQUFhO0NBQ2I7O0FBQ0Q7O0VBRUMsWUFBWTtFQUNaLGNBQWM7Q0FDZDs7QUFDRDtFQUNDLDBCQUEwQjtFQUMxQixrQkFBa0I7Q0FDbEI7O0FBN0REO0VBQ0UsZUFBZTtDQUNoQiIsImZpbGUiOiJhcHAuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gIGNvbG9yOiBpbmhlcml0O1xufVxuIl0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9 */

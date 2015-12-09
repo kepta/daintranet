@@ -3,7 +3,7 @@ import Base from './Base';
 import LoadingDumb from './Loading.dumb';
 import db from '../localdb/indexdb';
 import { getInbox } from '../network/Fetch';
-const LASTEMAILS = 5;
+const LASTEMAILS = 8;
 
 export default class Loading extends Base {
   constructor (props) {

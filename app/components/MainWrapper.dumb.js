@@ -44,11 +44,16 @@ export default class DumbMainWrapper extends React.Component {
         flexDirection: 'row',
       },
       inbox: {
-        width: '300px',
+        flexGrow: '1',
+        maxWidth: '333px',
         height: '96vh',
+        margin: '0 20px',
       },
       email: {
-        width: '400px',
+        flexGrow: '8',
+        margin: '0 20px',
+        height: '96vh',
+        // wordBreak: 'breakz',
       },
     };
   }

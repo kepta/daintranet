@@ -68,8 +68,8 @@ class IndexDB {
         if (value) {
           return res(value);
         } else {
-          return this.getSetEmail(id, user).then((emails) => {
-            res(emails);
+          return this.getSetEmail(id, user).then((email) => {
+            res({ id, email });
           }, (err) => {
             rej(err);
           });
@@ -80,7 +80,7 @@ class IndexDB {
       };
     });
   }
-  
+
   getSetEmail(id, user) {
     console.log('came here');
     return new Promise((res, rej) => {
