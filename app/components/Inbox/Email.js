@@ -1,6 +1,7 @@
 import React from 'react';
 import DumbEmail from './Email.dumb';
 import DB from '../../localdb/indexdb';
+import ReactCSSTransitionGroup  from 'react-addons-css-transition-group'
 export default class Email extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +21,11 @@ export default class Email extends React.Component {
     });
   }
   render() {
-    const dumbEmail = <DumbEmail email={this.state.email}/>;
+    const dumbEmail = (
+      <ReactCSSTransitionGroup transitionName="mainwrapper" transitionAppear={true} transitionAppearTimeout={500}>
+       <DumbEmail email={this.state.email} hide={this.props.hide} key={1}/>
+     </ReactCSSTransitionGroup>
+     );
     return this.state.email ? dumbEmail: null;
   }
 }

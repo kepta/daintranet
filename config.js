@@ -20,6 +20,7 @@ System.config({
     "mailparser": "npm:mailparser@0.5.3",
     "material-ui": "npm:material-ui@0.14.0-rc1",
     "react": "npm:react@0.14.3",
+    "react-addons-css-transition-group": "npm:react-addons-css-transition-group@0.14.3",
     "react-dom": "npm:react-dom@0.14.3",
     "react-redux": "npm:react-redux@4.0.0",
     "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
@@ -38,7 +39,7 @@ System.config({
       "crypto-browserify": "npm:crypto-browserify@3.11.0"
     },
     "github:jspm/nodelibs-domain@0.1.0": {
-      "domain-browser": "npm:domain-browser@1.1.4"
+      "domain-browser": "npm:domain-browser@1.1.5"
     },
     "github:jspm/nodelibs-events@0.1.1": {
       "events": "npm:events@1.0.2"
@@ -117,6 +118,15 @@ System.config({
       "inherits": "npm:inherits@2.0.1",
       "minimalistic-assert": "npm:minimalistic-assert@1.0.0",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
+    },
+    "npm:assert-helpers@4.1.0": {
+      "ansicolors": "npm:ansicolors@0.3.2",
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "diff": "npm:diff@2.2.1",
+      "esnextguardian": "npm:esnextguardian@1.2.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
@@ -283,6 +293,9 @@ System.config({
       "inherits": "npm:inherits@2.0.1",
       "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
     },
+    "npm:diff@2.2.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:diffie-hellman@5.0.0": {
       "bn.js": "npm:bn.js@4.5.0",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -291,7 +304,8 @@ System.config({
       "randombytes": "npm:randombytes@2.0.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
-    "npm:domain-browser@1.1.4": {
+    "npm:domain-browser@1.1.5": {
+      "assert-helpers": "npm:assert-helpers@4.1.0",
       "events": "github:jspm/nodelibs-events@0.1.1"
     },
     "npm:elliptic@6.0.2": {
@@ -309,6 +323,9 @@ System.config({
       "jstransform": "npm:jstransform@10.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "through": "npm:through@2.3.8"
+    },
+    "npm:esnextguardian@1.2.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:esprima-fb@13001.1001.0-dev-harmony-fb": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -550,6 +567,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:react-addons-create-fragment@0.14.3": {
+      "react": "npm:react@0.14.3"
+    },
+    "npm:react-addons-css-transition-group@0.14.3": {
       "react": "npm:react@0.14.3"
     },
     "npm:react-addons-pure-render-mixin@0.14.3": {

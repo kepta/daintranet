@@ -17,7 +17,6 @@ export default class SideBar extends Base {
     }
     populateInbox(mailArg) {
       return mailArg.map((mail, iter) => {
-        console.log(mail);
         const secondaryText = (
           <p>
             <span style={{ color: 'black' }}> { mail.su } </span><br/>

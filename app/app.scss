@@ -7,7 +7,7 @@ html *
 iframe {
     display: block;
     border: none;
-    height: calc(100vh - 139px) !important;
+    height: calc(100vh - 135px) !important;
     width: 100%;
 }
 
@@ -59,4 +59,92 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+/* -----
+SVG Icons - svgicons.sparkk.fr
+----- */
+
+.svg-icon {
+  width: 1em;
+  height: 1em;
+}
+.svg-icon-32 {
+  width: 2em;
+  height: 2em;
+}
+.svg-icon-48 {
+  width: 2.5em;
+  height: 2.5em;
+}
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: white;
+}
+
+.svg-icon circle {
+  stroke: white;
+  stroke-width: 1;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #797979;
+  border: 0px none #ff2600;
+  border-radius: 1px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a9a9a9;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #424242;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0px none transparent;
+  border-radius: 1px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #fefdff;
+}
+::-webkit-scrollbar-track:active {
+  background: transparent;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+.mainwrapper-appear {
+  opacity: 0.01;
+}
+
+.mainwrapper-appear.mainwrapper-appear-active {
+  opacity: 1;
+  transition: opacity .3s ease-in;
+}
+.mainwrapper-enter {
+  opacity: 0.01;
+}
+
+.mainwrapper-enter.mainwrapper-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.mainwrapper-leave {
+  opacity: 1;
+}
+
+.mainwrapper-leave.mainwrapper-leave-active {
+  opacity: 0.01;
+  transition: opacity .3s ease-in;
 }

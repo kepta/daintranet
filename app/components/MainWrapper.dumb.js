@@ -11,13 +11,13 @@ export default class DumbMainWrapper extends React.Component {
     };
     this.showEmail = this.showEmail.bind(this);
   }
-  displayEmail(id, user) {
+  displayEmail(id, user, hide) {
     if (id === null) {
       return null;
     }
     return (
       <Paper zDepth={1} style={this.style.email}>
-          <Email id={id} user={user}/>
+          <Email id={id} user={user} hide={hide}/>
       </Paper>
     );
   }
@@ -33,7 +33,7 @@ export default class DumbMainWrapper extends React.Component {
         <Paper zDepth={1} style={this.style.inbox}>
             <Inbox inbox={this.props.inbox} showEmail={this.showEmail} />
         </Paper>
-        {this.displayEmail(this.state.id, this.props.user)}
+        {this.displayEmail(this.state.id, this.props.user, this.showEmail)}
       </div>
     );
   }

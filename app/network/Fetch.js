@@ -3,7 +3,7 @@ import { MailParser } from 'mailparser';
 const local = window.location.href.indexOf('localhost');
 
 // export const BASEURL = 'http://localhost:1337/webmail.daiict.ac.in';
-export const BASEURL = local === -1 ? 'http://128.199.173.123:1337/webmail.daiict.ac.in'
+export const BASEURL = local !== -1 ? 'http://128.199.173.123:1337/webmail.daiict.ac.in'
                                       : 'http://localhost:1337/webmail.daiict.ac.in';
 
 const TIMER = 7000;

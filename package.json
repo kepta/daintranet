@@ -47,6 +47,7 @@
       "mailparser": "npm:mailparser@^0.5.3",
       "material-ui": "npm:material-ui@^0.14.0-rc1",
       "react": "npm:react@^0.14.3",
+      "react-addons-css-transition-group": "npm:react-addons-css-transition-group@^0.14.3",
       "react-dom": "npm:react-dom@^0.14.3",
       "react-redux": "npm:react-redux@^4.0.0",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@^0.2.1",
