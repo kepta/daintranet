@@ -9,8 +9,18 @@ export default class Inbox extends Base {
       const style = this.style();
       return (
         <div style={style.main}>
-          <div style={{flexGrow: '1', backgroundColor: 'pink'}}>
-              this
+          <div style={style.appbar}>
+              <div>
+                hello
+              </div>
+              <div>
+                hello
+
+              </div>
+              <div>
+                hello
+
+              </div>
           </div>
         </div>
       );
@@ -19,7 +29,11 @@ export default class Inbox extends Base {
       return {
         main: {
           display: 'flex',
-          flexGrow: '1',
+        },
+        appbar: {
+          flexDirection: 'row',
+          display: 'flex',
+          justifyContent: 'space-between',
         },
       };
     }
