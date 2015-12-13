@@ -4,7 +4,13 @@
   "description": "DAIICT's intranet and webmail app.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/jspm_packages"
+    ]
   },
   "repository": {
     "type": "git",
@@ -38,6 +44,7 @@
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
+    "jest-cli": "^0.8.1",
     "jspm": "^0.16.15",
     "node-sass": "^3.4.2",
     "run-sequence": "^1.1.5"

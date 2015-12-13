@@ -1,6 +1,7 @@
 import React from 'react';
 import Inbox from './Inbox/Inbox';
 import Email from './Inbox/Email';
+import Intranet from './Intranet/Intranet';
 import { Paper } from 'material-ui';
 export default class DumbMainWrapper extends React.Component {
   constructor(props) {
@@ -11,21 +12,19 @@ export default class DumbMainWrapper extends React.Component {
     };
     this.showEmail = this.showEmail.bind(this);
   }
-  displayEmail(id, user, hide) {
+  displayEmailOrIntranet(id, user, hide) {
     if (id === null) {
-      return null;
+      return <Intranet style={this.style.rightContent}/>;
     }
     return (
-      <Paper zDepth={1} style={this.style.email}>
+      <Paper zDepth={1} style={this.style.rightContent}>
           <Email id={id} user={user} hide={hide}/>
       </Paper>
     );
   }
   showEmail(id) {
-    console.log(id);
     this.setState({ id });
   }
-
   render() {
     console.log(this.state.id);
     return (
@@ -33,10 +32,11 @@ export default class DumbMainWrapper extends React.Component {
         <Paper zDepth={1} style={this.style.inbox}>
             <Inbox inbox={this.props.inbox} showEmail={this.showEmail} />
         </Paper>
-        {this.displayEmail(this.state.id, this.props.user, this.showEmail)}
+        {this.displayEmailOrIntranet(this.state.id, this.props.user, this.showEmail)}
       </div>
     );
   }
+
   style() {
     return {
       wrapper: {
@@ -49,11 +49,10 @@ export default class DumbMainWrapper extends React.Component {
         height: '96vh',
         margin: '0 20px',
       },
-      email: {
+      rightContent: {
         flexGrow: '8',
         margin: '0 20px',
         height: '96vh',
-        // wordBreak: 'breakz',
       },
     };
   }
