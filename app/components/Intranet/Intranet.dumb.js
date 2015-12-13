@@ -6,10 +6,21 @@ export default class Inbox extends Base {
       super(props);
     }
     render() {
+      const style = this.style();
       return (
-        <div style={{ width: '400px !important' }}>
-          hello world!
+        <div style={style.main}>
+          <div style={{flexGrow: '1', backgroundColor: 'pink'}}>
+              this
+          </div>
         </div>
       );
+    }
+    style() {
+      return {
+        main: {
+          display: 'flex',
+          flexGrow: '1',
+        },
+      };
     }
 }

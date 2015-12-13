@@ -14,7 +14,11 @@ export default class DumbMainWrapper extends React.Component {
   }
   displayEmailOrIntranet(id, user, hide) {
     if (id === null) {
-      return <Intranet style={this.style.rightContent}/>;
+      return (
+        <Paper zDepth={1} style={this.style.rightContent}>
+          <Intranet style={this.style.rightContent}/>
+        </Paper>
+      );
     }
     return (
       <Paper zDepth={1} style={this.style.rightContent}>
@@ -22,9 +26,11 @@ export default class DumbMainWrapper extends React.Component {
       </Paper>
     );
   }
+
   showEmail(id) {
     this.setState({ id });
   }
+
   render() {
     console.log(this.state.id);
     return (
