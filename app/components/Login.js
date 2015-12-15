@@ -1,6 +1,8 @@
 import React from 'react';
 import Base from './Base';
 import { LOGIN_ERROR } from '../state/actions';
+import { FlatButton } from 'material-ui';
+
 const ERROR_MESSAGE = 'Invalid user id';
 export default class Login extends Base {
   constructor(props) {
@@ -22,6 +24,7 @@ export default class Login extends Base {
     );
   }
   HandleLogin() {
+    alert('hi');
     const id = (this.refs.userId.value);
     const pass = (this.refs.password.value);
     this.props.setLogging({ id, pass });
@@ -56,10 +59,7 @@ export default class Login extends Base {
             <input type="checkbox" ref="checker" onChange={this.HandleChange}/>
           </div>
         </div>*/}
-        <div className="loginButton hover">
-          <a style={this.styles.button} onClick={this.HandleLogin}>Login
-          </a>
-        </div>
+        <FlatButton label="Login" onClick={this.HandleLogin}/>
       </div>
     );
   }
@@ -98,6 +98,7 @@ export default class Login extends Base {
         color: '#fff',
         position: 'relative',
         display: 'inline-block',
+        cursor: 'pointer',
       },
     };
   }
