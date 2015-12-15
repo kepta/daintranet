@@ -8,6 +8,7 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import routes from './routes';
+var compression = require('compression')
 var cors = require('cors');
 // import users from './routes/user';
 
@@ -22,6 +23,7 @@ app.locals.ENV_DEVELOPMENT = env == 'development';
 // app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(cors());
+app.use(compression());
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
