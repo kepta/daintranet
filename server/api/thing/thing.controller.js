@@ -1,8 +1,23 @@
-var Thing = require('./thing.model');
+/**
+ * Using Rails-like standard naming convention for endpoints.
+ * GET     /api/things              ->  index
+ * POST    /api/things              ->  create
+ * GET     /api/things/:id          ->  show
+ * PUT     /api/things/:id          ->  update
+ * DELETE  /api/things/:id          ->  destroy
+ */
+
+// 'use strict';
+
+import _ from 'lodash';
+// import Thing from './thing.model';
+import monk from 'monk';
+const db = monk('localhost/intranet');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    console.log('err.stack');
     res.status(statusCode).send(err);
   };
 }
@@ -31,6 +46,7 @@ function saveUpdates(updates) {
     var updated = _.merge(entity, updates);
     return updated.saveAsync()
       .spread(updated => {
+        console.log(updated);
         return updated;
       });
   };
@@ -49,9 +65,7 @@ function removeEntity(res) {
 
 // Gets a list of Things
 export function index(req, res) {
-  Thing.findAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+
 }
 
 // Gets a single Thing from the DB
@@ -64,9 +78,13 @@ export function show(req, res) {
 
 // Creates a new Thing in the DB
 export function create(req, res) {
-  Thing.createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  let things = db.get("Thing");
+  let promise = things.insert(req.body);
+
+
+  // Thing.createAsync(req.body)
+  //   .then(responseWithResult(res, 201))
+  //   .catch(handleError(res));
 }
 
 // Updates an existing Thing in the DB

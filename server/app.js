@@ -1,44 +1,72 @@
-/**
- * Main application file
- */
 
-'use strict';
 
+// var express = from ('express');
 import express from 'express';
-import mongoose from 'mongoose';
-mongoose.Promise = require('bluebird');
-import config from './config/environment';
-import http from 'http';
+import path from 'path';
+import favicon from 'serve-favicon';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import routes from './routes';
+var cors = require('cors');
+// import users from './routes/user';
 
-// Connect to MongoDB
-mongoose.connect(config.mongo.uri, config.mongo.options);
-mongoose.connection.on('error', function(err) {
-  console.error('MongoDB connection error: ' + err);
-  process.exit(-1);
-});
-
-// Populate databases with sample data
-if (config.seedDB) { require('./config/seed'); }
-
-// Setup server
 var app = express();
-var server = http.createServer(app);
-var socketio = require('socket.io')(server, {
-  serveClient: config.env !== 'production',
-  path: '/socket.io-client'
-});
-require('./config/socketio')(socketio);
-require('./config/express')(app);
-require('./routes')(app);
 
-// Start server
-function startServer() {
-  server.listen(config.port, config.ip, function() {
-    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-  });
+var env = process.env.NODE_ENV || 'development';
+app.locals.ENV = env;
+app.locals.ENV_DEVELOPMENT = env == 'development';
+
+// view engine setup
+
+// app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+app.use(cors());
+// app.use(favicon(__dirname + '/public/img/favicon.ico'));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use('/', routes);
+// app.use('/users', users);
+routes(app);
+/// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+/// error handlers
+
+// development error handler
+// will print stacktrace
+
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err,
+            title: 'error'
+        });
+    });
 }
 
-setImmediate(startServer);
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {},
+        title: 'error'
+    });
+});
 
-// Expose app
-exports = module.exports = app;
+
+module.exports = app;
