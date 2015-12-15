@@ -1,7 +1,8 @@
 import React from 'react';
 import Base from '../Base';
-import { flexRow, flexGrow1 } from '../../flex';
-import { List, Tabs, Tab } from 'material-ui';
+import { flexRow, flexGrow1, flexCenter } from '../../flex';
+import { List, Tabs, Tab, IconButton } from 'material-ui';
+import { LectureIcon, AcademicIcon } from '../Icons';
 import Professors from './Professors';
 export default class Inbox extends Base {
     constructor(props) {
@@ -13,11 +14,11 @@ export default class Inbox extends Base {
         <div style={style.main}>
           <div style={style.appbar}>
             <Tabs style={{ ...flexGrow1 }}>
-              <Tab label={<div>style</div>} style={style.hot}>
-                This is hot
-              </Tab>
-              <Tab label="Item Two" style={style.intranet}>
+              <Tab label={<div style ={{...flexRow, ...flexCenter}}><LectureIcon/>Lecture</div>} style={style.hot}>
                 <Professors />
+              </Tab>
+              <Tab label={<div style ={{...flexRow, ...flexCenter}}><AcademicIcon/>Academic</div>} style={style.intranet}>
+                helo
               </Tab>
               <Tab
                 label="Item Three" style={style.starred}

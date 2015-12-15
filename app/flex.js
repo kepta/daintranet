@@ -12,3 +12,6 @@ export const flexCol = {
   display: 'flex',
   flexDirection: 'column',
 };
+export const flexCenter = {
+  justifyContent: 'center',
+};
