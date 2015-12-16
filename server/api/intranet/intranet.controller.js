@@ -1,6 +1,6 @@
 var fs = require('fs');
 var minutes = 1, the_interval = minutes * 60 * 1000;
-const local = true;
+const local = false;
 
 const tree = local ? 'tree.json' : '/root/intranet/tree.json';
 const intranet = local ? '': '/root/intranet/';
@@ -56,7 +56,7 @@ export function index(req, res) {
 export function show(req, res) {
   if (req.query.loc) {
     const path = __dirname;
-    res.download(intranet + '/index.js');
+    res.download(intranet + req.query.loc);
   } else {
     handleError(res)(new Error('file now found'));
   }
