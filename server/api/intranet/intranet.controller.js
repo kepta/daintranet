@@ -1,5 +1,5 @@
 var fs = require('fs');
-var minutes = 1, the_interval = minutes * 60 * 1000;
+var minutes = 60, the_interval = minutes * 60 * 1000;
 const local = true;
 
 const tree = local ? 'tree.json' : '/root/intranet/tree.json';
