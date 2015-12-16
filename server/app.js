@@ -23,8 +23,8 @@ app.locals.ENV_DEVELOPMENT = env == 'development';
 // view engine setup
 
 // app.set('views', path.join(__dirname, 'views'));
-logger.debug("Overriding 'Express' logger");
-app.use(require("morgan")("combined", { "stream": logger.stream }));
+// logger.debug("Overriding 'Express' logger");
+// app.use(require("morgan")("combined", { "stream": logger.stream }));
 app.set('view engine', 'jade');
 app.use(cors());
 app.use(compression());
