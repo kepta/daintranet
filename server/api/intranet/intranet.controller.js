@@ -55,7 +55,9 @@ export function index(req, res) {
 
 export function show(req, res) {
   if (req.query.loc) {
-    const path = __dirname;
+    if (req.query.loc.indexOf('.pdf' !== -1)) {
+      res.setHeader('content-disposition', 'inline');
+    }
     res.render(intranet + req.query.loc);
   } else {
     handleError(res)(new Error('file now found'));
