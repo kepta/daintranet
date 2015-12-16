@@ -1,9 +1,8 @@
 
 
-// var express = from ('express');
 import express from 'express';
 import path from 'path';
-import favicon from 'serve-favicon';
+// import favicon from 'serve-favicon';
 // import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -22,9 +21,9 @@ app.locals.ENV_DEVELOPMENT = env == 'development';
 
 // view engine setup
 
-// app.set('views', path.join(__dirname, 'views'));
-// logger.debug("Overriding 'Express' logger");
-// app.use(require("morgan")("combined", { "stream": logger.stream }));
+app.set('views', path.join(__dirname, 'views'));
+logger.debug("Overriding 'Express' logger");
+app.use(require("morgan")("combined", { "stream": logger.stream }));
 app.set('view engine', 'jade');
 app.use(cors());
 app.use(compression());
