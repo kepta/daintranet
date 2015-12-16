@@ -39,7 +39,7 @@ export function index(req, res) {
       if (err) {
         return handleError(res)(err);
       }
-      return responseWithResult(res)(JSON.parse(res2.text));
+      return res.status(200).send(res2.text);
     });
 }
 
