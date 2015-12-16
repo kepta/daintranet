@@ -36,20 +36,25 @@ export default class DumbMainWrapper extends React.Component {
 
   render() {
     console.log(this.props.user);
+    console.log(window.innerWidth);
+    const isMobile =  window.innerWidth < 600 ;
+    console.log(isMobile);
+    const showInbox = isMobile ? null :
+                          (<Paper zDepth={1} style={this.style.inbox}>
+                              <Inbox showEmail={this.showEmail}
+                                actionLoggedIn={this.props.setLoggedIn}
+                                setLoginError={this.props.setLoginError}
+                                dbPromise={this.props.dbPromise}
+                                user={this.props.user}
+                                />
+                            </Paper>);
     return (
       <div>
         <LeftNav ref="leftNav" docked={false}>
           <LeftNavMenu/>
         </LeftNav>
         <div style={this.style.wrapper}>
-          <Paper zDepth={1} style={this.style.inbox}>
-              <Inbox showEmail={this.showEmail}
-                actionLoggedIn={this.props.setLoggedIn}
-                setLoginError={this.props.setLoginError}
-                dbPromise={this.props.dbPromise}
-                user={this.props.user}
-                />
-          </Paper>
+          {showInbox}
           {this.displayEmailOrIntranet(this.state.id, this.props.user, this.showEmail)}
         </div>
       </div>

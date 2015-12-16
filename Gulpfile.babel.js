@@ -74,7 +74,7 @@ gulp.task('server', ['sass'], function() {
 });
 
 gulp.task('build-deploy',function(done) {
-    runSeq(['jspm-bundle','html-build'], 'deploy',done);
+    runSeq(['sass-build', 'jspm-bundle','html-build'], 'deploy',done);
 });
 
 gulp.task('build', ['sass-build','jspm-bundle','html-build']);
