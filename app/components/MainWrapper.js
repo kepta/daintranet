@@ -16,8 +16,10 @@ export default class MainWrapper extends React.Component {
       <div>
         <div onClick={this.props.setLogout}> Logoooout!</div>
         <MainWrapperDumb
-          inbox={this.props.inbox}
           user={this.props.user}
+          actionLoggedIn={this.props.setLoggedIn}
+          setLoginError={this.props.setLoginError}
+          dbPromise={this.props.dbPromise}
           />
       </div>
     );

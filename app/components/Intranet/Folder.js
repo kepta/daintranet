@@ -2,19 +2,44 @@ import React from 'react';
 // import ProfDumb from './Professors.dumb';
 import Base from '../Base';
 import { ListItem, List, Avatar, ListDivider } from 'material-ui';
-import { FolderIcon } from '../Icons';
+import { FolderIcon, PdfIcon } from '../Icons';
+import { flexCenter } from '../../Flex';
+import { formQuery } from '../../network/Fetch';
+
 export default class Viewer extends Base {
     constructor(props) {
       super(props);
       this.style = this.style();
-      this._bind('displayStructure');
+      this._bind('displayStructure', 'goForward');
+    }
+    goForward(item) {
+      this.props.goForward(item);
+    }
+    showAttachment(path, file) {
+      console.log(path, file);
+      let url = path.join('/');
+      url = url + '/'+ file;
+      console.log(url);
+      window.open(formQuery(url), '_blank');
     }
     displayStructure(obj) {
       console.log(obj);
       return Object.keys(obj).map((item, key) => {
+        const isFile = obj[item] === 'file';
+        if (isFile) {
+          return (
+            <div key={key} onClick={this.showAttachment.bind(this, this.props.path, item)}>
+              <ListItem style={this.style.listItem}
+                      primaryText={item + 'file'}
+                      leftIcon={<Avatar style={this.style.avatarFile} icon={<PdfIcon/> }/>}
+                      />
+              <ListDivider inset={true}/>
+          </div>
+          );
+        }
         return (
-          <div key={key}>
-              <ListItem
+          <div key={key} onClick={this.goForward.bind(this, item)}>
+              <ListItem style={this.style.listItem}
                             primaryText={item}
                             leftIcon={<Avatar style={this.style.avatar} icon={<FolderIcon/> }/>}
                             />
@@ -25,11 +50,11 @@ export default class Viewer extends Base {
     }
     render() {
       return (
-        <div>
-          <div style={this.style.updated}>
+        <div style={this.style.main}>
+          <div style={{ ...this.style.updated, ...flexCenter }}>
             Last Updated: 1 hour ago
           </div>
-          <List>
+          <List style={this.style.list}>
             {this.displayStructure(this.props.location)}
           </List>
         </div>
@@ -37,9 +62,38 @@ export default class Viewer extends Base {
     }
     style() {
       return {
+        main: {
+          height: '100%',
+          overflowY: 'scroll',
+          marginTop: '10px',
+        },
+        list: {
+        },
+        listItem: {
+          marginTop: '10px',
+          marginBottom: '10px',
+        },
         updated: {
           color: 'grey',
-          fontSize: '1em',
+          fontSize: '0.75em',
+          display: 'flex',
+          marginTop: '12px',
+        },
+        avatarFile: {
+          height: '40px',
+          width: '40px',
+          borderRadius: '50%',
+          display: 'inline-block',
+          backgroundColor: '#9c27b0',
+          textAlign: 'center',
+          lineHeight: '47px',
+          fontSize: '24px',
+          color: '#9c27b0',
+          position: 'absolute',
+          top: '8px',
+          left: '16px',
+          WebkitUserSelect: 'none',
+          padding: '0 !important',
         },
         avatar: {
           height: '40px',

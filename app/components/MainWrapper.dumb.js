@@ -35,7 +35,7 @@ export default class DumbMainWrapper extends React.Component {
   }
 
   render() {
-    console.log(this.state.id);
+    console.log(this.props.user);
     return (
       <div>
         <LeftNav ref="leftNav" docked={false}>
@@ -43,7 +43,12 @@ export default class DumbMainWrapper extends React.Component {
         </LeftNav>
         <div style={this.style.wrapper}>
           <Paper zDepth={1} style={this.style.inbox}>
-              <Inbox inbox={this.props.inbox} showEmail={this.showEmail} />
+              <Inbox showEmail={this.showEmail}
+                actionLoggedIn={this.props.setLoggedIn}
+                setLoginError={this.props.setLoginError}
+                dbPromise={this.props.dbPromise}
+                user={this.props.user}
+                />
           </Paper>
           {this.displayEmailOrIntranet(this.state.id, this.props.user, this.showEmail)}
         </div>
@@ -60,6 +65,7 @@ export default class DumbMainWrapper extends React.Component {
       inbox: {
         flexGrow: '1',
         maxWidth: '333px',
+        width: '333px',
         height: '96vh',
         margin: '0 20px',
       },

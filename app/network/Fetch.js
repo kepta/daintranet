@@ -6,8 +6,8 @@ const local = window.location.href.indexOf('localhost');
 export const BASEURL = local !== -1 ? 'http://128.199.173.123:3000/api'
                                       : 'http://localhost:3000/api';
 
-const TIMER = 7000;
-const TIMER_INBOX = 7000;
+const TIMER = 20000;
+const TIMER_INBOX = 20000;
 let intranet = {};
 export function fetchEmail(id, user) {
   return new Promise((resolve, reject) => {
@@ -32,6 +32,7 @@ export function fetchEmail(id, user) {
 }
 
 export function getInbox (user) {
+  console.log('called it');
   return new Promise((resolve, reject) => {
     Request.get(`${BASEURL}/email`)
     .timeout(TIMER_INBOX)
@@ -60,4 +61,7 @@ export function fetchIntranet(user, fresh) {
     }
     return resolve(intranet);
   });
+}
+export function formQuery(path, user) {
+  return `${BASEURL}/user.id?loc=${path}`;
 }

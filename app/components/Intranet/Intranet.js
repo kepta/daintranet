@@ -10,10 +10,10 @@ export default class Inbox extends Base {
       super(props);
       this.state = {
         tree: null,
-        location: [],
+        path: [],
         currentLocation: null,
       };
-      this._bind('getDirectoryTree', 'changeLocation');
+      this._bind('getDirectoryTree', 'goForward');
       this.getDirectoryTree();
     }
     getDirectoryTree() {
@@ -29,12 +29,17 @@ export default class Inbox extends Base {
         });
       });
     }
-    changeLocation(currentLocation) {
+    goForward(location) {
+      console.log('called',location);
+      var tempArray = this.state.path.slice(0);
+      tempArray.push(location);
       this.setState({
-        currentLocation,
+        path: tempArray,
+        currentLocation: this.state.currentLocation[location],
       });
     }
     render() {
+      console.log(this.state.path);
       const progress = (
           <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
             <div style={{ alignSelf: 'center' }}>
@@ -46,7 +51,8 @@ export default class Inbox extends Base {
         !this.state.tree ? progress
                           : <IntranetDumb tree={this.state.tree}
                                           location={this.state.currentLocation}
-                                          changeLocation={this.changeLocation}/>
+                                          goForward={this.goForward}
+                                          path={this.state.path}/>
       );
     }
 }

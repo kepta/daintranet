@@ -57,18 +57,19 @@ class App extends Component {
       case LOGIN_ERROR:
         return (<Login {...props}/>);
       case LOGGED_IN:
-        return (<MainWrapper {...props}
-                              inbox={this.state.inbox}
-                              mails={this.state.mails
-                              }/>);
       case LOGGING:
-        return (
-          <Loading {...props}
-                    actionLoggedIn={this.props.setLoggedIn}
-                    setLoginError={this.props.setLoginError}
-                    setInbox={this.setInbox}
-          />
-        );
+        return (<MainWrapper {...props}
+          actionLoggedIn={this.props.setLoggedIn}
+          setLoginError={this.props.setLoginError}
+                              />);
+      // case LOGGING:
+      //   return (
+      //     <Loading {...props}
+      //               actionLoggedIn={this.props.setLoggedIn}
+      //               setLoginError={this.props.setLoginError}
+      //               setInbox={this.setInbox}
+      //     />
+      //   );
       default:
         return <div>error of severe kind</div>;
     }

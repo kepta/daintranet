@@ -17,7 +17,9 @@ export default class Inbox extends Base {
           <Folder
             tree={this.props.tree}
             location={this.props.location}
-            changeLocation={this.props.changeLocation}/>
+            goForward={this.props.goForward}
+            path={this.props.path}
+            />
         </div>
       );
     }
