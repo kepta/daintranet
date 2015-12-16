@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import monk from 'monk';
 const db = monk('localhost/intranet');
-import Request from 'superagent';
+import request from 'request';
+const http = require('http');
 
 
 function handleError(res, statusCode) {
@@ -32,15 +33,17 @@ function handleEntityNotFound(res) {
 }
 
 export function index(req, res) {
-  Request.get('https://webmail.daiict.ac.in/home/~/inbox.json')
-    .set('Authorization', req.headers.authorization)
-    .on('error', handleError(res))
-    .end( (err, res2) => {
-      if (err) {
-        return handleError(res)(err);
-      }
-      return res.status(200).send(res2.text);
-    });
+  const url = 'https://webmail.daiict.ac.in/home/~/inbox.json';
+  req.pipe(request(url)).pipe(res);
+  // Request.get('https://webmail.daiict.ac.in/home/~/inbox.json')
+  //   .set('Authorization', req.headers.authorization)
+  //   .on('error', handleError(res))
+  //   .end( (err, res2) => {
+  //     if (err) {
+  //       return handleError(res)(err);
+  //     }
+  //     return res.status(200).send(res2.text);
+  //   });
 }
 
 function fetchEmail(id, auth, res) {
