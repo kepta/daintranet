@@ -1,6 +1,36 @@
-var dir = require('node-dir');
-const _dirname = '/Users/kushanjoshi/code';
-const intranet = {};
+var fs = require('fs');
+var minutes = 1, the_interval = minutes * 60 * 1000;
+const local = true;
+
+const tree = local ? 'tree.json' : '/root/intranet/tree.json';
+const intranet = local ? '': '/root/intranet/';
+var intranetTree = {};
+
+try {
+  intranetTree = JSON.parse(fs.readFileSync(tree, 'utf8'));
+} catch (e) {
+  if (e) {
+    console.log(e);
+    intranetTree = {};
+  }
+}
+
+
+
+setInterval(function() {
+  readFileAsync();
+}, the_interval);
+
+function readFileAsync() {
+  fs.readFile(tree, 'utf8', function (err, data) {
+    if (err)  {
+      return console.log(err);
+    }
+    intranetTree = JSON.parse(data);
+    console.log('read file');
+  });
+}
+
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -18,29 +48,16 @@ function responseWithResult(res, statusCode) {
     }
   };
 }
-
+//
 export function index(req, res) {
-  dir.paths(_dirname, function (err, paths) {
-    if (err)
-      handleError(res)(err);
-    paths.dirs.forEach((path) => {
-      var temp = intranet;
-      path.split('/').forEach((dir) => {
-        temp[dir] = temp[dir]
-          ? temp[dir]
-          : {};
-        temp = temp[dir];
-      });
-    });
-    paths.files.forEach((path) => {
-      var temp = intranet;
-      path.split('/').forEach((dir) => {
-        temp[dir] = temp[dir]
-          ? temp[dir]
-          : 'file';
-        temp = temp[dir];
-      });
-    });
-    return responseWithResult(res)(intranet);
-  });
+  return responseWithResult(res)(intranetTree);
+}
+
+export function show(req, res) {
+  if (req.query.loc) {
+    const path = __dirname;
+    res.download(intranet + '/index.js');
+  } else {
+    handleError(res)(new Error('file now found'));
+  }
 }

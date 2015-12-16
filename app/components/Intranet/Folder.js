@@ -10,7 +10,7 @@ export default class Viewer extends Base {
       };
     }
     getLocation() {
-
+        
     }
     render() {
       return (
