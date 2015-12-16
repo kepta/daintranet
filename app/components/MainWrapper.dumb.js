@@ -17,7 +17,7 @@ export default class DumbMainWrapper extends React.Component {
     if (id === null) {
       return (
         <Paper zDepth={1} style={this.style.rightContent}>
-          <Intranet style={this.style.rightContent}/>
+          <Intranet style={this.style.rightContent} user={user}/>
         </Paper>
       );
     }

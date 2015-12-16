@@ -7,7 +7,7 @@ export const BASEURL = local !== -1 ? 'http://128.199.173.123:3000/api'
                                       : 'http://localhost:3000/api';
 
 const TIMER = 7000;
-const TIMER_INBOX = 3000;
+const TIMER_INBOX = 7000;
 
 export function fetchEmail(id, user) {
   return new Promise((resolve, reject) => {
@@ -32,7 +32,7 @@ export function fetchEmail(id, user) {
 }
 
 export function getInbox (user) {
-  console.log(user);
+  // console.log(user);
   return new Promise((resolve, reject) => {
     Request.get(`${BASEURL}/email`)
     .timeout(TIMER_INBOX)
@@ -44,5 +44,18 @@ export function getInbox (user) {
       localStorage.setItem('staleInbox', 0);
       return resolve(JSON.parse(resp.text).m);
     });
+  });
+}
+
+export function getIntranet(user) {
+  return new Promise((resolve, reject) => {
+    Request.get(`${BASEURL}/intranet`)
+      .timeout(TIMER_INBOX)
+      .auth(user.id, user.pass).end((err, resp) => {
+        if (err) {
+          return reject({ response: 401, err });
+        }
+        return resolve(JSON.parse(resp.text));
+      });
   });
 }
