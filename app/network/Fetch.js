@@ -63,5 +63,5 @@ export function fetchIntranet(user, fresh) {
   });
 }
 export function formQuery(path, user) {
-  return `${BASEURL}/user.id?loc=${path}`;
+  return `${BASEURL}/intranet/user.id?loc=${path}`;
 }

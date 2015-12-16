@@ -19,7 +19,7 @@ export default class Viewer extends Base {
       console.log(path, file);
       let url = path.join('/');
       url = url + '/'+ file;
-      console.log(url);
+      // console.log(url);
       window.open(formQuery(url), '_blank');
     }
     displayStructure(obj) {
@@ -30,7 +30,7 @@ export default class Viewer extends Base {
           return (
             <div key={key} onClick={this.showAttachment.bind(this, this.props.path, item)}>
               <ListItem style={this.style.listItem}
-                      primaryText={item + 'file'}
+                      primaryText={item}
                       leftIcon={<Avatar style={this.style.avatarFile} icon={<PdfIcon/> }/>}
                       />
               <ListDivider inset={true}/>
