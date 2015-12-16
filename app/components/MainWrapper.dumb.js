@@ -2,7 +2,8 @@ import React from 'react';
 import Inbox from './Inbox/Inbox';
 import Email from './Inbox/Email';
 import Intranet from './Intranet/Intranet';
-import { Paper } from 'material-ui';
+import { Paper, LeftNav } from 'material-ui';
+import LeftNavMenu from './LeftNav';
 export default class DumbMainWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -29,16 +30,22 @@ export default class DumbMainWrapper extends React.Component {
 
   showEmail(id) {
     this.setState({ id });
+    // this.refs.leftNav.toggle();
   }
 
   render() {
     console.log(this.state.id);
     return (
-      <div style={this.style.wrapper}>
-        <Paper zDepth={1} style={this.style.inbox}>
-            <Inbox inbox={this.props.inbox} showEmail={this.showEmail} />
-        </Paper>
-        {this.displayEmailOrIntranet(this.state.id, this.props.user, this.showEmail)}
+      <div>
+        <LeftNav ref="leftNav" docked={false}>
+          <LeftNavMenu/>
+        </LeftNav>
+        <div style={this.style.wrapper}>
+          <Paper zDepth={1} style={this.style.inbox}>
+              <Inbox inbox={this.props.inbox} showEmail={this.showEmail} />
+          </Paper>
+          {this.displayEmailOrIntranet(this.state.id, this.props.user, this.showEmail)}
+        </div>
       </div>
     );
   }

@@ -17,6 +17,7 @@
     "lodash": "^3.10.1",
     "monk": "^1.0.1",
     "morgan": "^1.6.1",
+    "node-dir": "^0.1.11",
     "path": "^0.12.7",
     "serve-favicon": "^2.3.0",
     "superagent": "^1.5.0",

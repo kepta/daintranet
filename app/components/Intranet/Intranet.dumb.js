@@ -1,9 +1,10 @@
 import React from 'react';
 import Base from '../Base';
-import { flexRow, flexGrow1, flexCenter } from '../../flex';
-import { List, Tabs, Tab, IconButton } from 'material-ui';
+import { flexRow, flexGrow1, flexCenter, flexCol } from '../../flex';
 import { LectureIcon, AcademicIcon } from '../Icons';
-import Professors from './Professors';
+import Appbar from './Appbar';
+import Folder from './Folder';
+
 export default class Inbox extends Base {
     constructor(props) {
       super(props);
@@ -12,42 +13,30 @@ export default class Inbox extends Base {
       const style = this.style();
       return (
         <div style={style.main}>
-          <div style={style.appbar}>
-            <Tabs style={{ ...flexGrow1 }}>
-              <Tab label={<div style ={{...flexRow, ...flexCenter}}><LectureIcon/>Lecture</div>} style={style.hot}>
-                <Professors />
-              </Tab>
-              <Tab label={<div style ={{...flexRow, ...flexCenter}}><AcademicIcon/>Academic</div>} style={style.intranet}>
-                helo
-              </Tab>
-              <Tab
-                label="Item Three" style={style.starred}
-              />
-            </Tabs>
-          </div>
+          <Appbar/>
+          <Folder/>
         </div>
       );
     }
     style() {
       return {
         main: {
+          height: '100%',
           display: 'flex',
+          flexDirection: 'column',
         },
-        appbar: {
-          display: 'flex',
-          flexGrow: '1',
-        },
-        hot: {
-          backgroundColor: '#B6B6B6',
-
-        },
-        intranet: {
-          backgroundColor: '#B6B6B6',
-        },
-        starred: {
-          backgroundColor: '#B6B6B6',
-
-        }
       };
     }
 }
+
+// <Tabs style={{ ...flexGrow1 }}>
+//   <Tab label={<div style ={{...flexRow, ...flexCenter}}><LectureIcon/>Lecture</div>} style={style.intranet}>
+//     <Professors />
+//   </Tab>
+//   <Tab label={<div style ={{...flexRow, ...flexCenter}}><AcademicIcon/>Academic</div>} style={style.intranet}>
+//     <Academic />
+//   </Tab>
+//   <Tab
+//     label="Item Three" style={style.starred}
+//   />
+// </Tabs>

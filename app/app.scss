@@ -3,7 +3,9 @@ html *
 {
    font-family: 'Robot', sans-serif;
 }
-
+html, body, #node {
+  height: 100%;
+}
 iframe {
     display: block;
     border: none;

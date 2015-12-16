@@ -1,7 +1,7 @@
 import React from 'react';
 import Base from './Base';
 import { LOGIN_ERROR } from '../state/actions';
-import { FlatButton } from 'material-ui';
+import { FlatButton, TextField, Paper } from 'material-ui';
 
 const ERROR_MESSAGE = 'Invalid user id';
 export default class Login extends Base {
@@ -10,8 +10,6 @@ export default class Login extends Base {
     this.state = {
       checked: false,
     };
-    // this.HandleLogin = this.HandleLogin.bind(this);
-    // this.HandleChange = this.HandleChange.bind(this);
     this._bind('HandleLogin', 'HandleChange');
     this.styles = this.styles();
   }
@@ -24,9 +22,8 @@ export default class Login extends Base {
     );
   }
   HandleLogin() {
-    alert('hi');
-    const id = (this.refs.userId.value);
-    const pass = (this.refs.password.value);
+    const id = (this.refs.userId.getValue());
+    const pass = (this.refs.password.getValue());
     this.props.setLogging({ id, pass });
   }
   HandleChange() {
@@ -42,23 +39,20 @@ export default class Login extends Base {
         {error}
         <form>
         <div>
-          <input style={this.styles.input}
-            ref="userId" type="text" placeholder="id"/>
+          <TextField
+            hintText="ID"
+            ref="userId"
+            hintStyle={ error ? { color: 'red' } : {} }
+            />
         </div>
         <div>
-          <input style={this.styles.input}
+          <TextField
               ref="password" type="password"
-              placeholder="password"/>
+              hintText="password"
+              hintStyle={ error ? { color: 'red' } : {} }
+              />
         </div>
         </form>
-        {/*<div style={this.styles.checkbox} className="checker layout-row">
-          <div style={{
-            paddingRight: '10px',
-          }} className="mui-text-caption mui-text-black">Remember me</div>
-          <div>
-            <input type="checkbox" ref="checker" onChange={this.HandleChange}/>
-          </div>
-        </div>*/}
         <FlatButton label="Login" onClick={this.HandleLogin}/>
       </div>
     );
