@@ -43,6 +43,6 @@ function fetchEmail(id, auth, res) {
 }
 
 export function show(req, res) {
-  const url = 'https://webmail.daiict.ac.in/home/~/inbox.json';
+  const url = `https://webmail.daiict.ac.in/home/~/?id=${req.params.id}`;
   req.pipe(request(url)).pipe(res);
 }
