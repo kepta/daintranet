@@ -10,6 +10,7 @@ export default class DumbMainWrapper extends React.Component {
     this.style=this.style();
     this.state = {
       id: null,
+      fresh: true,
     };
     this.showEmail = this.showEmail.bind(this);
   }
@@ -17,7 +18,7 @@ export default class DumbMainWrapper extends React.Component {
     if (id === null) {
       return (
         <Paper zDepth={1} style={this.style.rightContent}>
-          <Intranet style={this.style.rightContent} user={user}/>
+          <Intranet style={this.style.rightContent} user={user} fresh={this.state.fresh}/>
         </Paper>
       );
     }
@@ -29,7 +30,7 @@ export default class DumbMainWrapper extends React.Component {
   }
 
   showEmail(id) {
-    this.setState({ id });
+    this.setState({ id, fresh: false });
     // this.refs.leftNav.toggle();
   }
 

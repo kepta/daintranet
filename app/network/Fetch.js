@@ -6,9 +6,9 @@ const local = window.location.href.indexOf('localhost');
 export const BASEURL = local !== -1 ? 'http://128.199.173.123:3000/api'
                                       : 'http://localhost:3000/api';
 
-const TIMER = 7000;
-const TIMER_INBOX = 7000;
-
+const TIMER = 12000;
+const TIMER_INBOX = 12000;
+let intranet = {};
 export function fetchEmail(id, user) {
   return new Promise((resolve, reject) => {
     Request.get(
@@ -32,7 +32,6 @@ export function fetchEmail(id, user) {
 }
 
 export function getInbox (user) {
-  // console.log(user);
   return new Promise((resolve, reject) => {
     Request.get(`${BASEURL}/email`)
     .timeout(TIMER_INBOX)
@@ -40,22 +39,25 @@ export function getInbox (user) {
       if (err) {
         return reject({ response: 401, err });
       }
-      localStorage.setItem('inbox', resp.text);
-      localStorage.setItem('staleInbox', 0);
       return resolve(JSON.parse(resp.text).m);
     });
   });
 }
 
-export function getIntranet(user) {
+export function fetchIntranet(user, fresh) {
   return new Promise((resolve, reject) => {
-    Request.get(`${BASEURL}/intranet`)
-      .timeout(TIMER_INBOX)
-      .auth(user.id, user.pass).end((err, resp) => {
-        if (err) {
-          return reject({ response: 401, err });
-        }
-        return resolve(JSON.parse(resp.text));
-      });
+    if (fresh) {
+      console.log('here');
+      return Request.get(`${BASEURL}/intranet`)
+        .timeout(TIMER_INBOX)
+        .auth(user.id, user.pass).end((err, resp) => {
+          if (err) {
+            return reject({ response: 401, err });
+          }
+          intranet = JSON.parse(resp.text);
+          return resolve(intranet);
+        });
+    }
+    return resolve(intranet);
   });
 }

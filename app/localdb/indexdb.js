@@ -1,9 +1,6 @@
-import { MailParser } from 'mailparser';
 import { fetchEmail } from '../network/Fetch';
 export const DBNAME = 'intranetdb';
 export const INBOX = 'inbox';
-export const url = 'http://localhost:1337/webmail.daiict.ac.in';
-export const TIMER = 3000;
 export const RAND_MIN = 1000;
 export const RAND_MAX = 2200;
 
@@ -130,6 +127,7 @@ class IndexDB {
       };
     }));
   }
+
 }
 
 const dbInstance = new IndexDB();

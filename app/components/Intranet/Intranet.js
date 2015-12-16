@@ -2,7 +2,7 @@ import React from 'react';
 import IntranetDumb from './Intranet.dumb';
 import Base from '../Base';
 import { CircularProgress } from 'material-ui';
-import { getIntranet } from '../../network/Fetch';
+import { fetchIntranet } from '../../network/Fetch';
 
 export default class Inbox extends Base {
 
@@ -10,19 +10,28 @@ export default class Inbox extends Base {
       super(props);
       this.state = {
         tree: null,
+        location: [],
+        currentLocation: null,
       };
-      this._bind('getDirectoryTree');
+      this._bind('getDirectoryTree', 'changeLocation');
       this.getDirectoryTree();
     }
     getDirectoryTree() {
-      getIntranet(this.props.user).then((res, rej) => {
+      console.log(this.props.fresh);
+      fetchIntranet(this.props.user, this.props.fresh).then((res, rej) => {
         if (rej) {
-          // TODO: need to work on error
+          // TODO: need to work on error, to let use press retry in case of fail
           return console.log(rej);
         }
         this.setState({
           tree: res,
+          currentLocation: res,
         });
+      });
+    }
+    changeLocation(currentLocation) {
+      this.setState({
+        currentLocation,
       });
     }
     render() {
@@ -34,7 +43,10 @@ export default class Inbox extends Base {
           </div>
       );
       return (
-        this.state.tree ? <IntranetDumb/> : progress
+        !this.state.tree ? progress
+                          : <IntranetDumb tree={this.state.tree}
+                                          location={this.state.currentLocation}
+                                          changeLocation={this.changeLocation}/>
       );
     }
 }

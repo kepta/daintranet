@@ -14,7 +14,10 @@ export default class Inbox extends Base {
       return (
         <div style={style.main}>
           <Appbar/>
-          <Folder/>
+          <Folder
+            tree={this.props.tree}
+            location={this.props.location}
+            changeLocation={this.props.changeLocation}/>
         </div>
       );
     }
