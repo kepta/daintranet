@@ -56,7 +56,7 @@ export function index(req, res) {
 export function show(req, res) {
   if (req.query.loc) {
     const path = __dirname;
-    res.download(intranet + req.query.loc);
+    res.sendFile(intranet + req.query.loc);
   } else {
     handleError(res)(new Error('file now found'));
   }
