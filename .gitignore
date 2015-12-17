@@ -5,3 +5,4 @@ npm-debug.log
 jspm_packages
 server/node_modules
 server/logs
+server/.git
