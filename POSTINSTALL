@@ -1,5 +1,5 @@
 #!/bin/bash
 cd "$(dirname "$0")/server"
-ls
-forever stop server/bin/www
-forever start server/bin/www
+npm install
+forever stop bin/www
+forever start --spinSleepTime 10000 bin/www
