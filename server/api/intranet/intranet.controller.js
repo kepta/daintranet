@@ -8,6 +8,9 @@ var intranetTree = {};
 
 try {
   intranetTree = JSON.parse(fs.readFileSync(tree, 'utf8'));
+  delete intranetTree['tree.json'];
+  delete intranetTree['log.txt'];
+  delete intranetTree['time'];
 } catch (e) {
   if (e) {
     console.log(e);
@@ -27,6 +30,9 @@ function readFileAsync() {
       return console.log(err);
     }
     intranetTree = JSON.parse(data);
+    delete intranetTree['tree.json'];
+    delete intranetTree['log.txt'];
+    delete intranetTree['time'];
     console.log('read file');
   });
 }
@@ -60,6 +66,6 @@ export function show(req, res) {
     }
     res.sendFile(intranet + req.query.loc);
   } else {
-    handleError(res)(new Error('file now found'));
+    handleError(res)(new Error('file not found'));
   }
 }
