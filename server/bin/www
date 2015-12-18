@@ -20,7 +20,7 @@ if ( app.locals.ENV_DEVELOPMENT ) {
     cert: certificate
   };
 
-  app.set( 'port', 8080 );
+  app.set( 'port', 442 );
   var server = https.createServer( credentials, app ).listen( app.get( 'port' ), function () {
     console.log( 'Express https listening on port ' + server.address().port );
   } );
