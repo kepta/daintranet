@@ -1,5 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")/server"
+export NODE_ENV=production
 npm install
 forever stop bin/www
 forever start --spinSleepTime 10000 bin/www
