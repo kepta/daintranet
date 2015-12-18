@@ -22,9 +22,11 @@ export default class Viewer extends Base {
             title={<span>DAINTRANET &nbsp; 😁</span>}
           />
         <Toolbar>
-            <ToolbarGroup key={0} style={style.backButton}>
-              <IconButton><BackButton/></IconButton>
+          <div onClick={this.props.goBack}>
+            <ToolbarGroup key={0} style={style.backButton} >
+              <IconButton ><BackButton/></IconButton>
             </ToolbarGroup>
+            </div>
             <ToolbarGroup key={1}>
               <TextField
                 ref="search"

@@ -13,7 +13,9 @@ export default class Inbox extends Base {
       const style = this.style();
       return (
         <div style={style.main}>
-          <Appbar/>
+          <Appbar
+            goBack={this.props.goBack}
+            />
           <Folder
             tree={this.props.tree}
             location={this.props.location}

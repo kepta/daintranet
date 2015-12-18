@@ -65,7 +65,7 @@ export default class Viewer extends Base {
         main: {
           height: '100%',
           overflowY: 'scroll',
-          marginTop: '10px',
+          WebkitOverflowScrolling: 'touch',
         },
         list: {
         },
