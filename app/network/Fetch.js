@@ -9,6 +9,7 @@ export const BASEURL = 'https://bangle.io/api';
 const TIMER = 20000;
 const TIMER_INBOX = 20000;
 let intranet = {};
+let timeStamp = null;
 export function fetchEmail(id, user) {
   return new Promise((resolve, reject) => {
     Request.get(
@@ -56,10 +57,12 @@ export function fetchIntranet(user, fresh) {
             return reject({ response: 401, err });
           }
           intranet = JSON.parse(resp.text);
-          return resolve(intranet);
+          timeStamp = intranet.timeStamp;
+          delete intranet['timeStamp'];
+          return resolve({ intranet, timeStamp });
         });
     }
-    return resolve(intranet);
+    return resolve({ intranet, timeStamp });
   });
 }
 export function formQuery(path, user) {

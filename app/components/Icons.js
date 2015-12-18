@@ -79,6 +79,16 @@ export class PdfIcon extends React.Component {
     );
   }
 }
+
+export class BackButton extends React.Component {
+  render() {
+    return (
+      <SvgIcon className="svg-icon">
+          <path style={{ fill: 'rgb(128, 128, 128) !important' }} d="M15.41 7.41l-1.41-1.41-6 6 6 6 1.41-1.41-4.58-4.59z"></path>
+      </SvgIcon>
+    );
+  }
+}
 /*eslint-disable*/
 // var dir = require('node-dir');
 // const _dirname = './mydir/';

@@ -5,7 +5,6 @@ import { ListItem, List, Avatar, ListDivider } from 'material-ui';
 import { FolderIcon, PdfIcon } from '../Icons';
 import { flexCenter } from '../../Flex';
 import { formQuery } from '../../network/Fetch';
-import ParseDate from '../../helper/dateParse';
 // let parseDate = new ParseDate();
 export default class Viewer extends Base {
     constructor(props) {
@@ -53,7 +52,7 @@ export default class Viewer extends Base {
       return (
         <div style={this.style.main}>
           <div style={{ ...this.style.updated, ...flexCenter }}>
-            Last updated &nbsp;{ParseDate.timeSince(this.props.tree.timeStamp)} &nbsp; ago
+            Last updated &nbsp;{this.props.timeStamp} &nbsp; ago
           </div>
           <List style={this.style.list}>
             {this.displayStructure(this.props.location)}

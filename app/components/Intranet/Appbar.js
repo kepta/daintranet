@@ -1,8 +1,8 @@
 import React from 'react';
 // import ProfDumb from './Professors.dumb';
 import Base from '../Base';
-import { AppBar, FlatButton, TextField, Toolbar, ToolbarSeparator, IconButton } from 'material-ui';
-import { Close } from '../Icons';
+import { AppBar, TextField, Toolbar, ToolbarSeparator, IconButton, ToolbarGroup } from 'material-ui';
+import { BackButton } from '../Icons';
 export default class Viewer extends Base {
     constructor(props) {
       super(props);
@@ -15,19 +15,33 @@ export default class Viewer extends Base {
       console.log(this.refs.search.getValue());
     }
     render() {
+      const style = this.style();
       return (
         <div>
           <AppBar
             title={<span>DAINTRANET &nbsp; 😁</span>}
           />
         <Toolbar>
-            <TextField
+            <ToolbarGroup key={0} style={style.backButton}>
+              <IconButton><BackButton/></IconButton>
+            </ToolbarGroup>
+            <ToolbarGroup key={1}>
+              <TextField
                 ref="search"
                 hintText="Search Intranet"
                 errorText={this.state.errorText}
                 onChange={this.handleSearchChange} />
+            </ToolbarGroup>
         </Toolbar>
         </div>
       );
+    }
+    style() {
+      return {
+        backButton: {
+          position: 'relative',
+          left: '-20px',
+        },
+      };
     }
 }

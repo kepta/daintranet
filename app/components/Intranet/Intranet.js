@@ -3,15 +3,16 @@ import IntranetDumb from './Intranet.dumb';
 import Base from '../Base';
 import { CircularProgress } from 'material-ui';
 import { fetchIntranet } from '../../network/Fetch';
+import ParseDate from '../../helper/dateParse';
 
 export default class Inbox extends Base {
-
     constructor(props) {
       super(props);
       this.state = {
         tree: null,
         path: [],
         currentLocation: null,
+        timeStamp: null
       };
       this._bind('getDirectoryTree', 'goForward');
       this.getDirectoryTree();
@@ -24,14 +25,14 @@ export default class Inbox extends Base {
           return console.log(rej);
         }
         this.setState({
-          tree: res,
-          currentLocation: res,
+          tree: res.intranet,
+          currentLocation: res.intranet,
+          timeStamp: ParseDate.timeSince(res.timeStamp),
         });
       });
     }
     goForward(location) {
-      console.log('called',location);
-      var tempArray = this.state.path.slice(0);
+      const tempArray = this.state.path.slice(0);
       tempArray.push(location);
       this.setState({
         path: tempArray,
@@ -52,7 +53,8 @@ export default class Inbox extends Base {
                           : <IntranetDumb tree={this.state.tree}
                                           location={this.state.currentLocation}
                                           goForward={this.goForward}
-                                          path={this.state.path}/>
+                                          path={this.state.path}
+                                          timeStamp={this.state.timeStamp}/>
       );
     }
 }
