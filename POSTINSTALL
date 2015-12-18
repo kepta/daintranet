@@ -1,1 +1,5 @@
+#!/bin/bash
+cd "$(dirname "$0")/server"
+ls
 forever stop server/bin/www
+forever start server/bin/www
