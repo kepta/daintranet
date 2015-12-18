@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /*eslint-disable*/
 require("babel-register");
+var fs = require('fs');
 var app = require('../app');
 var https = require("https");
 

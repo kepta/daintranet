@@ -1,15 +1,11 @@
-
-
 import express from 'express';
 import path from 'path';
-// import favicon from 'serve-favicon';
-// import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import routes from './routes';
 var logger = require("./logger");
 
-var compression = require('compression')
+var compression = require('compression');
 var cors = require('cors');
 // import users from './routes/user';
 
