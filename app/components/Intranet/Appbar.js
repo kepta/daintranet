@@ -14,6 +14,9 @@ export default class Viewer extends Base {
     handleSearchChange(who, k) {
       console.log(this.refs.search.getValue());
     }
+    shouldComponentUpdate() {
+      return false;
+    }
     render() {
       const style = this.style();
       return (
@@ -22,17 +25,16 @@ export default class Viewer extends Base {
             title={<span>DAINTRANET &nbsp; 😁</span>}
           />
         <Toolbar>
-          <div onClick={this.props.goBack}>
             <ToolbarGroup key={0} style={style.backButton} >
-              <IconButton tooltip="Go back" ><BackButton/></IconButton>
+              <IconButton onClick={this.props.goBack} tooltip="Go back" ><BackButton/></IconButton>
             </ToolbarGroup>
-            </div>
             <ToolbarGroup key={1}>
               <TextField
                 ref="search"
+                fullWidth={true}
                 hintText="Search Intranet"
                 errorText={this.state.errorText}
-                onChange={this.handleSearchChange} />
+                onChange={this.handleSearchChange}/>
             </ToolbarGroup>
         </Toolbar>
         </div>
