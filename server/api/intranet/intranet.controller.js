@@ -61,8 +61,9 @@ export function index(req, res) {
 
 export function show(req, res) {
   if (req.query.loc) {
+    const posOfSlash = req.query.loc.lastIndexOf('/');
     if (req.query.loc.indexOf('.pdf' !== -1)) {
-      res.setHeader('content-disposition', 'inline; filename="'+filename+'"');
+      res.setHeader('content-disposition', 'inline; filename="'+req.query.loc.slice(posOfSlash+1)+'"');
     }
     res.sendFile(intranet + req.query.loc);
   } else {
