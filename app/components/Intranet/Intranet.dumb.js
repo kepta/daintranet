@@ -21,6 +21,7 @@ export default class Inbox extends Base {
             location={this.props.location}
             goForward={this.props.goForward}
             path={this.props.path}
+            pathString={this.props.pathString}
             timeStamp={this.props.timeStamp}
             />
         </div>

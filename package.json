@@ -8,8 +8,8 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-    "/node_modules/",
-    "/jspm_packages"
+      "/node_modules/",
+      "/jspm_packages"
     ]
   },
   "repository": {
@@ -66,5 +66,8 @@
       "babel-runtime": "npm:babel-runtime@^5.8.24",
       "core-js": "npm:core-js@^1.1.4"
     }
+  },
+  "dependencies": {
+    "eslint-config-airbnb": "^2.1.1"
   }
 }

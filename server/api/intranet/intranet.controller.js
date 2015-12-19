@@ -62,7 +62,7 @@ export function index(req, res) {
 export function show(req, res) {
   if (req.query.loc) {
     if (req.query.loc.indexOf('.pdf' !== -1)) {
-      res.setHeader('content-disposition', 'inline');
+      res.setHeader('content-disposition', 'inline; filename="'+filename+'"');
     }
     res.sendFile(intranet + req.query.loc);
   } else {

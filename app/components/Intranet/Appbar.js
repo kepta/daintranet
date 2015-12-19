@@ -24,7 +24,7 @@ export default class Viewer extends Base {
         <Toolbar>
           <div onClick={this.props.goBack}>
             <ToolbarGroup key={0} style={style.backButton} >
-              <IconButton ><BackButton/></IconButton>
+              <IconButton tooltip="Go back" ><BackButton/></IconButton>
             </ToolbarGroup>
             </div>
             <ToolbarGroup key={1}>
