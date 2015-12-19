@@ -67,6 +67,7 @@ export function show(req, res) {
     }
     res.sendFile(intranet + req.query.loc);
   } else {
+    res.setHeader('content-disposition', 'attachment; filename="'+req.query.loc.slice(posOfSlash+1)+'"');
     handleError(res)(new Error('file not found'));
   }
 }
