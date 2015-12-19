@@ -1,7 +1,7 @@
 var Fuse = require('fuse.js');
 var fs = require('fs');
 const local = false;
-const location = local ? __dirname +'/fuzzy.json' : '/root/intranet/fuzzy.json';
+const location = local ? __dirname + '/fuzzy.json' : '/root/intranet/fuzzy.json';
 var minutes = 60, the_interval = minutes * 60 * 1000;
 
 let obj = JSON.parse(fs.readFileSync(location, 'utf8'));
@@ -43,5 +43,5 @@ function responseWithResult(res, statusCode) {
 }
 
 export function show(req, res) {
-  return responseWithResult(res)(fuse.search(req.params.id));
+  return responseWithResult(res)(fuse.search(req.params.id).slice(0, 12));
 }
