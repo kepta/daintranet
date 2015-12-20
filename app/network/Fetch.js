@@ -68,3 +68,16 @@ export function fetchIntranet(user, fresh) {
 export function formQuery(path, user) {
   return `${BASEURL}/intranet/user.id?loc=${path}`;
 }
+
+export function fuzzySearch(search) {
+  return new Promise((resolve, reject) => {
+    return Request.get(`${BASEURL}/find/${search}`)
+        .end((err, resp) => {
+          if (err) {
+            return reject({ response: 401, err });
+          }
+          // console.log();
+          return resolve(JSON.parse(resp.text));
+        });
+  });
+}

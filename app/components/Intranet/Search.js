@@ -10,34 +10,33 @@ export default class Viewer extends Base {
       this.style = this.style();
       this._bind('displayStructure', 'goForward');
     }
-    goForward(item) {
-      this.props.goForward(item);
+    goForward(path) {
+      this.props.goToSearch(path.slice(15));
     }
-    showAttachment(path, file) {
-      console.log(path, file);
-      let url = path.join('/');
-      url = url + '/'+ file;
+    showAttachment(path) {
+      // console.log(path, file);
+      const url = path.slice(15); // /root/intranet/
       window.open(formQuery(url), '_blank');
     }
-    displayStructure(obj) {
-      console.log(obj);
-      return Object.keys(obj).map((item, key) => {
-        const isFile = obj[item] === 'file';
+    displayStructure(array) {
+      console.log(array);
+      return array.map((item, key) => {
+        const isFile = item.name.indexOf('.') > -1;
         if (isFile) {
           return (
-            <div key={key} onClick={this.showAttachment.bind(this, this.props.pathString, item)}>
+            <div key={key} onClick={this.showAttachment.bind(this, item.path)}>
               <ListItem style={this.style.listItem}
-                      primaryText={item}
-                      leftIcon={<Avatar style={{ ...this.style.avatar, ...this.style.avatarFile }} icon={<PdfIcon/> }/>}
-                      />
+                primaryText={item.name}
+                leftIcon={<Avatar style={{ ...this.style.avatar, ...this.style.avatarFile }} icon={<PdfIcon/> }/>}
+              />
               <ListDivider inset={true}/>
           </div>
           );
         }
         return (
-          <div key={key} onClick={this.goForward.bind(this, item)}>
+          <div key={key} onClick={this.goForward.bind(this, item.path)}>
               <ListItem style={this.style.listItem}
-                        primaryText={item}
+                        primaryText={item.name}
                         leftIcon={<Avatar style={this.style.avatar} icon={<FolderIcon/> }/>}
                         />
               <ListDivider inset={true}/>
@@ -48,7 +47,7 @@ export default class Viewer extends Base {
     render() {
       const lastUpdated = (
         <span>
-          Last updated &nbsp;{this.props.timeStamp} &nbsp; ago
+          Search Results
         </span>
       );
       const refresh = (
@@ -61,7 +60,7 @@ export default class Viewer extends Base {
             {statusDisplay}
           </div>
           <List style={this.style.list}>
-            {this.displayStructure(this.props.location)}
+            {this.displayStructure(this.props.searchResult)}
           </List>
         </div>
       );

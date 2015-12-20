@@ -2,7 +2,7 @@ import React from 'react';
 import IntranetDumb from './Intranet.dumb';
 import Base from '../Base';
 import { CircularProgress } from 'material-ui';
-import { fetchIntranet } from '../../network/Fetch';
+import { fetchIntranet, fuzzySearch } from '../../network/Fetch';
 import ParseDate from '../../helper/dateParse';
 
 export default class Inbox extends Base {
@@ -14,8 +14,10 @@ export default class Inbox extends Base {
         pathString: [],
         timeStamp: null,
         previous: null,
+        searchResult: false,
+        searching: false,
       };
-      this._bind('getDirectoryTree', 'goForward', 'goBack');
+      this._bind('getDirectoryTree', 'goForward', 'goBack', 'setSearch', 'goToSearch');
       this.getDirectoryTree();
     }
     getDirectoryTree() {
@@ -42,6 +44,47 @@ export default class Inbox extends Base {
         pathString: tempPathString,
       });
     }
+    goToSearch(pathArg) {
+      const pathString = pathArg.split('/');
+      const path = [this.state.tree];
+      pathString.forEach((subDir) => {
+        path.push(path[path.length - 1][subDir]);
+      });
+      this.setState({
+        searchResult: null,
+        path,
+        pathString,
+        searching: false,
+      });
+    }
+    setSearch(search) {
+      if (search) {
+        this.setState({
+          searching: true,
+        });
+        fuzzySearch(search).then((resp, err) => {
+          console.log(resp);
+          // TODO if you press cancel while search is going
+          if (err) {
+            console.log(err);
+            this.setState({
+              searching: false,
+            });
+          }
+          if (resp) {
+            this.setState({
+              searchResult: resp,
+              searching: false,
+            });
+          }
+        });
+      } else {
+        this.setState({
+          searchResult: null,
+        });
+      }
+    }
+
     goBack() {
       if (this.state.path.length === 1) return;
       const tempArray = this.state.path.slice(0, this.state.path.length - 1);
@@ -63,12 +106,17 @@ export default class Inbox extends Base {
       return (
         !this.state.tree ? progress
                           : <IntranetDumb tree={this.state.tree}
-                                          location={this.state.path[this.state.path.length - 1]}
-                                          goForward={this.goForward}
-                                          path={this.state.path}
-                                          pathString={this.state.pathString}
-                                          goBack={this.goBack}
-                                          timeStamp={this.state.timeStamp}/>
+                            location={this.state.path[this.state.path.length - 1]}
+                            goForward={this.goForward}
+                            path={this.state.path}
+                            pathString={this.state.pathString}
+                            goBack={this.goBack}
+                            timeStamp={this.state.timeStamp}
+                            searchResult={this.state.searchResult}
+                            setSearch={this.setSearch}
+                            searching={this.state.searching}
+                            goToSearch={this.goToSearch}
+                          />
       );
     }
 }

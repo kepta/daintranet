@@ -2,21 +2,38 @@ import React from 'react';
 // import ProfDumb from './Professors.dumb';
 import Base from '../Base';
 import { AppBar, TextField, Toolbar, ToolbarSeparator, IconButton, ToolbarGroup } from 'material-ui';
-import { BackButton } from '../Icons';
+import { BackButton, CloseGrey } from '../Icons';
 export default class Viewer extends Base {
     constructor(props) {
       super(props);
       this.state = {
-        input1: [],
+        search: false,
       };
-      this._bind('handleSearchChange');
+      this._bind('handleSearchChange', 'clearSearch');
+      this.lastQuery = undefined;
     }
-    handleSearchChange(who, k) {
-      console.log(this.refs.search.getValue());
+    handleSearchChange() {
+      const value = this.refs.search.getValue();
+      if (value.length >= 4) {
+        clearTimeout(this.lastQuery);
+        this.lastQuery = setTimeout(() => this.props.setSearch(value), 300);
+        this.setState({
+          search: true,
+        });
+      }
     }
-    shouldComponentUpdate() {
-      return false;
+    clearSearch() {
+      clearTimeout(this.lastQuery);
+      this.lastQuery = null;
+      this.props.setSearch(null);
+      this.refs.search.setValue('');
+      this.setState({
+        search: false,
+      });
     }
+    // shouldComponentUpdate() {
+    //   // return false;
+    // }
     render() {
       const style = this.style();
       return (
@@ -26,7 +43,11 @@ export default class Viewer extends Base {
           />
         <Toolbar>
             <ToolbarGroup key={0} style={style.backButton} >
-              <IconButton onClick={this.props.goBack} tooltip="Go back" ><BackButton/></IconButton>
+              <IconButton onClick={this.lastQuery ? this.clearSearch : this.props.goBack}
+                tooltip="Go back"
+              >
+                {this.lastQuery ? <CloseGrey/> : <BackButton/>}
+              </IconButton>
             </ToolbarGroup>
             <ToolbarGroup key={1}>
               <TextField
@@ -34,7 +55,8 @@ export default class Viewer extends Base {
                 fullWidth={true}
                 hintText="Search Intranet"
                 errorText={this.state.errorText}
-                onChange={this.handleSearchChange}/>
+                onChange={this.handleSearchChange}
+              />
             </ToolbarGroup>
         </Toolbar>
         </div>

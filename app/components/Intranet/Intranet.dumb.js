@@ -4,26 +4,39 @@ import { flexRow, flexGrow1, flexCenter, flexCol } from '../../flex';
 import { LectureIcon, AcademicIcon } from '../Icons';
 import Appbar from './Appbar';
 import Folder from './Folder';
-
+import SearchResult from './Search';
 export default class Inbox extends Base {
     constructor(props) {
       super(props);
     }
     render() {
       const style = this.style();
+      const folder = (
+        <Folder
+          tree={this.props.tree}
+          location={this.props.location}
+          goForward={this.props.goForward}
+          path={this.props.path}
+          pathString={this.props.pathString}
+          timeStamp={this.props.timeStamp}
+          searching={this.props.searching}
+        />
+      );
+      const searchResult = (
+        <SearchResult
+          searchResult={this.props.searchResult}
+          searching={this.props.searching}
+          goToSearch={this.props.goToSearch}
+        />
+      );
+      console.log('!this.props.searchResult');
       return (
         <div style={style.main}>
           <Appbar
             goBack={this.props.goBack}
-            />
-          <Folder
-            tree={this.props.tree}
-            location={this.props.location}
-            goForward={this.props.goForward}
-            path={this.props.path}
-            pathString={this.props.pathString}
-            timeStamp={this.props.timeStamp}
-            />
+            setSearch={this.props.setSearch}
+          />
+         { !this.props.searchResult ? folder: searchResult}
         </div>
       );
     }

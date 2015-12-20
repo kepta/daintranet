@@ -5,7 +5,7 @@ import { getInbox } from '../../network/Fetch';
 import db from '../../localdb/indexdb';
 import { CircularProgress } from 'material-ui';
 
-const LASTEMAILS = 6;
+const LASTEMAILS = 4;
 
 export default class Inbox extends Base {
     constructor(props) {
