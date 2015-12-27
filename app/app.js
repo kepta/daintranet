@@ -58,10 +58,12 @@ class App extends Component {
         return (<Login {...props}/>);
       case LOGGED_IN:
       case LOGGING:
-        return (<MainWrapper {...props}
-          actionLoggedIn={this.props.setLoggedIn}
-          setLoginError={this.props.setLoginError}
-                              />);
+        return (
+          <MainWrapper {...props}
+            actionLoggedIn={this.props.setLoggedIn}
+            setLoginError={this.props.setLoginError}
+          />
+      );
       // case LOGGING:
       //   return (
       //     <Loading {...props}

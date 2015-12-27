@@ -8,6 +8,7 @@ import App from './app';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
+
 const store = createStore(reducers);
 
 function handleChange() {
