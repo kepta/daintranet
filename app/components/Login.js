@@ -2,7 +2,7 @@ import React from 'react';
 import Base from './Base';
 import { LOGIN_ERROR } from '../state/actions';
 import { FlatButton, TextField, Paper } from 'material-ui';
-
+import { flexCenter } from '../helper/flex';
 const ERROR_MESSAGE = 'Invalid user id';
 export default class Login extends Base {
   constructor(props) {
@@ -10,7 +10,7 @@ export default class Login extends Base {
     this.state = {
       checked: false,
     };
-    this._bind('HandleLogin', 'HandleChange');
+    this._bind('handleLogin', 'handleEnter');
     this.styles = this.styles();
   }
   componentDidMount() {}
@@ -21,13 +21,15 @@ export default class Login extends Base {
       </p>
     );
   }
-  HandleLogin() {
+  handleEnter(e) {
+    if (e.which === 13) {
+      this.handleLogin();
+    }
+  }
+  handleLogin(event) {
     const id = (this.refs.userId.getValue());
     const pass = (this.refs.password.getValue());
     this.props.setLogging({ id, pass });
-  }
-  HandleChange() {
-    // const check = this.refs.checker.getDOMNode().checked;
   }
   render() {
     console.log(this.props.loginState);
@@ -36,24 +38,34 @@ export default class Login extends Base {
     console.log(error);
     return (
       <div style={this.styles.main}>
-        {error}
-        <form>
-        <div>
-          <TextField
-            hintText="ID"
-            ref="userId"
-            hintStyle={ error ? { color: 'red' } : {} }
+        <Paper style={this.styles.paper} onKeyDown={this.handleEnter}>
+          <div style={this.styles.headerContainer}>
+            <h1 style={{fontSize: '5em', marginBottom: '20px'}}>🎓</h1>
+            <h3 style={this.styles.header}>daintranet.com</h3>
+          </div>
+          {error}
+          <div>
+            <TextField
+              hintText="ID"
+              ref="userId"
+              hintStyle={ error ? { color: 'red' } : {} }
             />
-        </div>
-        <div>
-          <TextField
+          </div>
+          <div>
+            <TextField
               ref="password" type="password"
               hintText="password"
               hintStyle={ error ? { color: 'red' } : {} }
-              />
-        </div>
-        </form>
-        <FlatButton label="Login" onClick={this.HandleLogin}/>
+            />
+          </div>
+          <div style={flexCenter}>
+            <FlatButton
+              label="Login"
+              style={{ flexGrow: '1' }}
+              onTouchTap={this.handleLogin}
+            />
+          </div>
+        </Paper>
       </div>
     );
   }
@@ -66,11 +78,30 @@ export default class Login extends Base {
         alignItems: 'center',
         height: '100%',
       },
+      headerContainer: {
+        height: '150px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        marginBottom: '20px',
+      },
+      header: {
+        textTransform: 'uppercase',
+        fontSize: '28px',
+        fontWeight: '300',
+        lineHeight: '1.2',
+        color: '#757575',
+        fontFamily: 'roboto',
+      },
       checkbox: {
         width: '250px',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '20px',
+      },
+      paper: {
+        padding: '12px',
       },
       input: {
         userSelect: 'text',

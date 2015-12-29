@@ -1,5 +1,4 @@
 import React from 'react';
-import db from '../localdb/indexdb';
 import MainWrapperDumb from './MainWrapper.dumb';
 
 export default class MainWrapper extends React.Component {
@@ -20,7 +19,7 @@ export default class MainWrapper extends React.Component {
           actionLoggedIn={this.props.setLoggedIn}
           setLoginError={this.props.setLoginError}
           dbPromise={this.props.dbPromise}
-          />
+        />
       </div>
     );
   }

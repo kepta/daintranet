@@ -1,7 +1,8 @@
 import React from 'react';
+import Base from './Base';
 import { LinearProgress } from 'material-ui';
 
-export default class LoadingDumb extends React.Component {
+export default class LoadingDumb extends Base {
   render() {
     const style = this.style();
     return <LinearProgress style={style} mode="indeterminate"/>;
@@ -9,7 +10,7 @@ export default class LoadingDumb extends React.Component {
   style() {
     return {
       position: 'fixed',
-      top: '50%'
-    }
+      top: '50%',
+    };
   }
 }

@@ -21,7 +21,6 @@ export default class Inbox extends Base {
       this.getDirectoryTree();
     }
     getDirectoryTree() {
-      // console.log(this.props.fresh);
       fetchIntranet(this.props.user, this.props.fresh).then((res, rej) => {
         if (rej) {
           // TODO: need to work on error, to let use press retry in case of fail

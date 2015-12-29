@@ -23,13 +23,15 @@ export default class Email extends React.Component {
   }
   render() {
     const dumbEmail = (
-       <ReactCSSTransitionGroup transitionName="mainwrapper" transitionAppear={true}
-         transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+       <ReactCSSTransitionGroup transitionName="mainwrapper" transitionAppear
+         transitionEnterTimeout={500} transitionLeaveTimeout={300}
+       >
         <DumbEmail
           email={this.state.email}
           hide={this.props.hide} key={1}
           setStar={this.props.setStar}
-          starred={this.props.starred}/>
+          starred={this.props.starred}
+        />
       </ReactCSSTransitionGroup>
     );
     const progress = (

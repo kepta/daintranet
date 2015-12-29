@@ -28,7 +28,7 @@ module.exports = {
     "quotes": 0,
     "space-before-function-paren": 0,
     "react/prop-types": 0,
-    "react/jsx-boolean-value": 0,
+    // "react/jsx-boolean-value": 0,
     "no-console": 0,
   },
   "parser": "babel-eslint"

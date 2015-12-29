@@ -1,5 +1,4 @@
 import React from 'react';
-import EmailList from './EmailItem';
 import { List, ListItem, ListDivider, Avatar } from 'material-ui';
 // import Helper from '../Helpers/helper';
 // import User from '../Helpers/user.info';
@@ -25,12 +24,16 @@ export default class SideBar extends Base {
         );
         const from = mail.e[0].d || mail.e[0].a;
         return (
-          <div key={iter} onClick={this.props.showEmail.bind(this, mail.id)}>
+          <div key={iter} onTouchTap={this.props.showEmail.bind(this, mail.id)}>
             <ListItem
-            primaryText={mail.e[0].p}
-            secondaryText={secondaryText}
-            secondaryTextLines={2}
-            leftAvatar={<Avatar>{ from[0].toUpperCase() + from[1] }</Avatar>}
+              primaryText={mail.e[0].p}
+              secondaryText={secondaryText}
+              secondaryTextLines={2}
+              leftAvatar={
+                <Avatar>
+                  { from[0].toUpperCase() + from[1] }
+                </Avatar>
+              }
             />
             <ListDivider/>
           </div>

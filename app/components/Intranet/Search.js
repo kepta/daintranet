@@ -29,17 +29,17 @@ export default class Viewer extends Base {
                 primaryText={item.name}
                 leftIcon={<Avatar style={{ ...this.style.avatar, ...this.style.avatarFile }} icon={<PdfIcon/> }/>}
               />
-              <ListDivider inset={true}/>
+              <ListDivider inset/>
           </div>
           );
         }
         return (
           <div key={key} onClick={this.goForward.bind(this, item.path)}>
               <ListItem style={this.style.listItem}
-                        primaryText={item.name}
-                        leftIcon={<Avatar style={this.style.avatar} icon={<FolderIcon/> }/>}
-                        />
-              <ListDivider inset={true}/>
+                primaryText={item.name}
+                leftIcon={<Avatar style={this.style.avatar} icon={<FolderIcon/> }/>}
+              />
+              <ListDivider inset/>
           </div>
           );
       });

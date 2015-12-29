@@ -1,5 +1,8 @@
+/*eslint-disable*/
 import React from 'react';
 import { SvgIcon } from 'material-ui';
+
+// TODO: fucked up need to change
 
 // export const close = (
 //   <svg className="svg-icon svg-icon-32" viewBox="0 0 20 20">

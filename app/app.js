@@ -6,7 +6,7 @@ import { Actions } from './state/actions';
 import { LOGGED_IN, LOGGED_OUT, LOGGING, LOGIN_ERROR } from './state/actions';
 
 import Login from './components/login';
-import Loading from './components/loading';
+// import Loading from './components/loading';
 import MainWrapper from './components/MainWrapper';
 
 function mapStateToProps(state) {

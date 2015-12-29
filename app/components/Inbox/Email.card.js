@@ -1,6 +1,7 @@
 import React from 'react';
+import Base from '../Base';
 import { Card, CardHeader, ListDivider, Avatar } from 'material-ui';
-export default class EmailCard extends React.Component {
+export default class EmailCard extends Base {
   constructor(props) {
     super(props);
   }
@@ -12,15 +13,14 @@ export default class EmailCard extends React.Component {
     const email = this.props.email;
     const style = this.style();
     const avatar = <Avatar>{email.from[0].name.slice(0, 2) || email.from[0].address.slice(0, 2)}</Avatar>;
-    // const to = email.to.map((t) => t.address);
     const subtitle = <span>{email.from[0].address}<br/>{email.receivedDate.toString()}<br/></span>;
     return (
         <Card>
           <CardHeader
-           title={email.from[0].name}
-           subtitle={subtitle}
-           avatar={avatar}
-           />
+            title={email.from[0].name}
+            subtitle={subtitle}
+            avatar={avatar}
+          />
           <ListDivider/>
           <div style={style.iframeWrapper}>
             <iframe srcDoc={email.html || email.text} frameBorder="0" style={style.iframe}/>

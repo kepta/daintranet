@@ -2,9 +2,10 @@ import React from 'react';
 import Inbox from './Inbox/Inbox';
 import Email from './Inbox/Email';
 import Intranet from './Intranet/Intranet';
+import Base from './Base';
 import { Paper, LeftNav } from 'material-ui';
 import LeftNavMenu from './LeftNav';
-export default class DumbMainWrapper extends React.Component {
+export default class DumbMainWrapper extends Base {
   constructor(props) {
     super(props);
     this.style=this.style();
@@ -37,7 +38,7 @@ export default class DumbMainWrapper extends React.Component {
   render() {
     console.log(this.props.user);
     console.log(window.innerWidth);
-    const isMobile =  window.innerWidth < 600 ;
+    const isMobile = window.innerWidth < 600;
     console.log(isMobile);
     const showInbox = isMobile ? null :
                           (<Paper zDepth={1} style={this.style.inbox}>
@@ -46,7 +47,7 @@ export default class DumbMainWrapper extends React.Component {
                                 setLoginError={this.props.setLoginError}
                                 dbPromise={this.props.dbPromise}
                                 user={this.props.user}
-                                />
+                              />
                             </Paper>);
     return (
       <div>

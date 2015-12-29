@@ -25,22 +25,22 @@ export default class Viewer extends Base {
         const isFile = obj[item] === 'file';
         if (isFile) {
           return (
-            <div key={key} onClick={this.showAttachment.bind(this, this.props.pathString, item)}>
+            <div key={key} onTouchTap={this.showAttachment.bind(this, this.props.pathString, item)}>
               <ListItem style={this.style.listItem}
-                      primaryText={item}
-                      leftIcon={<Avatar style={{ ...this.style.avatar, ...this.style.avatarFile }} icon={<PdfIcon/> }/>}
-                      />
-              <ListDivider inset={true}/>
+                primaryText={item}
+                leftIcon={<Avatar style={{ ...this.style.avatar, ...this.style.avatarFile }} icon={<PdfIcon/> }/>}
+              />
+              <ListDivider inset/>
           </div>
           );
         }
         return (
-          <div key={key} onClick={this.goForward.bind(this, item)}>
+          <div key={key} onTouchTap={this.goForward.bind(this, item)}>
               <ListItem style={this.style.listItem}
-                        primaryText={item}
-                        leftIcon={<Avatar style={this.style.avatar} icon={<FolderIcon/> }/>}
-                        />
-              <ListDivider inset={true}/>
+                primaryText={item}
+                leftIcon={<Avatar style={this.style.avatar} icon={<FolderIcon/> }/>}
+              />
+              <ListDivider inset/>
           </div>
           );
       });

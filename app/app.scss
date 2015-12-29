@@ -110,15 +110,15 @@ SVG Icons - svgicons.sparkk.fr
   background: #424242;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(0,0,0,0);
   border: 0px none transparent;
   border-radius: 1px;
 }
 ::-webkit-scrollbar-track:hover {
-  background: #fefdff;
+  background: rgba(0,0,0,0);
 }
 ::-webkit-scrollbar-track:active {
-  background: transparent;
+  background:rgba(0,0,0,0);
 }
 ::-webkit-scrollbar-corner {
   background: transparent;

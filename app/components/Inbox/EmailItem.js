@@ -47,15 +47,21 @@ export default class EmailList extends Base {
         fro = this.props.from[0].d ? this.props.from[0].d : this.props.from[0].a;
       }
       return (
-          <div onClick={this.handleClick.bind(this, this.props.Id)}>
+          <div onTouchTap={this.handleClick.bind(this, this.props.Id)}>
               <div style={this.styles.main} >
                   {this.showDot()}
                   <div style= {{ width: '100%' }}>
                       <li style={this.styles.rightContent} className="email-list hover ellipsis">
                           <div style={this.styles.from}
-                            className="mui-text-title mui-text-black from ellipsis">{fro}</div>
+                            className="mui-text-title mui-text-black from ellipsis"
+                          >
+                            {fro}
+                          </div>
                           <div style={this.styles.subject}
-                            className="mui-text-body1 mui-text-black subject ellipsis">{this.props.subject}</div>
+                            className="mui-text-body1 mui-text-black subject ellipsis"
+                          >
+                            {this.props.subject}
+                          </div>
                           <div style={{ display: 'none' }}></div>
                       </li>
                   </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardText, CardHeader, Avatar, AppBar, IconMenu, IconButton, ContentInbox, ListDivider } from 'material-ui';
+import { AppBar, IconMenu, IconButton } from 'material-ui';
 import { Attachments, Close } from '../Icons';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
@@ -18,14 +18,24 @@ export default class Email extends React.Component {
     const attachmentsList = atc.map((a, it) => {
       const blob = new Blob([a.content], { type: a.contentType });
       const downloadUrl = URL.createObjectURL(blob);
-      return <MenuItem primaryText={a.fileName} key={it} onClick={this.openAttachment.bind(this, downloadUrl)}/>;
+
+      return (
+        <MenuItem
+          primaryText={a.fileName}
+          key={it}
+          onTouchTap={this.openAttachment.bind(this, downloadUrl)}
+        />
+      );
     });
     return (
       <IconMenu
-        iconButtonElement= {<IconButton tooltip="attachments"><Attachments /></IconButton>}
+        iconButtonElement={<IconButton tooltip="attachments">
+                              <Attachments/>
+                           </IconButton>}
       >
         {attachmentsList}
-      </IconMenu>);
+      </IconMenu>
+    );
   }
   handleHide() {
     this.props.hide(null);
@@ -37,10 +47,11 @@ export default class Email extends React.Component {
     return (
         <AppBar
           title={email.subject.slice(0, 40)}
-          iconElementLeft={<IconButton tooltip="close" onClick={this.handleHide}><Close/></IconButton>}
-          iconElementRight={
-          this.showAttachments(email.attachments)
-        }/>
+          iconElementLeft={<IconButton tooltip="close" onTouchTap={this.handleHide}>
+                              <Close/>
+                           </IconButton>}
+          iconElementRight={this.showAttachments(email.attachments)}
+        />
     );
   }
 }

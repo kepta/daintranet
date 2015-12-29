@@ -11,7 +11,7 @@ export default function(app) {
   // Insert routes below
   app.use('/api/intranet', require('./api/intranet'));
   app.use('/api/email', require('./api/email'));
-  app.use('/api/find', require('./api/find'))
+  app.use('/api/find', require('./api/find'));
   // app.use('/auth', require('./auth'));
 
   // All undefined asset or api routes should return a 404

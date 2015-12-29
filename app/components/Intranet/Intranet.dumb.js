@@ -1,7 +1,5 @@
 import React from 'react';
 import Base from '../Base';
-import { flexRow, flexGrow1, flexCenter, flexCol } from '../../flex';
-import { LectureIcon, AcademicIcon } from '../Icons';
 import Appbar from './Appbar';
 import Folder from './Folder';
 import SearchResult from './Search';
@@ -29,7 +27,6 @@ export default class Inbox extends Base {
           goToSearch={this.props.goToSearch}
         />
       );
-      console.log('!this.props.searchResult');
       return (
         <div style={style.main}>
           <Appbar
@@ -50,15 +47,3 @@ export default class Inbox extends Base {
       };
     }
 }
-
-// <Tabs style={{ ...flexGrow1 }}>
-//   <Tab label={<div style ={{...flexRow, ...flexCenter}}><LectureIcon/>Lecture</div>} style={style.intranet}>
-//     <Professors />
-//   </Tab>
-//   <Tab label={<div style ={{...flexRow, ...flexCenter}}><AcademicIcon/>Academic</div>} style={style.intranet}>
-//     <Academic />
-//   </Tab>
-//   <Tab
-//     label="Item Three" style={style.starred}
-//   />
-// </Tabs>

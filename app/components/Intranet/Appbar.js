@@ -1,8 +1,8 @@
 import React from 'react';
-// import ProfDumb from './Professors.dumb';
 import Base from '../Base';
-import { AppBar, TextField, Toolbar, ToolbarSeparator, IconButton, ToolbarGroup } from 'material-ui';
+import { AppBar, TextField, Toolbar, IconButton, ToolbarGroup } from 'material-ui';
 import { BackButton, CloseGrey } from '../Icons';
+
 export default class Viewer extends Base {
     constructor(props) {
       super(props);
@@ -31,19 +31,20 @@ export default class Viewer extends Base {
         search: false,
       });
     }
-    // shouldComponentUpdate() {
-    //   // return false;
-    // }
+    handleToggle() {
+      console.log('touch tap');
+    }
     render() {
       const style = this.style();
       return (
         <div>
           <AppBar
-            title={<span>DAINTRANET &nbsp; 😁</span>}
+            title={<span>DAINTRANET &nbsp; 👹</span>}
+            onTouchTap={this.handleToggle}
           />
-        <Toolbar>
+        <Toolbar >
             <ToolbarGroup key={0} style={style.backButton} >
-              <IconButton onClick={this.lastQuery ? this.clearSearch : this.props.goBack}
+              <IconButton onTouchTap={this.lastQuery ? this.clearSearch : this.props.goBack}
                 tooltip="Go back"
               >
                 {this.lastQuery ? <CloseGrey/> : <BackButton/>}
@@ -52,7 +53,7 @@ export default class Viewer extends Base {
             <ToolbarGroup key={1}>
               <TextField
                 ref="search"
-                fullWidth={true}
+                fullWidth
                 hintText="Search Intranet"
                 errorText={this.state.errorText}
                 onChange={this.handleSearchChange}
@@ -67,7 +68,7 @@ export default class Viewer extends Base {
         backButton: {
           position: 'relative',
           left: '-20px',
-        },
+        }
       };
     }
 }
