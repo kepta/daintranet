@@ -19,7 +19,9 @@ if ( app.locals.ENV_DEVELOPMENT ) {
   var credentials = {
     key: privateKey,
     cert: certificate,
-    ca: cabundle
+    ca: cabundle,
+    requestCert:        true,
+    rejectUnauthorized: false
     // pfx: cabundle
   };
 
