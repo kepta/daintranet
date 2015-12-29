@@ -15,7 +15,7 @@ if ( app.locals.ENV_DEVELOPMENT ) {
 } else {
   var privateKey = fs.readFileSync( '/root/ssl/server.key', 'utf8' );
   var certificate = fs.readFileSync( '/root/ssl/bangle_io.crt', 'utf8' );
-  var cabundle = fs.readFileSync( '/root/ssl/this_will_work.crt', 'utf8');
+  var cabundle = fs.readFileSync( '/root/ssl/bangle_io_safe.crt', 'utf8');
   var credentials = {
     key: privateKey,
     cert: certificate,
