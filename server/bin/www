@@ -19,8 +19,8 @@ if ( app.locals.ENV_DEVELOPMENT ) {
   var credentials = {
     key: privateKey,
     cert: certificate,
-    // ca: cabundle,
-    pfx: cabundle
+    ca: cabundle,
+    // pfx: cabundle
   };
 
   app.set( 'port', 443 );
