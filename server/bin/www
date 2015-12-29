@@ -13,13 +13,29 @@ if ( app.locals.ENV_DEVELOPMENT ) {
     console.log( 'Express server listening on port ' + server.address().port );
   } );
 } else {
+  var ca = [];
+  var chain = fs.readFileSync( "/root/ssl/bangle_io_safe.ca-bundle", 'utf8' );
+  var chain = chain.split( "\n" );
+  var cert = [];
+  for ( var i = 0; i < chain.length ; i++ ) {
+    line = chain[ i ];
+    if ( !( line.length !== 0 ) ) {
+      continue;
+    }
+    cert.push( line );
+    if ( line.match( /-END CERTIFICATE-/ ) ) {
+      ca.push( cert.join( "\n" ) );
+      cert = [];
+    }
+  }
+
   var privateKey = fs.readFileSync( '/root/ssl/server.key', 'utf8' );
   var certificate = fs.readFileSync( '/root/ssl/bangle_io.crt', 'utf8' );
-  var cabundle = fs.readFileSync( '/root/ssl/bangle_io_safe.ca-bundle', 'utf8');
+  var cabundle = fs.readFileSync( '/root/ssl/bangle_io_safe.ca-bundle', 'utf8' );
   var credentials = {
     key: privateKey,
     cert: certificate,
-    ca: cabundle,
+    ca: ca,
     // pfx: cabundle
   };
 
