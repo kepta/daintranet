@@ -24,7 +24,7 @@ export default class Viewer extends Base {
         const isFile = item.name.indexOf('.') > -1;
         if (isFile) {
           return (
-            <div key={key} onClick={this.showAttachment.bind(this, item.path)}>
+            <div key={key} onTouchTap={this.showAttachment.bind(this, item.path)}>
               <ListItem style={this.style.listItem}
                 primaryText={item.name}
                 leftIcon={<Avatar style={{ ...this.style.avatar, ...this.style.avatarFile }} icon={<PdfIcon/> }/>}
@@ -34,7 +34,7 @@ export default class Viewer extends Base {
           );
         }
         return (
-          <div key={key} onClick={this.goForward.bind(this, item.path)}>
+          <div key={key} onTouchTap={this.goForward.bind(this, item.path)}>
               <ListItem style={this.style.listItem}
                 primaryText={item.name}
                 leftIcon={<Avatar style={this.style.avatar} icon={<FolderIcon/> }/>}

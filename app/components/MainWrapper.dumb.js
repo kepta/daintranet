@@ -2,9 +2,13 @@ import React from 'react';
 import Inbox from './Inbox/Inbox';
 import Email from './Inbox/Email';
 import Intranet from './Intranet/Intranet';
+import isMobileFunc from '../helper/isMobile';
 import Base from './Base';
 import { Paper, LeftNav } from 'material-ui';
 import LeftNavMenu from './LeftNav';
+
+const isMobile = isMobileFunc();
+
 export default class DumbMainWrapper extends Base {
   constructor(props) {
     super(props);
@@ -19,13 +23,17 @@ export default class DumbMainWrapper extends Base {
     if (id === null) {
       return (
         <Paper zDepth={1} style={this.style.rightContent}>
-          <Intranet style={this.style.rightContent} user={user} fresh={this.state.fresh}/>
+          <Intranet style={this.style.rightContent}
+            user={user}
+            fresh={this.state.fresh}
+            isMobile={isMobile}
+          />
         </Paper>
       );
     }
     return (
       <Paper zDepth={1} style={this.style.rightContent}>
-          <Email id={id} user={user} hide={hide}/>
+          <Email id={id} user={user} hide={hide} isMobile={isMobile}/>
       </Paper>
     );
   }
@@ -36,10 +44,6 @@ export default class DumbMainWrapper extends Base {
   }
 
   render() {
-    console.log(this.props.user);
-    console.log(window.innerWidth);
-    const isMobile = window.innerWidth < 600;
-    console.log(isMobile);
     const showInbox = isMobile ? null :
                           (<Paper zDepth={1} style={this.style.inbox}>
                               <Inbox showEmail={this.showEmail}
@@ -47,6 +51,7 @@ export default class DumbMainWrapper extends Base {
                                 setLoginError={this.props.setLoginError}
                                 dbPromise={this.props.dbPromise}
                                 user={this.props.user}
+                                isMobile={isMobile}
                               />
                             </Paper>);
     return (

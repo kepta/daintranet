@@ -18,6 +18,7 @@ export default class Inbox extends Base {
           pathString={this.props.pathString}
           timeStamp={this.props.timeStamp}
           searching={this.props.searching}
+          isMobile={this.props.isMobile}
         />
       );
       const searchResult = (
@@ -25,6 +26,7 @@ export default class Inbox extends Base {
           searchResult={this.props.searchResult}
           searching={this.props.searching}
           goToSearch={this.props.goToSearch}
+          isMobile={this.props.isMobile}
         />
       );
       return (

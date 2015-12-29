@@ -115,6 +115,7 @@ export default class Inbox extends Base {
                             setSearch={this.setSearch}
                             searching={this.state.searching}
                             goToSearch={this.goToSearch}
+                            isMobile={this.props.isMobile}
                           />
       );
     }
