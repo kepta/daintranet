@@ -1,7 +1,9 @@
 import React from 'react';
 import Base from '../Base';
-import { ListItem, List, Avatar, ListDivider, RefreshIndicator } from 'material-ui';
+import { List, Avatar, ListDivider, RefreshIndicator } from 'material-ui';
 import { FolderIcon, PdfIcon } from '../Icons';
+import ListItem from './ListItem';
+import ListItemMobile from './ListItem.mobile';
 import { flexCenter } from '../../Flex';
 import { formQuery } from '../../network/Fetch';
 export default class Viewer extends Base {
@@ -10,38 +12,28 @@ export default class Viewer extends Base {
       this.style = this.style();
       this._bind('displayStructure', 'goForward');
     }
-    goForward(path) {
-      this.props.goToSearch(path.slice(15));
+    goForward(x, item) {
+      this.props.goToSearch(item.slice(15));
     }
-    showAttachment(path) {
-      // console.log(path, file);
-      const url = path.slice(15); // /root/intranet/
+    showAttachment(x) {
+      // console.log(item);
+      const url = x.slice(15); // /root/intranet/
       window.open(formQuery(url), '_blank');
     }
     displayStructure(array) {
       console.log(array);
       return array.map((item, key) => {
         const isFile = item.name.indexOf('.') > -1;
-        if (isFile) {
-          return (
-            <div key={key} onTouchTap={this.showAttachment.bind(this, item.path)}>
-              <ListItem style={this.style.listItem}
-                primaryText={item.name}
-                leftIcon={<Avatar style={{ ...this.style.avatar, ...this.style.avatarFile }} icon={<PdfIcon/> }/>}
-              />
-              <ListDivider inset/>
-          </div>
-          );
-        }
         return (
-          <div key={key} onTouchTap={this.goForward.bind(this, item.path)}>
-              <ListItem style={this.style.listItem}
-                primaryText={item.name}
-                leftIcon={<Avatar style={this.style.avatar} icon={<FolderIcon/> }/>}
-              />
-              <ListDivider inset/>
-          </div>
-          );
+          <ListItem
+            key={key}
+            isFile={isFile}
+            item={item.name}
+            goForward={this.goForward}
+            showAttachment={this.showAttachment}
+            pathString={item.path}
+          />
+        );
       });
     }
     render() {

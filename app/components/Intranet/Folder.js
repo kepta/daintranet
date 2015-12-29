@@ -23,26 +23,24 @@ export default class Viewer extends Base {
     displayStructure(obj) {
       return Object.keys(obj).map((item, key) => {
         const isFile = obj[item] === 'file';
+        const params = {
+          key,
+          isFile,
+          item,
+          goForward: this.goForward,
+          showAttachment: this.showAttachment,
+          pathString: this.props.pathString,
+        };
         if (this.props.isMobile) {
           return (
             <ListItemMobile
-              key={key}
-              isFile={isFile}
-              item={item}
-              goForward={this.goForward}
-              showAttachment={this.showAttachment}
-              pathString={this.props.pathString}
+              {...params}
             />
           );
         }
         return (
           <ListItem
-            key={key}
-            isFile={isFile}
-            item={item}
-            goForward={this.goForward}
-            showAttachment={this.showAttachment}
-            pathString={this.props.pathString}
+            {...params}
           />
         );
       });

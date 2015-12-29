@@ -19,7 +19,7 @@ export default class Item extends Base {
             primaryText={this.props.item}
             onTouchTap={ this.props.isFile ?
               this.props.showAttachment.bind(this, this.props.pathString, this.props.item)
-            : this.props.goForward.bind(this, this.props.item)}
+            : this.props.goForward.bind(this, this.props.item, this.props.pathString)}
             leftIcon={<Avatar {...avatarProps}/>}
           />
           <ListDivider inset/>
