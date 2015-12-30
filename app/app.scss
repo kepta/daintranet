@@ -5,6 +5,12 @@ html *
 }
 html, body, #node {
   height: 100%;
+  overflow:hidden;
+}
+#node {
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
 }
 iframe {
     display: block;

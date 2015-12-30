@@ -7,11 +7,32 @@ import db from './localdb/indexdb';
 import App from './app';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import isMobileFunc from './helper/isMobile';
+// import './helper/noBounce';
+
 if (isMobileFunc()) {
-  injectTapEventPlugin({ ignoreMouseThreshold: 1000 });
+  injectTapEventPlugin();
 } else {
   injectTapEventPlugin();
 }
+function preventDefault(e) {
+  // e = e || window.event;
+  e.preventDefault();
+  e.returnValue = false;
+  document.activeElement.blur();
+  document.getElementById('scroller').focus();
+
+  // console.log(document.getElementById('scroller'));
+  // console.log('here', e, document.activeElement);
+}
+
+const fixed = document.getElementById('node');
+fixed.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+  fixed.blur();
+  document.getElementById('scroller').focus();
+  console.log('moving');
+}, false);
+// window.addEventListener('scroll', preventDefault, false);
 
 const store = createStore(reducers);
 
@@ -22,6 +43,7 @@ function handleChange() {
 store.subscribe(handleChange);
 const node = document.createElement('div');
 node.setAttribute('id', 'node');
+node.setAttribute('class', 'noscroll');
 document.body.appendChild(node);
 
 // DB promise, resolves if db connection established

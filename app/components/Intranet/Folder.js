@@ -12,7 +12,7 @@ export default class Viewer extends Base {
       this._bind('displayStructure', 'goForward');
     }
     goForward(item) {
-      this.props.goForward(item);
+      setTimeout(() => this.props.goForward(item), 400);
     }
     showAttachment(path, file) {
       console.log(path, file);
@@ -49,7 +49,7 @@ export default class Viewer extends Base {
       );
       const statusDisplay = this.props.searching ? refresh : lastUpdated;
       return (
-          <div style={this.style.main}>
+          <div style={this.style.main} id="scroller">
             <div style={{ ...this.style.updated, ...flexCenter }}>
               {statusDisplay}
             </div>
@@ -64,6 +64,7 @@ export default class Viewer extends Base {
         main: {
           height: '100%',
           overflowY: 'scroll',
+          overflowX: 'hidden',
           WebkitOverflowScrolling: 'touch',
         },
         list: {

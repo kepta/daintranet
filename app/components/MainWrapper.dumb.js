@@ -8,18 +8,16 @@ import { Paper, LeftNav } from 'material-ui';
 import LeftNavMenu from './LeftNav';
 
 const isMobile = isMobileFunc();
-
 export default class DumbMainWrapper extends Base {
   constructor(props) {
     super(props);
-    this.style=this.style();
+    this._bind('showEmail', 'displayEmailOrIntranet', 'toggleNav');
     this.state = {
       id: null,
       fresh: true,
       leftNav: false,
     };
-    // this.showEmail = this.showEmail.bind(this);
-    this._bind('showEmail', 'displayEmailOrIntranet', 'toggleNav');
+    this.style=this.style();
   }
   displayEmailOrIntranet(id, user, hide, leftNav) {
     if (id === null) {
@@ -86,12 +84,12 @@ export default class DumbMainWrapper extends Base {
         maxWidth: '333px',
         width: '333px',
         height: '96vh',
-        margin: '0 20px',
+        margin: isMobile ? '0': '0 20px',
       },
       rightContent: {
         flexGrow: '8',
-        margin: '0 20px',
-        height: '96vh',
+        margin: isMobile ? '0': '0 20px',
+        height: document.body.clientHeight+'px',
       },
     };
   }
