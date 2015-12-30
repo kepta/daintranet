@@ -6,8 +6,12 @@ import reducers from './state/reducers';
 import db from './localdb/indexdb';
 import App from './app';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
-injectTapEventPlugin();
+import isMobileFunc from './helper/isMobile';
+if (isMobileFunc()) {
+  injectTapEventPlugin({ ignoreMouseThreshold: 1000 });
+} else {
+  injectTapEventPlugin();
+}
 
 const store = createStore(reducers);
 

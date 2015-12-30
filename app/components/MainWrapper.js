@@ -13,11 +13,11 @@ export default class MainWrapper extends React.Component {
     console.log(this.props);
     return (
       <div>
-        <div onTouchTap={this.props.setLogout}> Logoooout!</div>
         <MainWrapperDumb
           user={this.props.user}
           actionLoggedIn={this.props.setLoggedIn}
           setLoginError={this.props.setLoginError}
+          setLogout={this.props.setLogout}
           dbPromise={this.props.dbPromise}
         />
       </div>

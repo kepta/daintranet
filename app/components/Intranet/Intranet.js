@@ -116,6 +116,7 @@ export default class Inbox extends Base {
                             searching={this.state.searching}
                             goToSearch={this.goToSearch}
                             isMobile={this.props.isMobile}
+                            leftNav={this.props.leftNav}
                           />
       );
     }

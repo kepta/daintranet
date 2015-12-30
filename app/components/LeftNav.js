@@ -10,7 +10,7 @@ export default class Nav extends React.Component {
       return (
           <div>
             <MenuItem index={0}>Menu Item</MenuItem>
-            <MenuItem index={1}><a href="/link">Link</a></MenuItem>
+            <MenuItem index={1}><div onTouchTap={this.props.setLogout}> Logoooout!</div></MenuItem>
           </div>
       );
     }

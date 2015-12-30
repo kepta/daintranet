@@ -31,10 +31,13 @@ export default class Inbox extends Base {
       );
       return (
         <div style={style.main}>
-          <Appbar
-            goBack={this.props.goBack}
-            setSearch={this.props.setSearch}
-          />
+          <div style={style.appbar}>
+            <Appbar
+              goBack={this.props.goBack}
+              setSearch={this.props.setSearch}
+              leftNav={this.props.leftNav}
+            />
+          </div>
          { !this.props.searchResult ? folder: searchResult}
         </div>
       );
@@ -45,6 +48,9 @@ export default class Inbox extends Base {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
+        },
+        appbar: {
+          height: '150px',
         },
       };
     }

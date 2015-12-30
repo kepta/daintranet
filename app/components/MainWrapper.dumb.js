@@ -16,10 +16,12 @@ export default class DumbMainWrapper extends Base {
     this.state = {
       id: null,
       fresh: true,
+      leftNav: false,
     };
-    this.showEmail = this.showEmail.bind(this);
+    // this.showEmail = this.showEmail.bind(this);
+    this._bind('showEmail', 'displayEmailOrIntranet', 'toggleNav');
   }
-  displayEmailOrIntranet(id, user, hide) {
+  displayEmailOrIntranet(id, user, hide, leftNav) {
     if (id === null) {
       return (
         <Paper zDepth={1} style={this.style.rightContent}>
@@ -27,6 +29,7 @@ export default class DumbMainWrapper extends Base {
             user={user}
             fresh={this.state.fresh}
             isMobile={isMobile}
+            leftNav={leftNav}
           />
         </Paper>
       );
@@ -42,7 +45,9 @@ export default class DumbMainWrapper extends Base {
     this.setState({ id, fresh: false });
     // this.refs.leftNav.toggle();
   }
-
+  toggleNav() {
+    this.setState({ leftNav: !this.state.leftNav });
+  }
   render() {
     const showInbox = isMobile ? null :
                           (<Paper zDepth={1} style={this.style.inbox}>
@@ -56,12 +61,15 @@ export default class DumbMainWrapper extends Base {
                             </Paper>);
     return (
       <div>
-        <LeftNav ref="leftNav" docked={false}>
-          <LeftNavMenu/>
+        <LeftNav docked={false}
+          open={this.state.leftNav}
+          onRequestChange={leftNav => this.setState({ leftNav })}
+        >
+          <LeftNavMenu setLogout={this.props.setLogout}/>
         </LeftNav>
         <div style={this.style.wrapper}>
           {showInbox}
-          {this.displayEmailOrIntranet(this.state.id, this.props.user, this.showEmail)}
+          {this.displayEmailOrIntranet(this.state.id, this.props.user, this.showEmail, this.toggleNav)}
         </div>
       </div>
     );

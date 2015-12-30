@@ -13,6 +13,7 @@ export default class Viewer extends Base {
       this._bind('displayStructure', 'goForward');
     }
     goForward(x, item) {
+      console.log(x, item);
       this.props.goToSearch(item.slice(15));
     }
     showAttachment(x) {

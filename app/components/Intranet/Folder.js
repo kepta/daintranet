@@ -30,19 +30,12 @@ export default class Viewer extends Base {
           goForward: this.goForward,
           showAttachment: this.showAttachment,
           pathString: this.props.pathString,
+          path: this.props.path,
         };
         if (this.props.isMobile) {
-          return (
-            <ListItemMobile
-              {...params}
-            />
-          );
+          return (<ListItemMobile {...params}/>);
         }
-        return (
-          <ListItem
-            {...params}
-          />
-        );
+        return (<ListItem {...params}/>);
       });
     }
     render() {
@@ -56,14 +49,14 @@ export default class Viewer extends Base {
       );
       const statusDisplay = this.props.searching ? refresh : lastUpdated;
       return (
-        <div style={this.style.main}>
-          <div style={{ ...this.style.updated, ...flexCenter }}>
-            {statusDisplay}
+          <div style={this.style.main}>
+            <div style={{ ...this.style.updated, ...flexCenter }}>
+              {statusDisplay}
+            </div>
+            <List style={this.style.list}>
+              {this.displayStructure(this.props.location)}
+            </List>
           </div>
-          <List style={this.style.list}>
-            {this.displayStructure(this.props.location)}
-          </List>
-        </div>
       );
     }
     style() {
@@ -83,7 +76,7 @@ export default class Viewer extends Base {
           color: 'grey',
           fontSize: '0.75em',
           display: 'flex',
-          marginTop: '12px',
+          marginTop: '5px',
         },
         avatarFile: {
           backgroundColor: '#9c27b0',

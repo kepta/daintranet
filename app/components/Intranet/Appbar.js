@@ -40,7 +40,7 @@ export default class Viewer extends Base {
         <div>
           <AppBar
             title={<span>DAINTRANET &nbsp; 👹</span>}
-            onTouchTap={this.handleToggle}
+            onLeftIconButtonTouchTap={this.props.leftNav}
           />
         <Toolbar >
             <ToolbarGroup key={0} style={style.backButton} >
