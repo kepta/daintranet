@@ -1,12 +1,15 @@
 var Fuse = require('fuse.js');
 var fs = require('fs');
-const local = false;
-const location = local ? __dirname + '/fuzzy.json' : '/root/intranet/fuzzy.json';
+
+const isLocal = process.NODE_ENV !== 'production';
+const localIntranetLoc = __dirname + '/../../testFiles/intranet/';
+
+const location = isLocal ? localIntranetLoc + 'fuzzy.json' : '/root/intranet/fuzzy.json';
 var minutes = 60, the_interval = minutes * 60 * 1000;
 
 let obj = JSON.parse(fs.readFileSync(location, 'utf8'));
 const searchKey = {
-  keys: ["name"]
+  keys: ['name']
 };
 let fuse = new Fuse(obj, searchKey);
 setInterval(function() {

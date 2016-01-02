@@ -24,14 +24,14 @@ function preventDefault(e) {
   // console.log(document.getElementById('scroller'));
   // console.log('here', e, document.activeElement);
 }
-
-const fixed = document.getElementById('node');
-fixed.addEventListener('touchmove', function(e) {
-  e.preventDefault();
-  fixed.blur();
-  document.getElementById('scroller').focus();
-  console.log('moving');
-}, false);
+//
+// const fixed = document.getElementById('node');
+// fixed.addEventListener('touchmove', function(e) {
+//   e.preventDefault();
+//   fixed.blur();
+//   document.getElementById('scroller').focus();
+//   console.log('moving');
+// }, false);
 // window.addEventListener('scroll', preventDefault, false);
 
 const store = createStore(reducers);

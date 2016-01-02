@@ -1,11 +1,14 @@
 var fs = require('fs');
-var minutes = 60, the_interval = minutes * 60 * 1000;
-const local = false;
+var path = require('path');
 
-const tree = local ? 'tree.json' : '/root/intranet/tree.json';
-const intranet = local ? __dirname +'/' : '/root/intranet/';
+const isLocal = process.NODE_ENV !== 'production';
+
+var minutes = isLocal ? 1 : 60, the_interval = minutes * 60 * 1000;
+const localIntranetLoc = path.join(path.resolve(__dirname, '..', '..'), '/testFiles/intranet/'); 
+
+const tree = isLocal ? localIntranetLoc + 'tree.json' : '/root/intranet/tree.json';
+const intranet = isLocal ? localIntranetLoc : '/root/intranet/';
 var intranetTree = {};
-
 try {
   intranetTree = JSON.parse(fs.readFileSync(tree, 'utf8'));
   delete intranetTree['tree.json'];
@@ -17,9 +20,6 @@ try {
     intranetTree = {};
   }
 }
-
-
-
 setInterval(function() {
   readFileAsync();
 }, the_interval);
@@ -60,11 +60,12 @@ export function index(req, res) {
 }
 
 export function show(req, res) {
+  const posOfSlash = req.query.loc.lastIndexOf('/');
   if (req.query.loc) {
-    const posOfSlash = req.query.loc.lastIndexOf('/');
     if (req.query.loc.indexOf('.pdf' !== -1)) {
       res.setHeader('content-disposition', 'inline; filename="'+req.query.loc.slice(posOfSlash+1)+'"');
     }
+    console.log(intranet + req.query.loc);
     res.sendFile(intranet + req.query.loc);
   } else {
     res.setHeader('content-disposition', 'attachment; filename="'+req.query.loc.slice(posOfSlash+1)+'"');

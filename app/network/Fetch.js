@@ -2,7 +2,9 @@ import Request from 'superagent';
 import { MailParser } from 'mailparser';
 // const local = window.location.href.indexOf('localhost');
 
-export const BASEURL = 'https://bangle.io/api';
+// export const BASEURL = 'https://bangle.io/api';
+export const BASEURL = 'http://localhost:3000/api';
+
 // export const BASEURL = local === -1 ? 'http://128.199.173.123:3000/api'
                                       // : 'http://localhost:3000/api';
 
