@@ -43,7 +43,6 @@ export default class Email extends React.Component {
   render() {
     // console.log(this.props.email);
     const email = this.props.email;
-    console.log(email);
     return (
         <AppBar
           title={email.subject.slice(0, 40)}

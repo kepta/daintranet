@@ -4,7 +4,7 @@ var path = require('path');
 const isLocal = process.NODE_ENV !== 'production';
 
 var minutes = isLocal ? 1 : 60, the_interval = minutes * 60 * 1000;
-const localIntranetLoc = path.join(path.resolve(__dirname, '..', '..'), '/testFiles/intranet/'); 
+const localIntranetLoc = path.join(path.resolve(__dirname, '..', '..'), '/testFiles/intranet/');
 
 const tree = isLocal ? localIntranetLoc + 'tree.json' : '/root/intranet/tree.json';
 const intranet = isLocal ? localIntranetLoc : '/root/intranet/';
@@ -16,7 +16,6 @@ try {
   delete intranetTree['time'];
 } catch (e) {
   if (e) {
-    console.log(e);
     intranetTree = {};
   }
 }

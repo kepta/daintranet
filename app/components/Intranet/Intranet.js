@@ -24,7 +24,7 @@ export default class Inbox extends Base {
       fetchIntranet(this.props.user, this.props.fresh).then((res, rej) => {
         if (rej) {
           // TODO: need to work on error, to let use press retry in case of fail
-          return console.log(rej);
+          return console.error(rej);
         }
         this.setState({
           tree: res.intranet,
@@ -62,10 +62,9 @@ export default class Inbox extends Base {
           searching: true,
         });
         fuzzySearch(search).then((resp, err) => {
-          console.log(resp);
           // TODO if you press cancel while search is going
           if (err) {
-            console.log(err);
+            console.error(err);
             this.setState({
               searching: false,
             });
@@ -94,7 +93,6 @@ export default class Inbox extends Base {
       });
     }
     render() {
-      console.log(this.state.path[this.state.path.length - 1]);
       const progress = (
           <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
             <div style={{ alignSelf: 'center' }}>

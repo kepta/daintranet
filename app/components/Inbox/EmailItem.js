@@ -10,18 +10,13 @@ export default class EmailList extends Base {
         read: localStorage.getItem(this.props.Id)? true : false,
       };
 
-        // console.log(localStorage.getItem(this.props.d), this.props.id);
     }
     handleClick(Id, e) {
-      console.log(Id, e.target);
       this.props.displayMail(Id);
-      console.log(this.state.read);
       this.setState({
         read: true,
       });
       localStorage.setItem(this.props.Id, true);
-      // console.log(this.props.);
-      console.log(this.state.read);
     }
     showDot() {
       if (!this.state.read) {
@@ -41,7 +36,6 @@ export default class EmailList extends Base {
       }
     }
     render() {
-        // console.log(this.props.from);
       let fro = this.props.from[0].p;
       if (!this.props.from[0].p) {
         fro = this.props.from[0].d ? this.props.from[0].d : this.props.from[0].a;

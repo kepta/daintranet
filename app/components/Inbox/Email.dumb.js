@@ -10,7 +10,6 @@ export default class DumbEmail extends Base {
   }
   render() {
     const email = this.props.email.email;
-    console.log(email);
     const style = this.style();
     return (
       <div style={style.main}>

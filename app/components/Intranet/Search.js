@@ -13,16 +13,13 @@ export default class Viewer extends Base {
       this._bind('displayStructure', 'goForward');
     }
     goForward(x, item) {
-      console.log(x, item);
       this.props.goToSearch(item.slice(15));
     }
     showAttachment(x) {
-      // console.log(item);
       const url = x.slice(15); // /root/intranet/
       window.open(formQuery(url), '_blank');
     }
     displayStructure(array) {
-      console.log(array);
       return array.map((item, key) => {
         const isFile = item.name.indexOf('.') > -1;
         return (

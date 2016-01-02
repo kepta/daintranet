@@ -12,10 +12,14 @@ export default class Viewer extends Base {
       this._bind('displayStructure', 'goForward');
     }
     goForward(item) {
-      setTimeout(() => this.props.goForward(item), 400);
+      if (this.props.isMobile) {
+        setTimeout(() => this.props.goForward(item), 400);
+      } else {
+        this.props.goForward(item);
+      }
     }
     showAttachment(path, file) {
-      console.log(path, file);
+      // console.log(path, file);
       let url = path.join('/');
       url = url + '/'+ file;
       window.open(formQuery(url), '_blank');

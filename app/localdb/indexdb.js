@@ -40,17 +40,16 @@ class IndexDB {
                 .delete(id);
     request.onsuccess = (event) => {
         // It's gone!
-      console.log('deleted', event);
     };
   }
   set(id, email) {
     const transaction = this.db.transaction(INBOX, 'readwrite');
     transaction.oncomplete = (event) => {
-      console.log("Success");
+      console.debug("Success");
     };
 
     transaction.onerror = (event) => {
-      console.log("Error");
+      console.debug("Error");
     };
     const objectStore = transaction.objectStore(INBOX);
     objectStore.add({ id, email });
@@ -79,25 +78,23 @@ class IndexDB {
   }
 
   getSetEmail(id, user) {
-    console.log('came here');
     return new Promise((res, rej) => {
       fetchEmail(id, user).then((email) => {
-        console.log(id, email);
         this.set(id, email);
         res(email);
       }, (err) => {
         setTimeout(() => {
           fetchEmail(id, user).then((email) => {
-            console.log('2nd try');
+            console.debug('2nd try');
             this.set(id, email);
             res(email);
           }, (err2) => {
-            console.log('3rd try');
+            console.debug('3rd try');
             fetchEmail(id, user).then((email) => {
               this.set(id, email);
               res(email);
             }, (err3) => {
-              console.log('failed bro', err3);
+              console.error('failed bro', err3);
             });
           });
         }, Math.floor((Math.random() * RAND_MAX) + RAND_MIN));

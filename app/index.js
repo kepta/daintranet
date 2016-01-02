@@ -37,7 +37,7 @@ function preventDefault(e) {
 const store = createStore(reducers);
 
 function handleChange() {
-  console.log(store.getState());
+  // console.log(store.getState());
 }
 
 store.subscribe(handleChange);
@@ -55,4 +55,4 @@ render(
   node
 );
 
-console.log('helo world');
+console.log('hello world!, visit https://github.com/kepta/daintranet .');

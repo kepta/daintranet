@@ -38,7 +38,7 @@ export default class SideBar extends Base {
             <ListDivider/>
           </div>
         );
-      }).reverse();
+      });
     }
     render() {
       return (

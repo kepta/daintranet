@@ -9,7 +9,6 @@ import Login from './components/login';
 import MainWrapper from './components/MainWrapper';
 
 function mapStateToProps(state) {
-  console.log(state);
   return { login: state.login };
 }
 
@@ -41,9 +40,7 @@ class App extends Component {
     });
   }
   render () {
-    console.log(this.props.login);
     const user = { id: this.props.login.ID, pass: this.props.login.PASS };
-    console.log(user);
     const props = {
       setLogging: this.props.setLogging,
       loginState: this.props.login.STATUS,

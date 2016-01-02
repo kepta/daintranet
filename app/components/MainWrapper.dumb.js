@@ -89,7 +89,7 @@ export default class DumbMainWrapper extends Base {
       rightContent: {
         flexGrow: '8',
         margin: isMobile ? '0': '0 20px',
-        height: document.body.clientHeight+'px',
+        height: isMobile ? '99vh': '96vh',
       },
     };
   }

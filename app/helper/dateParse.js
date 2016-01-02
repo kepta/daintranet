@@ -31,7 +31,6 @@ export default class ParseDate {
     thatTime = new Date(thatTime);
     const currentTime = new Date();
     const diff = currentTime - thatTime;
-    console.log(diff);
     if (diff <= 60 * 1000) {
       const temp = parseInt(diff/1000);
       return temp === 1 ? '1 second ': temp + ' seconds ';

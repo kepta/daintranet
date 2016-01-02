@@ -6,7 +6,6 @@ export default class EmailCard extends Base {
     super(props);
   }
   createMarkup(html) {
-    console.log(html);
     return { __html: '<iframe srcdoc='+html+'></iframe>' };
   }
   render() {

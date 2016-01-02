@@ -32,7 +32,7 @@ export default class Viewer extends Base {
       });
     }
     handleToggle() {
-      console.log('touch tap');
+      // console.log('touch tap');
     }
     render() {
       const style = this.style();
@@ -44,9 +44,7 @@ export default class Viewer extends Base {
           />
         <Toolbar >
             <ToolbarGroup key={0} style={style.backButton} >
-              <IconButton onTouchTap={this.lastQuery ? this.clearSearch : this.props.goBack}
-                tooltip="Go back"
-              >
+              <IconButton onTouchTap={this.lastQuery ? this.clearSearch : this.props.goBack}>
                 {this.lastQuery ? <CloseGrey/> : <BackButton/>}
               </IconButton>
             </ToolbarGroup>
@@ -68,7 +66,7 @@ export default class Viewer extends Base {
         backButton: {
           position: 'relative',
           left: '-20px',
-        }
+        },
       };
     }
 }

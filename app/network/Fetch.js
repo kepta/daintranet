@@ -2,8 +2,8 @@ import Request from 'superagent';
 import { MailParser } from 'mailparser';
 // const local = window.location.href.indexOf('localhost');
 
-// export const BASEURL = 'https://bangle.io/api';
-export const BASEURL = 'http://localhost:3000/api';
+export const BASEURL = 'https://bangle.io/api';
+// export const BASEURL = 'http://localhost:3000/api';
 
 // export const BASEURL = local === -1 ? 'http://128.199.173.123:3000/api'
                                       // : 'http://localhost:3000/api';
@@ -26,7 +26,6 @@ export function fetchEmail(id, user) {
               mailparser.write(resp.text);
               mailparser.end();
               mailparser.on('end', (mailObject) => {
-                console.log(mailObject);
                 return resolve((mailObject));
               });
             }
@@ -35,7 +34,6 @@ export function fetchEmail(id, user) {
 }
 
 export function getInbox (user) {
-  console.log('called it');
   return new Promise((resolve, reject) => {
     Request.get(`${BASEURL}/email`)
     .timeout(TIMER_INBOX)
@@ -51,7 +49,6 @@ export function getInbox (user) {
 export function fetchIntranet(user, fresh) {
   return new Promise((resolve, reject) => {
     if (fresh) {
-      console.log('here');
       return Request.get(`${BASEURL}/intranet`)
         .timeout(TIMER_INBOX)
         .auth(user.id, user.pass).end((err, resp) => {
@@ -78,7 +75,6 @@ export function fuzzySearch(search) {
           if (err) {
             return reject({ response: 401, err });
           }
-          // console.log();
           return resolve(JSON.parse(resp.text));
         });
   });

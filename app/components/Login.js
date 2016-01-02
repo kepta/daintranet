@@ -32,15 +32,13 @@ export default class Login extends Base {
     this.props.setLogging({ id, pass });
   }
   render() {
-    console.log(this.props.loginState);
     const error = this.props.loginState === LOGIN_ERROR ?
         <div>{ERROR_MESSAGE}</div> : null;
-    console.log(error);
     return (
       <div style={this.styles.main}>
         <Paper style={this.styles.paper} onKeyDown={this.handleEnter}>
           <div style={this.styles.headerContainer}>
-            <h1 style={{fontSize: '5em', marginBottom: '20px'}}>🎓</h1>
+            <h1 style={{ fontSize: '5em', marginBottom: '20px' }}>🎓</h1>
             <h3 style={this.styles.header}>daintranet.com</h3>
           </div>
           {error}

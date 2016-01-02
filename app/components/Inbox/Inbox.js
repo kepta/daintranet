@@ -23,34 +23,30 @@ export default class Inbox extends Base {
       return array;
     }
     componentDidMount() {
-      // console.log(this.props.user);
-      console.log('did mount');
       this.props.dbPromise.then(() => {
         getInbox(this.props.user).then((res, rej) => {
-          console.log(res);
           const ids = this.extractId(res, res.length - LASTEMAILS, res.length);
           Promise.race(db.getAll(ids, this.props.user)).then(mails => {
-            console.log('hwe', mails);
             this.setState({
               inbox: res,
             });
             // this.props.actionLoggedIn();
           }, errPromise => {
             // should logout user
-            console.log(errPromise);
+            console.error(errPromise);
           });
         }, err => {
           if (err.response === 401) {
             this.props.setLoginError();
           } else {
-            console.log(err);
+            console.error(err);
           }
         });
       });
     }
     shouldComponentUpdate(nextProps, nextState) {
       if (this.state.inbox === null) {
-        console.log('ehere');
+        // console.error('ehere');
         return true;
       }
       return false;
@@ -66,7 +62,6 @@ export default class Inbox extends Base {
     //   return true;
     // }
     render() {
-      console.log('rendering');
       const progress = (
           <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
             <div style={{ alignSelf: 'center' }}>

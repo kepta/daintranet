@@ -10,7 +10,6 @@ export default class MainWrapper extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <MainWrapperDumb
