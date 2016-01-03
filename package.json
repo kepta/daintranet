@@ -52,6 +52,7 @@
   },
   "jspm": {
     "dependencies": {
+      "firebase": "npm:firebase@^2.3.2",
       "mailparser": "npm:mailparser@^0.5.3",
       "material-ui": "npm:material-ui@^0.14.0-rc1",
       "react": "npm:react@^0.14.3",

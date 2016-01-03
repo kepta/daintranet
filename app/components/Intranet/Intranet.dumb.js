@@ -50,7 +50,7 @@ export default class Inbox extends Base {
           flexDirection: 'column',
         },
         appbar: {
-          height: '150px',
+          height: '142x',
         },
       };
     }

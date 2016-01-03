@@ -1,17 +1,22 @@
 import Request from 'superagent';
 import { MailParser } from 'mailparser';
+
 // const local = window.location.href.indexOf('localhost');
 
-export const BASEURL = 'https://bangle.io/api';
-// export const BASEURL = 'http://localhost:3000/api';
+const WRONGPASS = 'INVALID_PASSWORD';
+const NEWUSER = 'INVALID_USER';
 
-// export const BASEURL = local === -1 ? 'http://128.199.173.123:3000/api'
-                                      // : 'http://localhost:3000/api';
+const PRODUCTON_URL = 'https://bangle.io/api';
+const DEV_URL = 'http://localhost:3000/api';
+const isLocal = window.location.href.indexOf('localhost') > -1;
+
+export const BASEURL = isLocal? DEV_URL : PRODUCTON_URL;
 
 const TIMER = 20000;
 const TIMER_INBOX = 20000;
 let intranet = {};
 let timeStamp = null;
+
 export function fetchEmail(id, user) {
   return new Promise((resolve, reject) => {
     Request.get(
@@ -33,15 +38,25 @@ export function fetchEmail(id, user) {
   });
 }
 
-export function getInbox (user) {
+function getInbox (user, isNew) {
   return new Promise((resolve, reject) => {
     Request.get(`${BASEURL}/email`)
     .timeout(TIMER_INBOX)
     .auth(user.id, user.pass).end((err, resp) => {
       if (err) {
-        return reject({ response: 401, err });
+        return reject(err);
+      }
+      if (isNew) {
+        return createUser(user).then((response) => {
+          console.log(response);
+          return resolve(JSON.parse(resp.text).m);
+        }, (error) => {
+          // console.log(error);
+          return reject(error);
+        });
       }
       return resolve(JSON.parse(resp.text).m);
+      // return resolve(JSON.parse(resp.text).m);
     });
   });
 }

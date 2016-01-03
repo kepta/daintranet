@@ -6,3 +6,4 @@ jspm_packages
 server/node_modules
 server/logs
 server/.git
+server/pass.js

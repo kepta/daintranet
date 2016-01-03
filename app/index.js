@@ -1,4 +1,5 @@
 import React from 'react';
+import Firebase from 'firebase';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -9,30 +10,19 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import isMobileFunc from './helper/isMobile';
 // import './helper/noBounce';
 
+const FIREBASE = 'https://amber-heat-8849.firebaseio.com/';
+export const firebaseRef = new Firebase(FIREBASE);
+var authData = firebaseRef.getAuth();
+if (authData) {
+  console.log("User " + authData.uid + " is logged in with " + authData.provider);
+} else {
+  console.log("User is logged out");
+}
 if (isMobileFunc()) {
   injectTapEventPlugin();
 } else {
   injectTapEventPlugin();
 }
-function preventDefault(e) {
-  // e = e || window.event;
-  e.preventDefault();
-  e.returnValue = false;
-  document.activeElement.blur();
-  document.getElementById('scroller').focus();
-
-  // console.log(document.getElementById('scroller'));
-  // console.log('here', e, document.activeElement);
-}
-//
-// const fixed = document.getElementById('node');
-// fixed.addEventListener('touchmove', function(e) {
-//   e.preventDefault();
-//   fixed.blur();
-//   document.getElementById('scroller').focus();
-//   console.log('moving');
-// }, false);
-// window.addEventListener('scroll', preventDefault, false);
 
 const store = createStore(reducers);
 

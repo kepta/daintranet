@@ -1,6 +1,6 @@
 import React from 'react';
 import Base from '../Base';
-import { AppBar, TextField, Toolbar, IconButton, ToolbarGroup } from 'material-ui';
+import { AppBar, TextField, Toolbar, IconButton, ToolbarGroup, ListDivider, Paper } from 'material-ui';
 import { BackButton, CloseGrey } from '../Icons';
 
 export default class Viewer extends Base {
@@ -43,21 +43,22 @@ export default class Viewer extends Base {
             onLeftIconButtonTouchTap={this.props.leftNav}
           />
         <Toolbar >
-            <ToolbarGroup key={0} style={style.backButton} >
-              <IconButton onTouchTap={this.lastQuery ? this.clearSearch : this.props.goBack}>
-                {this.lastQuery ? <CloseGrey/> : <BackButton/>}
-              </IconButton>
-            </ToolbarGroup>
-            <ToolbarGroup key={1}>
-              <TextField
-                ref="search"
-                fullWidth
-                hintText="Search Intranet"
-                errorText={this.state.errorText}
-                onChange={this.handleSearchChange}
-              />
-            </ToolbarGroup>
-        </Toolbar>
+          <ToolbarGroup key={0} style={style.backButton} >
+            <IconButton onTouchTap={this.lastQuery ? this.clearSearch : this.props.goBack}>
+              {this.lastQuery ? <CloseGrey/> : <BackButton/>}
+            </IconButton>
+          </ToolbarGroup>
+          <ToolbarGroup key={1}>
+            <TextField
+              ref="search"
+              fullWidth
+              hintText="Search Intranet"
+              errorText={this.state.errorText}
+              onChange={this.handleSearchChange}
+            />
+          </ToolbarGroup>
+          </Toolbar>
+          <ListDivider/>
         </div>
       );
     }
@@ -66,7 +67,7 @@ export default class Viewer extends Base {
         backButton: {
           position: 'relative',
           left: '-20px',
-        },
+        }
       };
-    }
+  }
 }

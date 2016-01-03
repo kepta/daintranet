@@ -33,7 +33,7 @@ export default class Login extends Base {
   }
   render() {
     const error = this.props.loginState === LOGIN_ERROR ?
-        <div>{ERROR_MESSAGE}</div> : null;
+        <div>{localStorage.getItem('LOGIN_ERROR')}</div> : null;
     return (
       <div style={this.styles.main}>
         <Paper style={this.styles.paper} onKeyDown={this.handleEnter}>
