@@ -60,14 +60,13 @@ class App extends Component {
             setLoginError={this.props.setLoginError}
           />
       );
-      // case LOGGING:
-      //   return (
-      //     <Loading {...props}
-      //               actionLoggedIn={this.props.setLoggedIn}
-      //               setLoginError={this.props.setLoginError}
-      //               setInbox={this.setInbox}
-      //     />
-      //   );
+      case LOGGING:
+        return (
+          <Loading {...props}
+                    actionLoggedIn={this.props.setLoggedIn}
+                    setLoginError={this.props.setLoginError}
+          />
+        );
       default:
         return <div>error of severe kind</div>;
     }

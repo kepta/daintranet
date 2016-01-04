@@ -1,46 +1,29 @@
 import React from 'react';
 import Base from './Base';
 import LoadingDumb from './Loading.dumb';
-import db from '../localdb/indexdb';
-import { getInbox } from '../network/Fetch';
-const LASTEMAILS = 8;
+// import db from '../localdb/indexdb';
+// import {getInbox} from '../network/Fetch';
+import { login } from '../network/auth';
+// const LASTEMAILS = 8;
 
 export default class Loading extends Base {
   constructor (props) {
     super(props);
-    this.state = {
-      completed: 0,
-    };
-  }
-  componentDidMount() {
-    this.props.dbPromise.then(() => {
-      getInbox(this.props.user).then((res, rej) => {
-        const ids = this.extractId(res, res.length - LASTEMAILS, res.length);
-        Promise.race(db.getAll(ids, this.props.user)).then(mails => {
-          this.props.setInbox(res, mails);
-          this.props.actionLoggedIn();
-        }, errPromise => {
-          console.error(errPromise);
-        });
-      }, err => {
-        if (err.response === 401) {
-          this.props.setLoginError();
-        } else {
-          console.error(err);
+    login(props.user).then((authData) => {
+      props.setLoggedIn();
+    }).catch(err => {
+      try {
+        console.error(err);
+        localStorage.setItem('LOGIN_ERROR', err.code); // TODO: err message ?
+      } catch (e) {
+        if (e) {
+          console.error(e);
         }
-      });
+      }
+      props.setLoginError();
     });
   }
-  extractId(emailList, start, end) {
-    let iterator = start > 0 ? start : 0;
-    const array = [];
-    for (iterator = start > 0 ? start : 0; iterator < end; iterator++) {
-      array.push(emailList[iterator].id);
-    }
-    return array;
-  }
-
   render () {
-    return (<LoadingDumb complete={this.state.complete}/>);
+    return (<LoadingDumb/>);
   }
 }
