@@ -7,7 +7,7 @@ var _rollbarConfig = {
     accessToken: "14f81273d4d3484a877ee209970779f8",
     captureUncaught: true,
     payload: {
-        environment: "development"
+      environment: window.location.href.indexOf('localhost') > -1 ? "development": "production"
     }
 };
 // Rollbar Snippet
