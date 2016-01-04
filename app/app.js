@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Actions } from './state/actions';
 import { LOGGED_IN, LOGGED_OUT, LOGGING, LOGIN_ERROR } from './state/actions';
-
-import Login from './components/login';
+import Loading from './components/Loading';
+import Login from './components/Login';
 // import Loading from './components/loading';
 import MainWrapper from './components/MainWrapper';
 
@@ -53,21 +53,20 @@ class App extends Component {
       case LOGIN_ERROR:
         return (<Login {...props}/>);
       case LOGGED_IN:
-      case LOGGING:
         return (
           <MainWrapper {...props}
             actionLoggedIn={this.props.setLoggedIn}
             setLoginError={this.props.setLoginError}
           />
       );
-      // case LOGGING:
-      //   return (
-      //     <Loading {...props}
-      //               actionLoggedIn={this.props.setLoggedIn}
-      //               setLoginError={this.props.setLoginError}
-      //               setInbox={this.setInbox}
-      //     />
-      //   );
+      case LOGGING:
+        return (
+          <Loading {...props}
+            setLoggedIn={this.props.setLoggedIn}
+            setLoginError={this.props.setLoginError}
+            setInbox={this.setInbox}
+          />
+        );
       default:
         return <div>error of severe kind</div>;
     }

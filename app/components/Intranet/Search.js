@@ -1,9 +1,9 @@
 import React from 'react';
 import Base from '../Base';
-import { List, Avatar, ListDivider, RefreshIndicator } from 'material-ui';
-import { FolderIcon, PdfIcon } from '../Icons';
+import { List, RefreshIndicator } from 'material-ui';
+// import { PdfIcon } from '../Icons';
 import ListItem from './ListItem';
-import ListItemMobile from './ListItem.mobile';
+// import ListItemMobile from './ListItem.mobile';
 import { flexCenter } from '../../Flex';
 import { formQuery } from '../../network/Fetch';
 export default class Viewer extends Base {

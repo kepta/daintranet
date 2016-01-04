@@ -9,7 +9,6 @@ export default class EmailList extends Base {
       this.state = {
         read: localStorage.getItem(this.props.Id)? true : false,
       };
-
     }
     handleClick(Id, e) {
       this.props.displayMail(Id);

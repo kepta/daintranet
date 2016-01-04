@@ -38,7 +38,7 @@ export function fetchEmail(id, user) {
   });
 }
 
-function getInbox (user, isNew) {
+export function getInbox (user) {
   return new Promise((resolve, reject) => {
     Request.get(`${BASEURL}/email`)
     .timeout(TIMER_INBOX)
@@ -46,17 +46,7 @@ function getInbox (user, isNew) {
       if (err) {
         return reject(err);
       }
-      if (isNew) {
-        return createUser(user).then((response) => {
-          console.log(response);
-          return resolve(JSON.parse(resp.text).m);
-        }, (error) => {
-          // console.log(error);
-          return reject(error);
-        });
-      }
       return resolve(JSON.parse(resp.text).m);
-      // return resolve(JSON.parse(resp.text).m);
     });
   });
 }

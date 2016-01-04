@@ -70,7 +70,6 @@
     }
   },
   "dependencies": {
-    "bouncefix.js": "^0.3.0",
     "eslint-config-airbnb": "^2.1.1"
   }
 }

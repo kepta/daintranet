@@ -67,7 +67,7 @@ export default class Viewer extends Base {
         backButton: {
           position: 'relative',
           left: '-20px',
-        }
+        },
       };
-  }
+    }
 }

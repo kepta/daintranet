@@ -1,8 +1,8 @@
 import React from 'react';
 import InboxDumb from './Inbox.dumb';
 import Base from '../Base';
-import { login } from '../../network/Fetch';
-import db from '../../localdb/indexdb';
+// import { login } from '../../network/Fetch';
+// import db from '../../localdb/indexdb';
 import { CircularProgress } from 'material-ui';
 
 const LASTEMAILS = 4;
@@ -23,24 +23,24 @@ export default class Inbox extends Base {
       return array;
     }
     componentDidMount() {
-      this.props.dbPromise.then(() => {
-        login(this.props.user).then((res, rej) => {
-          const ids = this.extractId(res, res.length - LASTEMAILS, res.length);
-          Promise.race(db.getAll(ids, this.props.user)).then(mails => {
-            this.setState({
-              inbox: res,
-            });
-            // this.props.actionLoggedIn();
-          }, errPromise => {
-            // should logout user
-            console.error(errPromise);
-          });
-        }, err => {
-          // console.error(err.message || err.code);
-          localStorage.setItem('LOGIN_ERROR', err.message || err.code)
-          this.props.setLoginError();
-        });
-      });
+      // this.props.dbPromise.then(() => {
+      //   login(this.props.user).then((res, rej) => {
+      //     const ids = this.extractId(res, res.length - LASTEMAILS, res.length);
+      //     Promise.race(db.getAll(ids, this.props.user)).then(mails => {
+      //       this.setState({
+      //         inbox: res,
+      //       });
+      //       // this.props.actionLoggedIn();
+      //     }, errPromise => {
+      //       // should logout user
+      //       console.error(errPromise);
+      //     });
+      //   }, err => {
+      //     // console.error(err.message || err.code);
+      //     localStorage.setItem('LOGIN_ERROR', err.message || err.code)
+      //     this.props.setLoginError();
+      //   });
+      // });
     }
     shouldComponentUpdate(nextProps, nextState) {
       if (this.state.inbox === null) {

@@ -12,12 +12,12 @@ import isMobileFunc from './helper/isMobile';
 
 const FIREBASE = 'https://amber-heat-8849.firebaseio.com/';
 export const firebaseRef = new Firebase(FIREBASE);
-var authData = firebaseRef.getAuth();
-if (authData) {
-  console.log("User " + authData.uid + " is logged in with " + authData.provider);
-} else {
-  console.log("User is logged out");
-}
+// let authData = firebaseRef.getAuth();
+// if (authData) {
+//   console.log("User " + authData.uid + " is logged in with " + authData.provider);
+// } else {
+//   console.log("User is logged out");
+// }
 if (isMobileFunc()) {
   injectTapEventPlugin();
 } else {
@@ -33,11 +33,13 @@ function handleChange() {
 store.subscribe(handleChange);
 const node = document.createElement('div');
 node.setAttribute('id', 'node');
-node.setAttribute('class', 'noscroll');
+// node.setAttribute('class', 'noscroll');
 document.body.appendChild(node);
-
+debugger;
 // DB promise, resolves if db connection established
 const dbPromise = db.createDB();
+console.log(dbPromise);
+console.log(App);
 render(
   <Provider store = {store}>
     <App dbPromise={dbPromise}/>
