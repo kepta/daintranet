@@ -29,7 +29,7 @@ module.exports = {
     "space-before-function-paren": 0,
     "react/prop-types": 0,
     // "react/jsx-boolean-value": 0,
-    "no-console": 1,
+    "no-console": 0,
   },
   "parser": "babel-eslint"
 };

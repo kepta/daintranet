@@ -5,6 +5,8 @@ import { CircularProgress } from 'material-ui';
 import { fetchIntranet, fuzzySearch } from '../../network/Fetch';
 import ParseDate from '../../helper/dateParse';
 
+import { increment } from '../../network/firebase';
+
 export default class Inbox extends Base {
     constructor(props) {
       super(props);
@@ -38,6 +40,7 @@ export default class Inbox extends Base {
       const tempPathString = this.state.pathString.slice(0);
       tempPathString.push(location);
       tempArray.push(this.state.path[this.state.path.length - 1][location]);
+      increment(tempPathString.join('*'), this.props.user);
       this.setState({
         path: tempArray,
         pathString: tempPathString,

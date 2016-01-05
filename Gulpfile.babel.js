@@ -40,9 +40,9 @@ gulp.task('deploy', function() {
 gulp.task('jspm-bundle', function(done) {
     jspm.setPackagePath('.');
     jspm.bundleSFX('app/index', dist+'/main.js', {
-        sourceMaps: false,
-        minify : false,
-        mangle : false
+        sourceMaps: true,
+        minify : true,
+        mangle : true
     }).then(() => {
         done();
     });

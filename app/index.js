@@ -1,5 +1,4 @@
 import React from 'react';
-import Firebase from 'firebase';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -10,20 +9,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import isMobileFunc from './helper/isMobile';
 // import './helper/noBounce';
 
-const FIREBASE = 'https://amber-heat-8849.firebaseio.com/';
-export const firebaseRef = new Firebase(FIREBASE);
-var authData = firebaseRef.getAuth();
-if (authData) {
-  console.log("User " + authData.uid + " is logged in with " + authData.provider);
-} else {
-  console.log("User is logged out");
-}
 if (isMobileFunc()) {
   injectTapEventPlugin();
 } else {
   injectTapEventPlugin();
 }
-
+// throw new Error('is it owrking');
+// window.onerror("TestRollbarError: testing window.onerror", window.location.href);
 const store = createStore(reducers);
 
 function handleChange() {

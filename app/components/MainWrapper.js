@@ -8,7 +8,6 @@ export default class MainWrapper extends React.Component {
       id: null,
     };
   }
-
   render() {
     return (
       <div>

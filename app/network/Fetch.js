@@ -1,6 +1,6 @@
 import Request from 'superagent';
 import { MailParser } from 'mailparser';
-
+import { isLoggedIn } from './auth';
 // const local = window.location.href.indexOf('localhost');
 
 const WRONGPASS = 'INVALID_PASSWORD';
@@ -69,8 +69,8 @@ export function fetchIntranet(user, fresh) {
     return resolve({ intranet, timeStamp });
   });
 }
-export function formQuery(path, user) {
-  return `${BASEURL}/intranet/user.id?loc=${path}`;
+export function formQuery(path) {
+  return `${BASEURL}/intranet/${isLoggedIn().password.email}?loc=${path}`;
 }
 
 export function fuzzySearch(search) {
