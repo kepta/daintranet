@@ -19,6 +19,7 @@ export default class Inbox extends Base {
           timeStamp={this.props.timeStamp}
           searching={this.props.searching}
           isMobile={this.props.isMobile}
+          showAttachment={this.props.showAttachment}
         />
       );
       const searchResult = (
@@ -27,6 +28,7 @@ export default class Inbox extends Base {
           searching={this.props.searching}
           goToSearch={this.props.goToSearch}
           isMobile={this.props.isMobile}
+          showAttachment={this.props.showAttachment}
         />
       );
       return (

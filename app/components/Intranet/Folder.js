@@ -5,11 +5,13 @@ import { flexCenter } from '../../Flex';
 import { formQuery } from '../../network/Fetch';
 import ListItem from './ListItem';
 import ListItemMobile from './ListItem.mobile';
+import { increment } from '../../network/firebase';
+
 export default class Viewer extends Base {
     constructor(props) {
       super(props);
       this.style = this.style();
-      this._bind('displayStructure', 'goForward');
+      this._bind('displayStructure', 'goForward', 'showAttachment');
     }
     goForward(item) {
       if (this.props.isMobile) {
@@ -19,10 +21,12 @@ export default class Viewer extends Base {
       }
     }
     showAttachment(path, file) {
-      // console.log(path, file);
-      let url = path.join('/');
-      url = url + '/'+ file;
-      window.open(formQuery(url), '_blank');
+      this.props.showAttachment(path, file);
+      // // console.log(path, file);
+      // let url = path.join('/');
+      // increment(path.join('*'), )
+      // url = url + '/'+ file;
+      // window.open(formQuery(url), '_blank');
     }
     displayStructure(obj) {
       return Object.keys(obj).map((item, key) => {

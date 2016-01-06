@@ -1,26 +1,23 @@
 import { firebaseRef } from './auth';
 
 const date = new Date();
-console.log(date);
 const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900}`;
-console.log(dateString);
-export function increment(path, user, isFile) {
-  const target = firebaseRef.child('file').child(dateString).child(path);
-  firebaseRef.child('file').child(dateString).orderByValue().once('value', snap => {
-    // console.log('e', snap.val());
-    snap.forEach(data => {
-      console.log(data.key(), data.val());
-    });
-  });
-  target.transaction((currentData) => {
-    if (currentData === null) {
-      return 1;
-    } else {
-      return currentData+1;
-    }
-  });
-}
 
 export function readTopFolders() {
-  
+  // firebaseRef.child('file').child(dateString).orderByValue().on('value', snap => {
+  //   snap.forEach(data => {
+  //     console.log(data.key(), data.val());
+  //   });
+  // });
+}
+export function increment(path, user, isFile) {
+  // console.log('incrementing');
+  const target = firebaseRef.child('file').child(dateString).child(user.id.slice(0, 6)).child(path);
+  target.transaction((currentData) => {
+    return (currentData || 0) + 1;
+  }, (e) => {
+    if (e) {
+      console.error('hero', e);
+    }
+  });
 }

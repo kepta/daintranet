@@ -12,10 +12,34 @@ const isLocal = window.location.href.indexOf('localhost') > -1;
 
 export const BASEURL = isLocal? DEV_URL : PRODUCTON_URL;
 
+let userFromCollege = false;
 const TIMER = 20000;
 const TIMER_INBOX = 20000;
 let intranet = {};
 let timeStamp = null;
+
+export function getIP() {
+  return new Promise((resolve, reject) => {
+    Request.get('https://api.ipify.org?format=json')
+      .end((err, resp) => {
+        if (err) {
+          reject(err);
+        } else {
+          try {
+            const IP = JSON.parse(resp.text).ip;
+            if (IP === '14.139.122.114') {
+              console.debug('You are using this app inside the college, hurray bandwidth saving : )');
+              userFromCollege = true;
+            }
+          } catch (e) {
+            console.error(e);
+          }
+          // resolve(JSON.parse(resp.text));
+        }
+      });
+  });
+}
+// getIP();
 
 export function fetchEmail(id, user) {
   return new Promise((resolve, reject) => {
@@ -39,6 +63,7 @@ export function fetchEmail(id, user) {
 }
 
 export function getInbox (user) {
+  console.log(user, 'hi');
   return new Promise((resolve, reject) => {
     Request.get(`${BASEURL}/email`)
     .timeout(TIMER_INBOX)
@@ -70,6 +95,9 @@ export function fetchIntranet(user, fresh) {
   });
 }
 export function formQuery(path) {
+  if (userFromCollege) {
+    return `http://10.100.56.13/~daiict_nt01/${path}`
+  }
   return `${BASEURL}/intranet/${isLoggedIn().password.email}?loc=${path}`;
 }
 
