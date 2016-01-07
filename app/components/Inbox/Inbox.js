@@ -6,7 +6,7 @@ import { getInbox } from '../../network/Fetch';
 import db from '../../localdb/indexdb';
 import { CircularProgress } from 'material-ui';
 
-const LASTEMAILS = 4;
+const LASTEMAILS = 5;
 
 export default class Inbox extends Base {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class Inbox extends Base {
     extractId(emailList, start, end) {
       let iterator = start > 0 ? start : 0;
       const array = [];
-      for (iterator = start > 0 ? start : 0; iterator < end; iterator++) {
+      for (iterator = 0; iterator < LASTEMAILS; iterator++) {
         array.push(emailList[iterator].id);
       }
       return array;
@@ -28,7 +28,7 @@ export default class Inbox extends Base {
       console.log('fetching');
       this.props.dbPromise.then(() => {
         getInbox(this.props.user).then((res, rej) => {
-          const ids = this.extractId(res, res.length - LASTEMAILS, res.length);
+          const ids = this.extractId(res);
           Promise.race(db.getAll(ids, this.props.user)).then(mails => {
             this.setState({
               inbox: res,

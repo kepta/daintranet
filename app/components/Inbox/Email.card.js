@@ -11,8 +11,13 @@ export default class EmailCard extends Base {
   render() {
     const email = this.props.email;
     const style = this.style();
-    const avatar = <Avatar>{email.from[0].name.slice(0, 2) || email.from[0].address.slice(0, 2)}</Avatar>;
-    const subtitle = <span>{email.from[0].address}<br/>{email.receivedDate.toString()}<br/></span>;
+    const avatar = <Avatar>{email.from[0] && (email.from[0].name.slice(0, 2) || email.from[0].address.slice(0, 2))}</Avatar>;
+    const subtitle = (
+      <span>
+        {email.from[0] && email.from[0].address}<br/>
+        {email.receivedDate && email.receivedDate.toString()}<br/>
+      </span>
+    );
     return (
         <Card>
           <CardHeader

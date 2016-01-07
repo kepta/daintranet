@@ -41,7 +41,7 @@ export default class Inbox extends Base {
       tempArray.push(this.state.path[this.state.path.length - 1][location]);
       if (tempPathString.length === 3) {
         // @recording: only increment if a subfolder inside prof
-        increment(tempPathString.join('*'), this.props.user);
+        increment(tempPathString.join('*').replace(/\./g, '^'), this.props.user);
       }
       this.setState({
         path: tempArray,
@@ -99,7 +99,7 @@ export default class Inbox extends Base {
       }
       // console.log(url.replace('/', '*'));
       window.open(formQuery(url), '_blank');
-      increment(url.replace(/\//g, '*').replace('.', '^'), this.props.user);
+      increment(url.replace(/\//g, '*').replace(/\./g, '^'), this.props.user);
     }
     goBack() {
       if (this.state.path.length === 1) return;

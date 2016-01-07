@@ -7,7 +7,6 @@ import db from './localdb/indexdb';
 import App from './app';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import isMobileFunc from './helper/isMobile';
-// import './helper/noBounce';
 
 if (isMobileFunc()) {
   injectTapEventPlugin();

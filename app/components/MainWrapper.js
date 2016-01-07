@@ -1,5 +1,6 @@
 import React from 'react';
 import { getIP } from '../network/Fetch';
+import { loginIncrement } from '../network/firebase';
 import MainWrapperDumb from './MainWrapper.dumb';
 
 export default class MainWrapper extends React.Component {
@@ -21,6 +22,7 @@ export default class MainWrapper extends React.Component {
       }
     }
     // gets the users ip, to detect if he is inside college or not
+    loginIncrement();
     getIP();
   }
   render() {

@@ -34,7 +34,6 @@ export function getIP() {
           } catch (e) {
             console.error(e);
           }
-          // resolve(JSON.parse(resp.text));
         }
       });
   });
@@ -63,7 +62,6 @@ export function fetchEmail(id, user) {
 }
 
 export function getInbox (user) {
-  console.log(user, 'hi');
   return new Promise((resolve, reject) => {
     Request.get(`${BASEURL}/email`)
     .timeout(TIMER_INBOX)

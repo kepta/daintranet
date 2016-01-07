@@ -10,15 +10,6 @@ export default class TroubleLoading extends Base {
     };
     this._bind('tryAgain');
   }
-  componentDidMount() {
-    setTimeout(() => {
-      if (this) {
-        this.setState({
-          count: this.state.count + 1,
-        });
-      }
-    }, 7000);
-  }
   tryAgain() {
     setTimeout(() => {
       this.setState({
@@ -36,6 +27,13 @@ export default class TroubleLoading extends Base {
   }
 
   render() {
+    setTimeout(() => {
+      if (this) {
+        this.setState({
+          count: this.state.count + 1,
+        });
+      }
+    }, 7000);
     // console.log(this.state.count);
     const showTryAgain = (
         <p onClick={this.tryAgain}>Try again</p>
