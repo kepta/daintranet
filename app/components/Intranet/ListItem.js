@@ -15,35 +15,21 @@ export default class Item extends Base {
       };
       return (
         <div>
-          <ListItem style={style.listItem}
-            primaryText={this.props.item}
+          <div style={style.listItem}
             onTouchTap={ this.props.isFile ?
               this.props.showAttachment.bind(this, this.props.pathString, this.props.item)
             : this.props.goForward.bind(this, this.props.item, this.props.pathString)}
-            leftIcon={<Avatar {...avatarProps}/>}
-          />
-          <ListDivider inset/>
+          >
+          <FolderIcon style={style.avatar} />
+            {this.props.item}
+            <ListDivider inset/>
+          </div>
         </div>
       );
     }
     style() {
       return {
-        avatar: {
-          height: '40px',
-          width: '40px',
-          borderRadius: '50%',
-          display: 'inline-block',
-          backgroundColor: '#ec407a',
-          textAlign: 'center',
-          lineHeight: '47px',
-          fontSize: '24px',
-          color: '#ffcc80',
-          position: 'absolute',
-          top: '8px',
-          left: '16px',
-          WebkitUserSelect: 'none',
-          padding: '0 !important',
-        },
+        fill: "#ffcc80",
       };
     }
 }

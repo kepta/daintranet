@@ -1,5 +1,6 @@
 import React from 'react';
 import Base from '../Base';
+
 import { FolderIcon, PdfIcon } from '../Icons';
 
 export default class ListItemMobile extends Base {

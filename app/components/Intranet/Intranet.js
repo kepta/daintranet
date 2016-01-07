@@ -17,8 +17,11 @@ export default class Inbox extends Base {
         previous: null,
         searchResult: false,
         searching: false,
+        search: false,
+        home: true,
+        hot: false,
       };
-      this._bind('getDirectoryTree', 'goForward', 'goBack', 'setSearch', 'goToSearch', 'showAttachment');
+      this._bind('getDirectoryTree', 'goForward', 'goBack', 'setSearch', 'goToSearch', 'showAttachment', 'handleClick');
       this.getDirectoryTree();
     }
     getDirectoryTree() {
@@ -61,6 +64,9 @@ export default class Inbox extends Base {
         searching: false,
       });
     }
+    handleClick(type) {
+      this.setState(type);
+    }
     setSearch(search) {
       if (search) {
         this.setState({
@@ -94,7 +100,6 @@ export default class Inbox extends Base {
         url = path.slice(15);
       } else {
         url = path.join('/');
-        // increment(path.join('*'), )
         url = url + '/'+ file;
       }
       // console.log(url.replace('/', '*'));
@@ -134,6 +139,10 @@ export default class Inbox extends Base {
                             isMobile={this.props.isMobile}
                             leftNav={this.props.leftNav}
                             showAttachment={this.showAttachment}
+                            search={this.state.search}
+                            home={this.state.home}
+                            hot={this.state.hot}
+                            handleClick={this.handleClick}
                           />
       );
     }
