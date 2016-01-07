@@ -1,6 +1,6 @@
 import Request from 'superagent';
 import { MailParser } from 'mailparser';
-
+import { isLoggedIn } from './auth';
 // const local = window.location.href.indexOf('localhost');
 
 const WRONGPASS = 'INVALID_PASSWORD';
@@ -10,12 +10,35 @@ const PRODUCTON_URL = 'https://bangle.io/api';
 const DEV_URL = 'http://localhost:3000/api';
 const isLocal = window.location.href.indexOf('localhost') > -1;
 
-export const BASEURL = isLocal? DEV_URL : PRODUCTON_URL;
+export const BASEURL = !isLocal? DEV_URL : PRODUCTON_URL;
 
+let userFromCollege = false;
 const TIMER = 20000;
 const TIMER_INBOX = 20000;
 let intranet = {};
 let timeStamp = null;
+
+export function getIP() {
+  return new Promise((resolve, reject) => {
+    Request.get('https://api.ipify.org?format=json')
+      .end((err, resp) => {
+        if (err) {
+          reject(err);
+        } else {
+          try {
+            const IP = JSON.parse(resp.text).ip;
+            if (IP === '14.139.122.114') {
+              console.debug('You are using this app inside the college, hurray bandwidth saving : )');
+              userFromCollege = true;
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }
+      });
+  });
+}
+// getIP();
 
 export function fetchEmail(id, user) {
   return new Promise((resolve, reject) => {
@@ -69,8 +92,11 @@ export function fetchIntranet(user, fresh) {
     return resolve({ intranet, timeStamp });
   });
 }
-export function formQuery(path, user) {
-  return `${BASEURL}/intranet/user.id?loc=${path}`;
+export function formQuery(path) {
+  if (userFromCollege) {
+    return `http://10.100.56.13/~daiict_nt01/${path}`
+  }
+  return `${BASEURL}/intranet/${isLoggedIn().password.email}?loc=${path}`;
 }
 
 export function fuzzySearch(search) {

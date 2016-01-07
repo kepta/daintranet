@@ -22,7 +22,8 @@ export default class SideBar extends Base {
             {mail.fr}
           </p>
         );
-        const from = mail.e[0].d || mail.e[0].a;
+        console.log(mail);
+        const from = mail.e && mail.e[mail.e.length-1].a;
         return (
           <div key={iter} onTouchTap={this.props.showEmail.bind(this, mail.id)}>
             <ListItem

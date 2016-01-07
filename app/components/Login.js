@@ -90,7 +90,6 @@ export default class Login extends Base {
         fontWeight: '300',
         lineHeight: '1.2',
         color: '#757575',
-        fontFamily: 'roboto',
       },
       checkbox: {
         width: '250px',

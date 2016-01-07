@@ -5,19 +5,22 @@ import { List, RefreshIndicator } from 'material-ui';
 import ListItem from './ListItem';
 // import ListItemMobile from './ListItem.mobile';
 import { flexCenter } from '../../Flex';
-import { formQuery } from '../../network/Fetch';
+import { increment } from '../../network/firebase';
+
 export default class Viewer extends Base {
     constructor(props) {
       super(props);
       this.style = this.style();
-      this._bind('displayStructure', 'goForward');
+      this._bind('displayStructure', 'goForward', 'showAttachment');
     }
     goForward(x, item) {
       this.props.goToSearch(item.slice(15));
     }
     showAttachment(x) {
-      const url = x.slice(15); // /root/intranet/
-      window.open(formQuery(url), '_blank');
+      this.props.showAttachment(x, null);
+      // const url = x.slice(15); // /root/intranet/
+      // console.log(url);
+      // window.open(formQuery(url), '_blank');
     }
     displayStructure(array) {
       return array.map((item, key) => {

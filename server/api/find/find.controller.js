@@ -46,5 +46,5 @@ function responseWithResult(res, statusCode) {
 }
 
 export function show(req, res) {
-  return responseWithResult(res)(fuse.search(req.params.id).slice(0, 12));
+  return responseWithResult(res)(fuse.search(req.params.id).slice(0, 50));
 }

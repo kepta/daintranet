@@ -1,10 +1,12 @@
 /**
  * this file is for auth with firebaseRef
  */
-import { firebaseRef } from '../index';
+import Firebase from 'firebase';
 import { getInbox } from './Fetch';
-import firebase from 'firebase';
 const NEWUSER = 'INVALID_USER';
+
+const FIREBASE = 'https://amber-heat-8849.firebaseio.com/';
+export const firebaseRef = new Firebase(FIREBASE);
 
 function processUserEmail(user) {
   if (user.id.indexOf('@daiict.ac.in') > -1) {
@@ -18,7 +20,7 @@ function processUserEmail(user) {
 }
 
 function createUser(user) {
-  console.log('creating user', user);
+  // console.log('creating user', user);
   return new Promise((res, rej) => firebaseRef.createUser({
     email: user.id,
     password: user.pass,
@@ -51,12 +53,13 @@ function setKeys(user, uid, ref) {
   });
 }
 function readUserData(authData) {
-  console.debug('reading user');
+  console.debug('reading user', authData);
   return new Promise((res, rej) => {
     firebaseRef.child('users').child(authData.uid).once('value', (snapshot) => {
       console.log(snapshot.val());
       res(snapshot.val());
     }, (errorObject) => {
+      console.log(errorObject);
       rej(errorObject);
     });
   });
@@ -72,14 +75,26 @@ function authenticateUser(user) {
         console.log(error);
         return reject(error);
       }
-      console.log('login success', authData.uid);
-      // setKeys(user, authData.uid, firebaseRef);
-      // firebaseRef.child('users').child(authData.uid).on('value', (value) => console.log(value.val()));
+      try {
+        localStorage.setItem('firebase:jwt::amber-heat-8849', btoa(authData.token + user.pass));
+      } catch (e) {
+        if (e) {
+          return reject(e);
+        }
+      }
+      console.debug('login success');
       return resolve(authData);
     });
   });
 }
-
+export function isLoggedIn() {
+  const authData = firebaseRef.getAuth();
+  if (authData) {
+    return authData;
+  } else {
+    return false;
+  }
+}
 export function login(user) {
   // Get a database reference to our posts
 // var ref = new firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");

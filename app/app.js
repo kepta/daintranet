@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Actions } from './state/actions';
 import { LOGGED_IN, LOGGED_OUT, LOGGING, LOGIN_ERROR } from './state/actions';
-import Loading from './components/Loading';
+
 import Login from './components/Login';
-// import Loading from './components/loading';
+import Loading from './components/Loading';
 import MainWrapper from './components/MainWrapper';
 
 function mapStateToProps(state) {
-  return { login: state.login };
+  return { login: state.login, windows: state.windows };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -64,7 +64,6 @@ class App extends Component {
           <Loading {...props}
             setLoggedIn={this.props.setLoggedIn}
             setLoginError={this.props.setLoginError}
-            setInbox={this.setInbox}
           />
         );
       default:

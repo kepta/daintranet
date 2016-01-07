@@ -3,6 +3,7 @@ import Base from '../Base';
 import Appbar from './Appbar';
 import Folder from './Folder';
 import SearchResult from './Search';
+
 export default class Inbox extends Base {
     constructor(props) {
       super(props);
@@ -19,6 +20,7 @@ export default class Inbox extends Base {
           timeStamp={this.props.timeStamp}
           searching={this.props.searching}
           isMobile={this.props.isMobile}
+          showAttachment={this.props.showAttachment}
         />
       );
       const searchResult = (
@@ -27,6 +29,7 @@ export default class Inbox extends Base {
           searching={this.props.searching}
           goToSearch={this.props.goToSearch}
           isMobile={this.props.isMobile}
+          showAttachment={this.props.showAttachment}
         />
       );
       return (
@@ -36,6 +39,10 @@ export default class Inbox extends Base {
               goBack={this.props.goBack}
               setSearch={this.props.setSearch}
               leftNav={this.props.leftNav}
+              search={this.props.search}
+              home={this.props.home}
+              hot={this.props.hot}
+              handleClick={this.props.handleClick}
             />
           </div>
          { !this.props.searchResult ? folder: searchResult}

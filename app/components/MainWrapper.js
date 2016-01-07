@@ -1,4 +1,6 @@
 import React from 'react';
+import { getIP } from '../network/Fetch';
+import { loginIncrement } from '../network/firebase';
 import MainWrapperDumb from './MainWrapper.dumb';
 
 export default class MainWrapper extends React.Component {
@@ -7,8 +9,22 @@ export default class MainWrapper extends React.Component {
     this.state = {
       id: null,
     };
+    try {
+      // console.log(props.login.ID);
+      if (props.user.id.indexOf('@daiict') === -1) {
+        localStorage.setItem('studentId', props.user.id+'@daiict.ac.in');
+      } else {
+        localStorage.setItem('studentId', props.user.id);
+      }
+    } catch (e) {
+      if (e) {
+        console.error(e);
+      }
+    }
+    // gets the users ip, to detect if he is inside college or not
+    loginIncrement();
+    getIP();
   }
-
   render() {
     return (
       <div>

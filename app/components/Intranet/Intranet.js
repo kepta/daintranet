@@ -2,9 +2,10 @@ import React from 'react';
 import IntranetDumb from './Intranet.dumb';
 import Base from '../Base';
 import { CircularProgress } from 'material-ui';
-import { fetchIntranet, fuzzySearch } from '../../network/Fetch';
+import { fetchIntranet, fuzzySearch, formQuery } from '../../network/Fetch';
 import ParseDate from '../../helper/dateParse';
-
+import { increment, readTopFolders } from '../../network/firebase';
+readTopFolders();
 export default class Inbox extends Base {
     constructor(props) {
       super(props);
@@ -16,8 +17,11 @@ export default class Inbox extends Base {
         previous: null,
         searchResult: false,
         searching: false,
+        search: false,
+        home: true,
+        hot: false,
       };
-      this._bind('getDirectoryTree', 'goForward', 'goBack', 'setSearch', 'goToSearch');
+      this._bind('getDirectoryTree', 'goForward', 'goBack', 'setSearch', 'goToSearch', 'showAttachment', 'handleClick');
       this.getDirectoryTree();
     }
     getDirectoryTree() {
@@ -38,6 +42,10 @@ export default class Inbox extends Base {
       const tempPathString = this.state.pathString.slice(0);
       tempPathString.push(location);
       tempArray.push(this.state.path[this.state.path.length - 1][location]);
+      if (tempPathString.length === 3) {
+        // @recording: only increment if a subfolder inside prof
+        increment(tempPathString.join('*').replace(/\./g, '^'), this.props.user);
+      }
       this.setState({
         path: tempArray,
         pathString: tempPathString,
@@ -55,6 +63,9 @@ export default class Inbox extends Base {
         pathString,
         searching: false,
       });
+    }
+    handleClick(type) {
+      this.setState(type);
     }
     setSearch(search) {
       if (search) {
@@ -82,7 +93,19 @@ export default class Inbox extends Base {
         });
       }
     }
-
+    showAttachment(path, file) {
+      let url;
+      if (file === null) {
+        // this is the case when we get direct path from search.js
+        url = path.slice(15);
+      } else {
+        url = path.join('/');
+        url = url + '/'+ file;
+      }
+      // console.log(url.replace('/', '*'));
+      window.open(formQuery(url), '_blank');
+      increment(url.replace(/\//g, '*').replace(/\./g, '^'), this.props.user);
+    }
     goBack() {
       if (this.state.path.length === 1) return;
       const tempArray = this.state.path.slice(0, this.state.path.length - 1);
@@ -115,6 +138,11 @@ export default class Inbox extends Base {
                             goToSearch={this.goToSearch}
                             isMobile={this.props.isMobile}
                             leftNav={this.props.leftNav}
+                            showAttachment={this.showAttachment}
+                            search={this.state.search}
+                            home={this.state.home}
+                            hot={this.state.hot}
+                            handleClick={this.handleClick}
                           />
       );
     }
