@@ -26,7 +26,6 @@ const node = document.createElement('div');
 node.setAttribute('id', 'node');
 // node.setAttribute('class', 'noscroll');
 document.body.appendChild(node);
-debugger;
 // DB promise, resolves if db connection established
 const dbPromise = db.createDB();
 console.log(dbPromise);
