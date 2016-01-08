@@ -3,7 +3,7 @@ import Base from '../Base';
 import { List, RefreshIndicator } from 'material-ui';
 import { flexCenter } from '../../Flex';
 import { formQuery } from '../../network/Fetch';
-import ListItem from './ListItem';
+import ListItem from './IconItems';
 import ListItemMobile from './ListItem.mobile';
 import { increment } from '../../network/firebase';
 
@@ -29,35 +29,22 @@ export default class Viewer extends Base {
       // window.open(formQuery(url), '_blank');
     }
     displayStructure(obj) {
-      const params = {
-        items: obj,
-        goForward: this.goForward,
-        showAttachment: this.showAttachment,
-        pathString: this.props.pathString,
-        path: this.props.path,
-        isMobile: this.props.isMobile,
-      };
-      return (<ListItem {...params}/>);
-      //
-      // return Object.keys(obj).map((item, key) => {
-      //   const isFile = obj[item] === 'file';
-      //   const params = {
-      //     key,
-      //     isFile,
-      //     item,
-      //     goForward: this.goForward,
-      //     showAttachment: this.showAttachment,
-      //     pathString: this.props.pathString,
-      //     path: this.props.path,
-      //   };
-      //   if (this.props.isMobile) {
-      //     return (<ListItemMobile {...params}/>);
-      //   }
-      //   if (this.props.isMobile) {
-      //     return (<ListItemMobile {...params}/>);
-      //   }
-      //   return (<ListItem {...params}/>);
-      // });
+      return Object.keys(obj).map((item, key) => {
+        const isFile = obj[item] === 'file';
+        const params = {
+          key,
+          isFile,
+          item,
+          goForward: this.goForward,
+          showAttachment: this.showAttachment,
+          pathString: this.props.pathString,
+          path: this.props.path,
+        };
+        if (this.props.isMobile) {
+          return (<ListItemMobile {...params}/>);
+        }
+        return (<ListItem {...params}/>);
+      });
     }
     render() {
       const lastUpdated = (
@@ -89,7 +76,6 @@ export default class Viewer extends Base {
           WebkitOverflowScrolling: 'touch',
         },
         list: {
-          paddingBottom: '0px',
         },
         listItem: {
           paddingTop: '10px',

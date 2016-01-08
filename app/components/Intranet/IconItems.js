@@ -12,6 +12,7 @@ export default class Item extends Base {
     render() {
       const style = this.style(this.props.isMobile);
       const obj = this.props.items;
+      console.log(obj);
       const list = Object.keys(obj).map((item, key) => {
         const isFile = obj[item] === 'file';
         return (

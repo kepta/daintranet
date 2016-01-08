@@ -8,7 +8,7 @@ import ListItem from './ListItem';
 
 // import ListItem from './ListItem';
 
-export default class Item extends Base {
+export default class Hot extends Base {
     constructor(props) {
       super(props);
       this.state = {

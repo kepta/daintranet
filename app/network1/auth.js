@@ -65,7 +65,6 @@ function readUserData(authData) {
   });
 }
 function authenticateUser(user) {
-  console.debug('authenticating user');
   return new Promise((resolve, reject) => {
     return firebaseRef.authWithPassword({
       email: user.id,
@@ -96,16 +95,6 @@ export function isLoggedIn() {
   }
 }
 export function login(user) {
-  // Get a database reference to our posts
-// var ref = new firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
-
-// // Attach an asynchronous callback to read the data at our posts reference
-// firebaseRef.child('users').child('e730e2b0-0f6d-45da-bd46-46a60a9154a').on("value", function(snapshot) {
-//   console.log(snapshot.val());
-// }, function (errorObject) {
-//   console.log("The read failed: " + errorObject.code);
-// });
-  // firebaseRef.child('users').child('e730e2b0-0f6d-45da-bd46-46a60a9154a7').on('value', (e) => console.log(e));
   const safeUser = processUserEmail(user);
   const promise = Promise.resolve(safeUser);
   return promise.then(authenticateUser)
@@ -115,10 +104,7 @@ export function login(user) {
             .then(createUser.bind(this, safeUser))
             .then(authenticateUser.bind(this, safeUser));
     } else {
-      console.log('hereeeee');
       throw error;
     }
   });
-    // .then(readUserData);
-  // return ;
 }

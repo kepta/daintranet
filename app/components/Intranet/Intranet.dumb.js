@@ -9,6 +9,7 @@ export default class Inbox extends Base {
       super(props);
     }
     render() {
+      console.log(this.props.user);
       const style = this.style();
       const folder = (
         <Folder
