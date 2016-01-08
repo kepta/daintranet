@@ -5,7 +5,7 @@ import { primaryTextWhite, greyShade, baseColor } from '../../helper/colorPallet
 import { AppBar, TextField, Toolbar, IconButton, ToolbarGroup, ListDivider, Paper } from 'material-ui';
 import { BackButton, CloseGrey } from '../Icons';
 
-export default class Viewer extends Base {
+export default class Tab extends Base {
   giveStyle(style, tab) {
     return {
       ...style,
@@ -19,18 +19,28 @@ export default class Viewer extends Base {
       home: type === 'home',
     });
   }
+  feedBack() {
+    alert('This feature is in progress. If you have any bugs, feature request, suggestion. Please fill the form.');
+      window.open('https://docs.google.com/forms/d/1W7VEWJMFNqizlQ1dw4l93xWxyXGVv5CoQtHYUhZ8gn8/viewform?usp=send_form', '_blank');
+  }
   render() {
     const style = this.style();
     return (
       <div style={style.main}>
-        <div style={this.giveStyle(style.tab, this.props.search)} onClick={this.handleClick.bind(this, 'search')}>
-          <SearchIcon/>
+        <div style={this.giveStyle(style.tab, this.props.search)} onTouchTap={this.feedBack}>
+          <IconButton tooltip="Search">
+            <SearchIcon/>
+          </IconButton>
         </div>
-        <div style={this.giveStyle(style.tab, this.props.hot)} onClick={this.handleClick.bind(this, 'hot')}>
-          <HotIcon/>
+        <div style={this.giveStyle(style.tab, this.props.hot)} onTouchTap={this.handleClick.bind(this, 'hot')}>
+          <IconButton tooltip="Hot">
+            <HotIcon/>
+          </IconButton>
         </div>
-        <div style={this.giveStyle(style.tab, this.props.home)} onClick={this.handleClick.bind(this, 'home')}>
-          <HomeIcon/>
+        <div style={this.giveStyle(style.tab, this.props.home)} onTouchTap={this.handleClick.bind(this, 'home')}>
+          <IconButton tooltip="Intranet">
+            <HomeIcon/>
+          </IconButton>
         </div>
       </div>
     );

@@ -1,9 +1,9 @@
 import React from 'react';
 import Base from '../Base';
-import { List, Avatar, ListDivider, RefreshIndicator } from 'material-ui';
-import { FolderIcon, PdfIcon } from '../Icons';
+import { List, RefreshIndicator } from 'material-ui';
+// import { PdfIcon } from '../Icons';
 import ListItem from './ListItem';
-import ListItemMobile from './ListItem.mobile';
+// import ListItemMobile from './ListItem.mobile';
 import { flexCenter } from '../../Flex';
 import { increment } from '../../network/firebase';
 
@@ -23,19 +23,28 @@ export default class Viewer extends Base {
       // window.open(formQuery(url), '_blank');
     }
     displayStructure(array) {
-      return array.map((item, key) => {
-        const isFile = item.name.indexOf('.') > -1;
-        return (
-          <ListItem
-            key={key}
-            isFile={isFile}
-            item={item.name}
-            goForward={this.goForward}
-            showAttachment={this.showAttachment}
-            pathString={item.path}
-          />
-        );
-      });
+      console.log('here', array);
+      return (
+        <ListItem
+          items={array}
+          goForward={this.goForward}
+          showAttachment={this.showAttachment}
+          fromSearch
+        />
+      );
+      // return array.map((item, key) => {
+      //   const isFile = item.name.indexOf('.') > -1;
+      //   return (
+      //     <ListItem
+      //       key={key}
+      //       isFile={isFile}
+      //       item={item.name}
+      //       goForward={this.goForward}
+      //       showAttachment={this.showAttachment}
+      //       pathString={item.path}
+      //     />
+      //   );
+      // });
     }
     render() {
       const lastUpdated = (
