@@ -3,7 +3,7 @@ import Base from '../Base';
 import Appbar from './Appbar';
 import Folder from './Folder';
 import SearchResult from './Search';
-
+import Hot from './Hot';
 export default class Inbox extends Base {
     constructor(props) {
       super(props);
@@ -32,6 +32,20 @@ export default class Inbox extends Base {
           showAttachment={this.props.showAttachment}
         />
       );
+      let whatToshow = folder;
+      if (this.props.hot) {
+        whatToshow = (
+          <Hot
+            user={this.props.user}
+            goToSearch={this.props.goToSearch}
+            showAttachment={this.props.showAttachment}
+          />
+        );
+      } else if (this.props.search) {
+        whatToshow = searchResult;
+      } else {
+        whatToshow = folder;
+      }
       return (
         <div style={style.main}>
           <div style={style.appbar}>
@@ -45,7 +59,7 @@ export default class Inbox extends Base {
               handleClick={this.props.handleClick}
             />
           </div>
-         { !this.props.searchResult ? folder: searchResult}
+          { whatToshow }
         </div>
       );
     }

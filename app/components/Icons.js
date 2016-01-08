@@ -145,7 +145,6 @@ export class CloseGrey extends React.Component {
 
 export class FolderIcon extends React.Component {
   render() {
-    console.log('updated', this.props.style);
     return (
       <SvgIcon style={{ ...iconStyle,  ...this.props.style }}>
         <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path>
@@ -157,9 +156,10 @@ export class PdfIcon extends React.Component {
   shouldComponentUpdate() {
     return false;
   }
+  // ff8a65
   render() {
     return (
-      <SvgIcon style={{ fill: '#ff8a65' }}>
+      <SvgIcon style={{ ...iconStyle,  ...this.props.style }}>
         <path d="M6 2c-1.1 0-1.99.9-1.99 2l-.01 16c0 1.1.89 2 1.99 2h12.01c1.1 0 2-.9 2-2v-12l-6-6h-8zm7 7v-5.5l5.5 5.5h-5.5z"></path>
       </SvgIcon>
     );

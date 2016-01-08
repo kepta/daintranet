@@ -10,8 +10,8 @@ const PRODUCTON_URL = 'https://bangle.io/api';
 const DEV_URL = 'http://localhost:3000/api';
 const isLocal = window.location.href.indexOf('localhost') > -1;
 
-export const BASEURL = !isLocal? DEV_URL : PRODUCTON_URL;
-
+export const BASEURL = isLocal? DEV_URL : PRODUCTON_URL;
+// export const BASEURL = PRODUCTON_URL;
 let userFromCollege = false;
 const TIMER = 20000;
 const TIMER_INBOX = 20000;

@@ -81,15 +81,16 @@ export default class DumbMainWrapper extends Base {
       },
       inbox: {
         flexGrow: '1',
-        maxWidth: '333px',
-        width: '333px',
-        height: '96vh',
-        margin: isMobile ? '0': '0 20px',
+        maxWidth: '320px',
+        minWidth: '320px',
+        height: '99vh',
+        margin: isMobile ? '0': '0 5px 0 8px',
       },
       rightContent: {
-        flexGrow: '8',
-        margin: isMobile ? '0': '0 20px',
-        height: isMobile ? '99vh': '96vh',
+        flexGrow: '1',
+        maxWidth: '1600px',
+        margin: isMobile ? '0': '0 8px',
+        height: '99vh',
       },
     };
   }

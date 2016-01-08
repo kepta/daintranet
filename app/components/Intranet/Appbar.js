@@ -2,7 +2,7 @@ import React from 'react';
 import Base from '../Base';
 import { AppBar, TextField, Toolbar, IconButton, ToolbarGroup, ListDivider, Paper } from 'material-ui';
 import { BackButton, CloseGrey } from '../Icons';
-import SearchBar from './SearchBar';
+import SearchBar from './Tabs';
 
 export default class Viewer extends Base {
     constructor(props) {
@@ -56,13 +56,7 @@ export default class Viewer extends Base {
                 </IconButton>
               </ToolbarGroup>
               <ToolbarGroup key={1}>
-                <TextField
-                  ref="search"
-                  fullWidth
-                  hintText="Search Intranet"
-                  errorText={this.state.errorText}
-                  onChange={this.handleSearchChange}
-                />
+              
               </ToolbarGroup>
               </Toolbar>
           <ListDivider/>

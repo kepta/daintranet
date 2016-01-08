@@ -5,7 +5,6 @@ import { CircularProgress } from 'material-ui';
 import { fetchIntranet, fuzzySearch, formQuery } from '../../network/Fetch';
 import ParseDate from '../../helper/dateParse';
 import { increment, readTopFolders } from '../../network/firebase';
-readTopFolders();
 export default class Inbox extends Base {
     constructor(props) {
       super(props);
@@ -21,7 +20,7 @@ export default class Inbox extends Base {
         home: true,
         hot: false,
       };
-      this._bind('getDirectoryTree', 'goForward', 'goBack', 'setSearch', 'goToSearch', 'showAttachment', 'handleClick');
+      this._bind('getDirectoryTree', 'goForward', 'goBack', 'setSearch', 'goToStringPath', 'showAttachment', 'handleClick');
       this.getDirectoryTree();
     }
     getDirectoryTree() {
@@ -49,9 +48,12 @@ export default class Inbox extends Base {
       this.setState({
         path: tempArray,
         pathString: tempPathString,
+        search: false,
+        home: true,
+        hot: false,
       });
     }
-    goToSearch(pathArg) {
+    goToStringPath(pathArg) {
       const pathString = pathArg.split('/');
       const path = [this.state.tree];
       pathString.forEach((subDir) => {
@@ -62,6 +64,9 @@ export default class Inbox extends Base {
         path,
         pathString,
         searching: false,
+        search: false,
+        home: true,
+        hot: false,
       });
     }
     handleClick(type) {
@@ -98,6 +103,8 @@ export default class Inbox extends Base {
       if (file === null) {
         // this is the case when we get direct path from search.js
         url = path.slice(15);
+      } else if (file === 'hot') {
+        url = path;
       } else {
         url = path.join('/');
         url = url + '/'+ file;
@@ -123,27 +130,29 @@ export default class Inbox extends Base {
             </div>
           </div>
       );
+      const params = {
+        user: this.props.user,
+        tree: this.state.tree,
+        location: this.state.path[this.state.path.length - 1],
+        goForward: this.goForward,
+        path: this.state.path,
+        pathString: this.state.pathString,
+        goBack: this.goBack,
+        timeStamp: this.state.timeStamp,
+        searchResult: this.state.searchResult,
+        setSearch: this.setSearch,
+        searching: this.state.searching,
+        goToSearch: this.goToStringPath,
+        isMobile: this.props.isMobile,
+        leftNav: this.props.leftNav,
+        showAttachment: this.showAttachment,
+        search: this.state.search,
+        home: this.state.home,
+        hot: this.state.hot,
+        handleClick: this.handleClick,
+      };
       return (
-        !this.state.tree ? progress
-                          : <IntranetDumb tree={this.state.tree}
-                            location={this.state.path[this.state.path.length - 1]}
-                            goForward={this.goForward}
-                            path={this.state.path}
-                            pathString={this.state.pathString}
-                            goBack={this.goBack}
-                            timeStamp={this.state.timeStamp}
-                            searchResult={this.state.searchResult}
-                            setSearch={this.setSearch}
-                            searching={this.state.searching}
-                            goToSearch={this.goToSearch}
-                            isMobile={this.props.isMobile}
-                            leftNav={this.props.leftNav}
-                            showAttachment={this.showAttachment}
-                            search={this.state.search}
-                            home={this.state.home}
-                            hot={this.state.hot}
-                            handleClick={this.handleClick}
-                          />
+        !this.state.tree ? progress : <IntranetDumb {...params} />
       );
     }
 }

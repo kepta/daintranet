@@ -2,6 +2,7 @@ import React from 'react';
 import { List, ListItem, ListDivider, Avatar } from 'material-ui';
 // import Helper from '../Helpers/helper';
 // import User from '../Helpers/user.info';
+import { primaryTextBlack, secTextBlack } from '../../helper/colorPallete';
 import Base from '../Base';
 // let helper = new Helper();
 
@@ -18,21 +19,21 @@ export default class SideBar extends Base {
       return mailArg.map((mail, iter) => {
         const secondaryText = (
           <p>
-            <span style={{ color: 'black' }}> { mail.su } </span><br/>
-            {mail.fr}
+            <span style={{ color: secTextBlack }}> { mail.su } </span>
           </p>
         );
-        console.log(mail);
-        const from = mail.e && mail.e[mail.e.length-1].a;
+        // console.log(mail);
+        const fromIcon = mail.e && mail.e[mail.e.length-1].a;
+        const from = mail.e && mail.e[mail.e.length-1];
         return (
           <div key={iter} onTouchTap={this.props.showEmail.bind(this, mail.id)}>
             <ListItem
-              primaryText={mail.e[0].p}
+              primaryText={<span style={{ textTransform: 'capitalize', color: primaryTextBlack }}> {from.p || from.d || from.a}</span>}
               secondaryText={secondaryText}
               secondaryTextLines={2}
               leftAvatar={
                 <Avatar>
-                  { from[0].toUpperCase() + from[1] }
+                  { fromIcon[0].toUpperCase()}
                 </Avatar>
               }
             />
@@ -43,7 +44,7 @@ export default class SideBar extends Base {
     }
     render() {
       return (
-            <div style={this.style.main} className="mui-col-sm-4 mui-col-md-4">
+            <div style={this.style.main}>
                 <List subheader="Webmail">
                   <ListDivider/>
                 </List>

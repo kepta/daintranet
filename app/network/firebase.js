@@ -1,13 +1,34 @@
 import { firebaseRef } from './auth';
 const date = new Date();
 const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900}`;
+// const dateStringYest = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900}`;
 
-export function readTopFolders() {
-  // firebaseRef.child('file').child(dateString).orderByValue().on('value', snap => {
-  //   snap.forEach(data => {
-  //     console.log(data.key(), data.val());
-  //   });
-  // });
+export function readTopFolders(user) {
+  return new Promise( (resolve, reject) => {
+    const obj = {};
+    firebaseRef.child('file').child(dateString).child(user.id.slice(0, 6)).orderByValue().limitToLast(10).once('value', snap => {
+      snap.forEach( dat => {
+        //  array.push({ count : dat.val(), path: dat.key() } ) ;
+         obj[dat.key()] =   (obj[dat.key()] || 0) +  dat.val();
+      })
+      if (date.getDate() === 1) {
+        resolve(obj);
+      }
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+      reject(errorObject);
+      return;
+    });
+    if (date.getDate() >= 2) {
+      const yesterday = `${date.getDate() - 1}-${date.getMonth()+1}-${date.getYear()+1900}`
+      firebaseRef.child('file').child(yesterday).child(user.id.slice(0, 6)).orderByValue().limitToLast(10).once('value', snap => {
+        snap.forEach( dat => {
+          obj[dat.key()] =   (obj[dat.key()] || 0) +  dat.val();
+        })
+        resolve(obj);
+      });
+    }
+  });
 }
 export function increment(path, user, isFile) {
   // console.log('incrementing');

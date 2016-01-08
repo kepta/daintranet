@@ -15,7 +15,7 @@ export default class TroubleLoading extends Base {
       this.setState({
         count: 2,
       });
-    }, 7000);
+    }, 15000);
     this.setState({
       count: -1,
     });
@@ -27,13 +27,6 @@ export default class TroubleLoading extends Base {
   }
 
   render() {
-    setTimeout(() => {
-      if (this) {
-        this.setState({
-          count: this.state.count + 1,
-        });
-      }
-    }, 7000);
     // console.log(this.state.count);
     const showTryAgain = (
         <p onClick={this.tryAgain}>Try again</p>
@@ -45,10 +38,6 @@ export default class TroubleLoading extends Base {
       <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
         <div style={{ alignSelf: 'center' }}>
           <CircularProgress/>
-          <div style={{ marginTop: '25px' }}>
-            {this.state.count === 0 ? showTryAgain : null}
-            {this.state.count === 2 ? resetALL : null}
-          </div>
         </div>
       </div>
     );
