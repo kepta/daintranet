@@ -19,15 +19,13 @@ import { SvgIcon } from 'material-ui';
 //   </svg>
 // );
 const iconStyle = {
-  height: '30px',
-  width: '30px',
-  borderRadius: '50%',
-  display: 'inline-block',
-  textAlign: 'center',
-  lineHeight: '47px',
-  fontSize: '24px',
-  WebkitUserSelect: 'none',
-  padding: '0 !important',
+  // borderRadius: '50%',
+  // display: 'inline-block',
+  // textAlign: 'center',
+  // lineHeight: '47px',
+  // fontSize: '24px',
+  // WebkitUserSelect: 'none',
+  // padding: '0 !important',
 };
 export class Attachments extends React.Component {
   render() {
@@ -102,6 +100,18 @@ export class Close extends React.Component {
     );
   }
 }
+export class CloseOther extends React.Component {
+  render() {
+    return (
+      <SvgIcon style={{ ...iconStyle,  ...this.props.style }}>
+        <path d="M11.469,10l7.08-7.08c0.406-0.406,0.406-1.064,0-1.469c-0.406-0.406-1.063-0.406-1.469,0L10,8.53l-7.081-7.08
+      							c-0.406-0.406-1.064-0.406-1.469,0c-0.406,0.406-0.406,1.063,0,1.469L8.531,10L1.45,17.081c-0.406,0.406-0.406,1.064,0,1.469
+      							c0.203,0.203,0.469,0.304,0.735,0.304c0.266,0,0.531-0.101,0.735-0.304L10,11.469l7.08,7.081c0.203,0.203,0.469,0.304,0.735,0.304
+      							c0.267,0,0.532-0.101,0.735-0.304c0.406-0.406,0.406-1.064,0-1.469L11.469,10z"></path>
+      </SvgIcon>
+    );
+  }
+}
 export class CloseGrey extends React.Component {
   render() {
     return (
@@ -120,7 +130,7 @@ export class FolderIcon extends React.Component {
     return false;
   }
   render() {
-    console.log(this.props.style );
+    // console.log(this.props.style );
     return (
       <SvgIcon style={{ ...iconStyle,  ...this.props.style }}>
         <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path>
@@ -134,7 +144,7 @@ export class PdfIcon extends React.Component {
   }
   render() {
     return (
-      <SvgIcon style={{ fill: '#ff8a65' }}>
+      <SvgIcon style={{ ...iconStyle,  ...this.props.style }}>
         <path d="M6 2c-1.1 0-1.99.9-1.99 2l-.01 16c0 1.1.89 2 1.99 2h12.01c1.1 0 2-.9 2-2v-12l-6-6h-8zm7 7v-5.5l5.5 5.5h-5.5z"></path>
       </SvgIcon>
     );
@@ -144,8 +154,8 @@ export class PdfIcon extends React.Component {
 export class BackButton extends React.Component {
   render() {
     return (
-      <SvgIcon className="svg-icon">
-          <path style={{ fill: 'rgb(128, 128, 128) !important' }} d="M15.41 7.41l-1.41-1.41-6 6 6 6 1.41-1.41-4.58-4.59z"></path>
+      <SvgIcon style={{ ...iconStyle,  ...this.props.style }}>
+          <path d="M15.41 7.41l-1.41-1.41-6 6 6 6 1.41-1.41-4.58-4.59z"></path>
       </SvgIcon>
     );
   }

@@ -13,21 +13,22 @@ export default class Tab extends Base {
     };
   }
   handleClick(type) {
-    this.props.handleClick({
+    this.props.handleTabChange({
       search: type === 'search',
       hot: type === 'hot',
       home: type === 'home',
+      searching: false,
     });
   }
   feedBack() {
     alert('This feature is in progress. If you have any bugs, feature request, suggestion. Please fill the form.');
-      window.open('https://docs.google.com/forms/d/1W7VEWJMFNqizlQ1dw4l93xWxyXGVv5CoQtHYUhZ8gn8/viewform?usp=send_form', '_blank');
+    window.open('https://docs.google.com/forms/d/1W7VEWJMFNqizlQ1dw4l93xWxyXGVv5CoQtHYUhZ8gn8/viewform?usp=send_form', '_blank');
   }
   render() {
     const style = this.style();
     return (
       <div style={style.main}>
-        <div style={this.giveStyle(style.tab, this.props.search)} onTouchTap={this.feedBack}>
+        <div style={this.giveStyle(style.tab, this.props.search)} onTouchTap={this.handleClick.bind(this, 'search')}>
           <IconButton tooltip="Search">
             <SearchIcon/>
           </IconButton>

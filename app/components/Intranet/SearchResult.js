@@ -1,6 +1,6 @@
 import React from 'react';
 import Base from '../Base';
-import { List, RefreshIndicator } from 'material-ui';
+import { List } from 'material-ui';
 // import { PdfIcon } from '../Icons';
 import ListItem from './ListItem';
 // import ListItemMobile from './ListItem.mobile';
@@ -14,53 +14,28 @@ export default class Viewer extends Base {
       this._bind('displayStructure', 'goForward', 'showAttachment');
     }
     goForward(x, item) {
-      this.props.goToSearch(item.slice(15));
+      this.props.goToStringPath(item.slice(15));
     }
     showAttachment(x) {
-      this.props.showAttachment(x, null);
-      // const url = x.slice(15); // /root/intranet/
-      // console.log(url);
-      // window.open(formQuery(url), '_blank');
+      this.props.showAttachment(x.slice(15));
     }
     displayStructure(array) {
       console.log('here', array);
-      return (
-        <ListItem
-          items={array}
-          goForward={this.goForward}
-          showAttachment={this.showAttachment}
-          fromSearch
-        />
-      );
-      // return array.map((item, key) => {
-      //   const isFile = item.name.indexOf('.') > -1;
-      //   return (
-      //     <ListItem
-      //       key={key}
-      //       isFile={isFile}
-      //       item={item.name}
-      //       goForward={this.goForward}
-      //       showAttachment={this.showAttachment}
-      //       pathString={item.path}
-      //     />
-      //   );
-      // });
+      if (array) {
+        return (
+          <ListItem
+            items={array}
+            goForward={this.goForward}
+            showAttachment={this.showAttachment}
+            fromSearch
+          />
+        );
+      }
+      return null;
     }
     render() {
-      const lastUpdated = (
-        <span>
-          Search Results
-        </span>
-      );
-      const refresh = (
-        <RefreshIndicator size={40} left={5} top={5} style={{ position: 'relative' }} status="loading" />
-      );
-      const statusDisplay = this.props.searching ? refresh : lastUpdated;
       return (
         <div style={this.style.main}>
-          <div style={{ ...this.style.updated, ...flexCenter }}>
-            {statusDisplay}
-          </div>
           <List style={this.style.list}>
             {this.displayStructure(this.props.searchResult)}
           </List>

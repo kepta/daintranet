@@ -21,30 +21,21 @@ export default class Viewer extends Base {
       }
     }
     showAttachment(path, file) {
-      this.props.showAttachment(path, file);
-      // // console.log(path, file);
-      // let url = path.join('/');
-      // increment(path.join('*'), )
-      // url = url + '/'+ file;
-      // window.open(formQuery(url), '_blank');
+      let url = path.join('/');
+      url = url + '/'+ file;
+      this.props.showAttachment(url);
     }
     displayStructure(obj) {
-      return Object.keys(obj).map((item, key) => {
-        const isFile = obj[item] === 'file';
-        const params = {
-          key,
-          isFile,
-          item,
-          goForward: this.goForward,
-          showAttachment: this.showAttachment,
-          pathString: this.props.pathString,
-          path: this.props.path,
-        };
-        if (this.props.isMobile) {
-          return (<ListItemMobile {...params}/>);
-        }
-        return (<ListItem {...params}/>);
-      });
+      const params = {
+        items: obj,
+        goForward: this.goForward,
+        showAttachment: this.showAttachment,
+        pathString: this.props.pathString,
+        path: this.props.path,
+        isMobile: this.props.isMobile,
+      };
+      return (<ListItem {...params}/>);
+      // });
     }
     render() {
       const lastUpdated = (
@@ -55,7 +46,7 @@ export default class Viewer extends Base {
       const refresh = (
         <RefreshIndicator size={40} left={5} top={5} style={{ position: 'relative' }} status="loading" />
       );
-      const statusDisplay = this.props.searching ? refresh : lastUpdated;
+      const statusDisplay = lastUpdated;
       return (
           <div style={this.style.main} id="scroller">
             <div style={{ ...this.style.updated, ...flexCenter }}>

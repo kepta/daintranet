@@ -4,7 +4,7 @@ import Base from '../Base';
 import { CircularProgress } from 'material-ui';
 import { fetchIntranet, fuzzySearch, formQuery } from '../../network/Fetch';
 import ParseDate from '../../helper/dateParse';
-import { increment, readTopFolders } from '../../network/firebase';
+import { increment } from '../../network/firebase';
 export default class Inbox extends Base {
     constructor(props) {
       super(props);
@@ -20,7 +20,9 @@ export default class Inbox extends Base {
         home: true,
         hot: false,
       };
-      this._bind('getDirectoryTree', 'goForward', 'goBack', 'setSearch', 'goToSearch', 'showAttachment', 'handleClick');
+      this._bind('getDirectoryTree', 'goForward', 'goBack',
+                'setSearch', 'goToStringPath', 'showAttachment',
+                'handleTabChange');
       this.getDirectoryTree();
     }
     getDirectoryTree() {
@@ -48,11 +50,14 @@ export default class Inbox extends Base {
       this.setState({
         path: tempArray,
         pathString: tempPathString,
+        search: false,
+        home: true,
+        hot: false,
+        searching: false,
       });
     }
-    goToSearch(pathArg) {
+    goToStringPath(pathArg) {
       console.log(pathArg);
-      // debugger;
       const pathString = pathArg.split('/');
       const path = [this.state.tree];
       console.log(path, pathString);
@@ -60,7 +65,6 @@ export default class Inbox extends Base {
         path.push(path[path.length - 1][subDir]);
       });
       this.setState({
-        searchResult: null,
         path,
         pathString,
         searching: false,
@@ -69,47 +73,33 @@ export default class Inbox extends Base {
         hot: false,
       });
     }
-    handleClick(type) {
+    handleTabChange(type) {
       this.setState(type);
     }
     setSearch(search) {
-      if (search) {
-        this.setState({
-          searching: true,
-        });
-        fuzzySearch(search).then((resp, err) => {
-          // TODO if you press cancel while search is going
-          if (err) {
-            console.error(err);
-            this.setState({
-              searching: false,
-            });
-          }
-          if (resp) {
-            this.setState({
-              searchResult: resp,
-              searching: false,
-            });
-          }
-        });
-      } else {
-        this.setState({
-          searchResult: null,
-        });
-      }
+      this.setState({
+        searching: true,
+      });
+      fuzzySearch(search).then((resp, err) => {
+        // TODO if you press cancel while search is going
+        if (err && this.state.search) {
+          console.error(err);
+          this.setState({
+            searching: false,
+            searchResult: null,
+          });
+        }
+        if (resp && this.state.search) {
+          this.setState({
+            searchResult: resp,
+            searching: false,
+          });
+        }
+      });
     }
     showAttachment(path, file) {
-      let url;
-      if (file === null) {
-        // this is the case when we get direct path from search.js
-        url = path.slice(15);
-      } else {
-        url = path.join('/');
-        url = url + '/'+ file;
-      }
-      // console.log(url.replace('/', '*'));
-      window.open(formQuery(url), '_blank');
-      increment(url.replace(/\//g, '*').replace(/\./g, '^'), this.props.user);
+      window.open(formQuery(path), '_blank');
+      increment(path.replace(/\//g, '*').replace(/\./g, '^'), this.props.user);
     }
     goBack() {
       if (this.state.path.length === 1) return;
@@ -118,38 +108,41 @@ export default class Inbox extends Base {
       this.setState({
         path: tempArray,
         pathString: tempPathString,
+        search: false,
+        home: true,
+        hot: false,
       });
     }
     render() {
       const progress = (
-          <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
-            <div style={{ alignSelf: 'center' }}>
-              <CircularProgress/>
-            </div>
+        <div style={{ display: 'flex', justifyContent: 'center', height: '100%' }}>
+          <div style={{ alignSelf: 'center' }}>
+            <CircularProgress/>
           </div>
+        </div>
       );
-      return (
-        !this.state.tree ? progress
-                          : <IntranetDumb tree={this.state.tree}
-                            location={this.state.path[this.state.path.length - 1]}
-                            goForward={this.goForward}
-                            path={this.state.path}
-                            pathString={this.state.pathString}
-                            goBack={this.goBack}
-                            timeStamp={this.state.timeStamp}
-                            searchResult={this.state.searchResult}
-                            setSearch={this.setSearch}
-                            searching={this.state.searching}
-                            goToSearch={this.goToSearch}
-                            isMobile={this.props.isMobile}
-                            leftNav={this.props.leftNav}
-                            showAttachment={this.showAttachment}
-                            search={this.state.search}
-                            home={this.state.home}
-                            hot={this.state.hot}
-                            handleClick={this.handleClick}
-                            user={this.props.user}
-                          />
+      const IntranetDumbRef = (
+        <IntranetDumb tree={this.state.tree}
+          location={this.state.path[this.state.path.length - 1]}
+          goForward={this.goForward}
+          path={this.state.path}
+          pathString={this.state.pathString}
+          goBack={this.goBack}
+          timeStamp={this.state.timeStamp}
+          searchResult={this.state.searchResult}
+          goToStringPath={this.goToStringPath}
+          isMobile={this.props.isMobile}
+          leftNav={this.props.leftNav}
+          showAttachment={this.showAttachment}
+          search={this.state.search}
+          searching={this.state.searching}
+          home={this.state.home}
+          hot={this.state.hot}
+          handleTabChange={this.handleTabChange}
+          user={this.props.user}
+          setSearch={this.setSearch}
+        />
       );
+      return !this.state.tree ? progress : IntranetDumbRef;
     }
 }

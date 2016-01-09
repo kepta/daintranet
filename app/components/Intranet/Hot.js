@@ -8,7 +8,8 @@ import ListItem from './ListItem';
 
 // import ListItem from './ListItem';
 
-export default class Hot extends Base {
+export default class HotItem extends Base {
+
     constructor(props) {
       super(props);
       this.state = {
@@ -30,11 +31,10 @@ export default class Hot extends Base {
       });
     }
     goForward(x, item) {
-      this.props.goToSearch(item);
+      this.props.goToStringPath(item);
     }
     showAttachment(x) {
-      console.log(x);
-      this.props.showAttachment(x, 'hot');
+      this.props.showAttachment(x);
     }
     render() {
       console.log(this.state.data);

@@ -2,8 +2,9 @@ import React from 'react';
 import Base from '../Base';
 import { AppBar, TextField, Toolbar, IconButton, ToolbarGroup, ListDivider, Paper } from 'material-ui';
 import { BackButton, CloseGrey } from '../Icons';
-import SearchBar from './Tabs';
-
+import Tabs from './Tabs';
+import SearchBar from './SearchBar';
+import MiscBar from './MiscBar';
 export default class Viewer extends Base {
     constructor(props) {
       super(props);
@@ -43,22 +44,22 @@ export default class Viewer extends Base {
             title={<span>DAINTRANET &nbsp; 👹</span>}
             onLeftIconButtonTouchTap={this.props.leftNav}
           />
-          <SearchBar
+          <Tabs
             search={this.props.search}
             home={this.props.home}
             hot={this.props.hot}
-            handleClick={this.props.handleClick}
+            searching={this.props.searching}
+            handleTabChange={this.props.handleTabChange}
           />
-            <Toolbar >
-              <ToolbarGroup key={0} style={style.backButton} >
-                <IconButton onTouchTap={this.lastQuery ? this.clearSearch : this.props.goBack}>
-                  {this.lastQuery ? <CloseGrey/> : <BackButton/>}
-                </IconButton>
-              </ToolbarGroup>
-              <ToolbarGroup key={1}>
-              
-              </ToolbarGroup>
-              </Toolbar>
+          <MiscBar
+            setSearch={this.props.setSearch}
+            search={this.props.search}
+            home={this.props.home}
+            hot={this.props.hot}
+            goBack={this.props.goBack}
+            pathString={this.props.pathString}
+            goToStringPath={this.props.goToStringPath}
+          />
           <ListDivider/>
         </div>
       );

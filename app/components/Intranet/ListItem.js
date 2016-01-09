@@ -1,9 +1,9 @@
 import React from 'react';
 import Base from '../Base';
-import { ListItem, Avatar, ListDivider } from 'material-ui';
+// import { Avatar, ListDivider } from 'material-ui';
 import { FolderIcon, PdfIcon } from '../Icons';
 
-export default class Item extends Base {
+export default class ListItem extends Base {
     onTouchTap(self, isFile, props, item, pathString) {
       return isFile ?
       props.showAttachment.bind(self, props.pathString || pathString, item)
@@ -20,7 +20,7 @@ export default class Item extends Base {
       } else {
         grid = Object.keys(obj);
       }
-      console.log(grid);
+      console.log('wat', grid);
       const list = grid.map((item, key) => {
         //   const isFile = item.name.indexOf('.') > -1;
         // console.log(item);
@@ -29,8 +29,8 @@ export default class Item extends Base {
         if (fromSearch) {
           item.path.lastIndexOf('/');
           name = item.path.slice(item.path.lastIndexOf('/')+1);
-          console.log(name);
-          isFile = name.indexOf('.') > -1 ;
+          // console.log(name);
+          isFile = name.indexOf('.') > -1;
         } else {
           isFile = obj[item] === 'file';
         }
@@ -41,8 +41,8 @@ export default class Item extends Base {
           >
             <div style={style.listItem}>
                 <div style={style.icon}>
-                  { isFile ? <PdfIcon style={{ fill: '#ff8a65', height: '64px', width: '64px' }}/>
-                : <FolderIcon style={{ fill: '#ffcc80', height: '64px', width: '64px' }}/>}
+                  { isFile ? <PdfIcon style={{ fill: '#ff8a65', height: '44px', width: '44px' }}/>
+                : <FolderIcon style={{ fill: '#ffcc80', height: '44px', width: '44px' }}/>}
                 </div>
                 <div>
                     {name}
@@ -62,6 +62,7 @@ export default class Item extends Base {
           display: 'flex',
           alignItems: 'center',
           cursor: 'pointer',
+          marginLeft: '15px',
         },
         listItem: {
           display: 'flex',
