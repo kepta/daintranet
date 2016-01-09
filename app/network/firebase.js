@@ -4,7 +4,7 @@ const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900
 // const dateStringYest = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900}`;
 
 // var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
-
+//
 // function getData() {
 //   let totalCount = 0;
 //   let totalUsers = 0;
@@ -15,15 +15,16 @@ const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900
 //     snap.forEach(dat => {
 //       const x = dat.val();
 //       // console.log(x.email, x['8-1-2016']);
-//       if (x['7-1-2016']) {
-//         totalUsers++;
-//         totalCount+= (x['8-1-2016'] || 0);
-//         email.push(x.email);
-//       }
-//       if (x['9-1-2016']) {
+//       // if (x['7-1-2016']) {
+//       //   totalUsers++;
+//       //   totalCount+= (x['8-1-2016'] || 0);
+//       //   email.push(x.email);
+//       // }
+//       const date = '9-1-2016'
+//       if (x[date]) {
 //         regular++;
 //         // totalCount+= (x['8-1-2016'] || 0);
-//         regEmail.push(x.email);
+//         regEmail.push({email: x.email, count: x[date]} );
 //       }
 //
 //       // if (dat.val()['8-1-2016']) {
@@ -32,8 +33,8 @@ const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900
 //       // }
 //       // console.log(dat.child('8-1-2016').key('email').val());
 //     });
-//     console.log(email);
-//     console.log(totalUsers, totalCount, regular);
+//     console.log(regEmail.sort((a, b) => b.count - a.count));
+//     console.log(regular);
 //   });
 // }
 //
