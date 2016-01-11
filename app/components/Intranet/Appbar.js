@@ -59,6 +59,7 @@ export default class Viewer extends Base {
             goBack={this.props.goBack}
             pathString={this.props.pathString}
             goToStringPath={this.props.goToStringPath}
+            isMobile={this.props.isMobile}
           />
           <ListDivider/>
         </div>

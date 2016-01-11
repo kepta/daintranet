@@ -34,6 +34,9 @@ export default class Viewer extends Base {
         path: this.props.path,
         isMobile: this.props.isMobile,
       };
+      if (this.props.isMobile) {
+        return <ListItemMobile {...params} />;
+      }
       return (<ListItem {...params}/>);
       // });
     }

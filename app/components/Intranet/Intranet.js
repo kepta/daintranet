@@ -57,10 +57,8 @@ export default class Inbox extends Base {
       });
     }
     goToStringPath(pathArg) {
-      console.log(pathArg);
       const pathString = pathArg.split('/');
       const path = [this.state.tree];
-      console.log(path, pathString);
       pathString.forEach((subDir) => {
         path.push(path[path.length - 1][subDir]);
       });

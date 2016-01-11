@@ -37,7 +37,7 @@ export default class HotItem extends Base {
       this.props.showAttachment(x);
     }
     render() {
-      console.log(this.state.data);
+      // console.log(this.state.data);
       const style = this.style();
       const data = this.state.data ?
         (<ListItem

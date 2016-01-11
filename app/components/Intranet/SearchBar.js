@@ -6,7 +6,13 @@ import { CloseOther, PdfIcon } from '../Icons';
 
 export default class SearchBar extends Base {
   componentDidMount() {
-    this.refs.search.focus();
+    if (!this.props.isMobile) {
+      this.refs.search.focus();
+    }
+  }
+  handleEnter(e) {
+    e.blur();
+    console.log('enter');
   }
   render() {
     const style = this.style();
@@ -18,6 +24,7 @@ export default class SearchBar extends Base {
             fullWidth
             underlineFocusStyle={{ borderColor: 'rgb(212, 212, 212)' }}
             onChange={this.props.handleSearchChange}
+            onEnterKeyDown={(e) => e.target.blur()}
           />
         </div>
     );

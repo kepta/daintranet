@@ -59,6 +59,7 @@ export default class Item extends Base {
           alignItems: 'center',
           fontSize: isMobile ? '13px' : '16px',
           wordWrap: 'break-word',
+          wordBreak: 'break-word',
           textAlign: 'center',
         },
         avatar: {

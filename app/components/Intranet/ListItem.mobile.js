@@ -4,29 +4,39 @@ import Base from '../Base';
 import { FolderIcon, PdfIcon } from '../Icons';
 
 export default class ListItemMobile extends Base {
+
     render() {
       const style = this.style();
-      let showIcon;
-      if (this.props.search || this.props.path.length > 2) {
-        showIcon = <div style={style.icon}>{this.props.isFile ? <PdfIcon/> : <FolderIcon/>}</div>;
-      } else {
-        showIcon = null;
-      }
-      // console.log(this.props.item);
-      return (
-        <div
-          className="list-mobile"
-          style={style.main}
-          onTouchTap={ this.props.isFile ?
-          this.props.showAttachment.bind(this, this.props.pathString, this.props.item)
-        : this.props.goForward.bind(this, this.props.item)}
-        >
-          <div style={style.content}>
-            {showIcon}
-            {this.props.item}
+      const obj = this.props.items;
+      const grid = Object.keys(obj);
+      const list = grid.map((item, key) => {
+        const isFile = obj[item] === 'file';
+        // console.log(isFile);
+        let showIcon;
+        if (this.props.path.length > 2) {
+          showIcon = <div style={style.icon}>{isFile ? <PdfIcon style={{ fill: '#ff8a65' }}/> : <FolderIcon style={{ fill: '#ffcc80' }}/>}</div>;
+        } else {
+          showIcon = null;
+        }
+        return (
+          <div
+            key={key}
+            className="list-mobile"
+            style={style.main}
+            onTouchTap={ isFile ?
+            this.props.showAttachment.bind(this, this.props.pathString, item)
+          : this.props.goForward.bind(this, item)}
+          >
+            <div style={style.content}>
+              {showIcon}
+              {item}
+            </div>
           </div>
-        </div>
-      );
+        );
+      });
+      list.push(<div key={9999} style={{ ...style.main, borderBottom: 'solid 0px' }}/>);
+      list.push(<div key={9998} style={{ ...style.main, borderBottom: 'solid 0px' }}/>);
+      return <div>{list}</div>;
     }
     style() {
       return {

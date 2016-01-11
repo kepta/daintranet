@@ -20,7 +20,7 @@ export default class Viewer extends Base {
       this.props.showAttachment(x.slice(15));
     }
     displayStructure(array) {
-      console.log('here', array);
+      // console.log('here', array);
       if (array) {
         return (
           <ListItem

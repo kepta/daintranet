@@ -53,7 +53,6 @@ export default class Inbox extends Base {
             <Appbar
               goBack={this.props.goBack}
               setSearch={this.props.setSearch}
-              setSearch={this.props.setSearch}
               leftNav={this.props.leftNav}
               search={this.props.search}
               home={this.props.home}
@@ -61,6 +60,7 @@ export default class Inbox extends Base {
               handleTabChange={this.props.handleTabChange}
               pathString={this.props.pathString}
               goToStringPath={this.props.goToStringPath}
+              isMobile={this.props.isMobile}
             />
           </div>
           { whatToshow }
@@ -75,7 +75,7 @@ export default class Inbox extends Base {
           flexDirection: 'column',
         },
         appbar: {
-          height: '200px',
+          minHeight: '166px',
         },
       };
     }

@@ -9,7 +9,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import isMobileFunc from './helper/isMobile';
 
 if (isMobileFunc()) {
-  injectTapEventPlugin();
+  injectTapEventPlugin(700);
 } else {
   injectTapEventPlugin();
 }

@@ -5,49 +5,47 @@ const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900
 
 // var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
 //
-// function getData() {
-//   let totalCount = 0;
-//   let totalUsers = 0;
-//   let email = [];
-//   let regEmail = [];
-//   let regular = 0;
-//   firebaseRef.child('users').once('value', snap => {
-//     snap.forEach(dat => {
-//       const x = dat.val();
-//       // console.log(x.email, x['8-1-2016']);
-//       // if (x['7-1-2016']) {
-//       //   totalUsers++;
-//       //   totalCount+= (x['8-1-2016'] || 0);
-//       //   email.push(x.email);
-//       // }
-//       const date = '9-1-2016'
-//       if (x[date]) {
-//         regular++;
-//         // totalCount+= (x['8-1-2016'] || 0);
-//         regEmail.push({email: x.email, count: x[date]} );
-//       }
-//
-//       // if (dat.val()['8-1-2016']) {
-//       //   totalUsers++;
-//       //   totalCount += dat.val()['8-1-2016'].count;
-//       // }
-//       // console.log(dat.child('8-1-2016').key('email').val());
-//     });
-//     console.log(regEmail.sort((a, b) => b.count - a.count));
-//     console.log(regular);
-//   });
-// }
-//
-// firebaseRef.auth("", function(error, result) {
-//   if (error) {
-//     console.log("Authentication Failed!", error);
-//   } else {
-//     console.log(getData());
-//     console.log("Authenticated successfully with payload:", result.auth);
-//     console.log("Auth expires at:", new Date(result.expires * 1000));
-//   }
-// });
+// import { secret } from '../../secret.js';
+const SHOWUSERS = false;
 
+function getData(date1) {
+  let email = [];
+  let users = 0;
+  let sessions = 0;
+  return new Promise((res, rej) => {
+    firebaseRef.child('users').once('value', snap => {
+      snap.forEach(dat => {
+        const x = dat.val();
+        if (x[date1]) {
+          users++;
+          sessions+= (x[date1] || 0);
+          email.push({ email: x.email, count: x[date1] });
+        }
+      });
+      email = email.sort((a, b) => b.count - a.count);
+      console.log(email);
+      console.log(`${date1} users = ${users},sessions ${sessions}`);
+      res(users, sessions, email);
+    });
+  });
+}
+
+// if (SHOWUSERS) {
+//   firebaseRef.auth(secret, function(error, result) {
+//     if (error) {
+//       console.log("Authentication Failed!", error);
+//     } else {
+//       console.log(getData());
+//       console.log("Authenticated successfully with payload:", result.auth);
+//       console.log("Auth expires at:", new Date(result.expires * 1000));
+//     }
+//   });
+//   getData('7-1-2016');
+//   getData('8-1-2016');
+//   getData('9-1-2016');
+//   getData('10-1-2016');
+//   getData('11-1-2016');
+// }
 
 export function readTopFolders(user) {
   return new Promise((resolve, reject) => {
@@ -61,7 +59,7 @@ export function readTopFolders(user) {
       if (date.getDate() === 1) {
         resolve(obj);
       }
-    }, function (errorObject) {
+    }, (errorObject) => {
       console.log("The read failed: " + errorObject.code);
       reject(errorObject);
       return;

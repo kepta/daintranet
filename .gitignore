@@ -7,3 +7,4 @@ server/node_modules
 server/logs
 server/.git
 server/pass.js
+secret.js

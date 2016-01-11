@@ -19,6 +19,7 @@ export default class MiscBar extends Base {
     // return console.log(e.target.value);
     const value = event.target.value;
     // this.searchRef = event.target;
+    const delay = this.props.isMobile ? 750 : 550;
     if (value.length >= 3) {
       clearTimeout(this.lastQuery);
       this.lastQuery = setTimeout(() => {
@@ -27,7 +28,7 @@ export default class MiscBar extends Base {
         this.setState({
           searchString: value,
         });
-      }, 550);
+      }, delay);
     }
   }
   // onBlur(event) {
@@ -52,6 +53,7 @@ export default class MiscBar extends Base {
       whatToshow = (
         <SearchBar
           handleSearchChange={this.handleSearchChange}
+          isMobile={this.props.isMobile}
         />
       );
     }

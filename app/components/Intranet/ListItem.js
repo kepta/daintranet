@@ -20,7 +20,7 @@ export default class ListItem extends Base {
       } else {
         grid = Object.keys(obj);
       }
-      console.log('wat', grid);
+      // console.log('wat', grid);
       const list = grid.map((item, key) => {
         //   const isFile = item.name.indexOf('.') > -1;
         // console.log(item);
