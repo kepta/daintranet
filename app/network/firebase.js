@@ -5,8 +5,8 @@ const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900
 
 // var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
 //
-// import { secret } from '../../secret.js';
-const SHOWUSERS = false;
+import { secret } from '../../secret.js';
+const SHOWUSERS = true;
 
 function getData(date1) {
   let email = [];
@@ -30,22 +30,25 @@ function getData(date1) {
   });
 }
 
-// if (SHOWUSERS) {
-//   firebaseRef.auth(secret, function(error, result) {
-//     if (error) {
-//       console.log("Authentication Failed!", error);
-//     } else {
-//       console.log(getData());
-//       console.log("Authenticated successfully with payload:", result.auth);
-//       console.log("Auth expires at:", new Date(result.expires * 1000));
-//     }
-//   });
-//   getData('7-1-2016');
-//   getData('8-1-2016');
-//   getData('9-1-2016');
-//   getData('10-1-2016');
-//   getData('11-1-2016');
-// }
+if (SHOWUSERS) {
+  firebaseRef.auth(secret, function(error, result) {
+    if (error) {
+      console.log("Authentication Failed!", error);
+    } else {
+      console.log(getData());
+      console.log("Authenticated successfully with payload:", result.auth);
+      console.log("Auth expires at:", new Date(result.expires * 1000));
+    }
+  });
+  getData('7-1-2016');
+  getData('8-1-2016');
+  getData('9-1-2016');
+  getData('10-1-2016');
+  getData('11-1-2016');
+  getData('12-1-2016');
+  getData('13-1-2016');
+
+}
 
 export function readTopFolders(user) {
   return new Promise((resolve, reject) => {
