@@ -6,6 +6,7 @@ import isMobileFunc from '../helper/isMobile';
 import Base from './Base';
 import { Paper, LeftNav } from 'material-ui';
 import LeftNavMenu from './LeftNav';
+import { emailIncrement } from '../network/firebase';
 
 const isMobile = isMobileFunc();
 export default class DumbMainWrapper extends Base {
@@ -39,7 +40,9 @@ export default class DumbMainWrapper extends Base {
     );
   }
 
-  showEmail(id) {
+  showEmail(id, sub) {
+    console.log(sub);
+    emailIncrement(sub);
     this.setState({ id, fresh: false });
     // this.refs.leftNav.toggle();
   }

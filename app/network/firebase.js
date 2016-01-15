@@ -71,6 +71,21 @@ const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900
 //     // getFreq();
 // }
 
+function toHash(str) {
+  let hash = 0;
+  let i;
+  let chr;
+  let len;
+  if (str.length === 0) return hash;
+  for (i = 0, len = str.length; i < len; i++) {
+    chr = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}
+
+
 export function readTopFolders(user) {
   return new Promise((resolve, reject) => {
     const obj = {};
@@ -127,4 +142,28 @@ export function loginIncrement() {
       console.error('loginincrement', e);
     }
   });
+}
+
+export function emailIncrement(subject) {
+  // const auth = firebaseRef.getAuth();
+  if (!subject) {
+    return;
+  }
+  firebaseRef.child('email').child(toHash(subject))
+    .transaction((currentData) => {
+      if (!currentData) {
+        return {
+          subject,
+          count: 1,
+        };
+      }
+      return {
+        subject,
+        count: currentData.count + 1,
+      };
+    }, (e) => {
+      if (e) {
+        console.error('hero', e);
+      }
+    });
 }

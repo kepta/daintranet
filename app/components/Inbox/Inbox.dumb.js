@@ -26,7 +26,7 @@ export default class SideBar extends Base {
         const fromIcon = mail.e && mail.e[mail.e.length-1].a;
         const from = mail.e && mail.e[mail.e.length-1];
         return (
-          <div key={iter} onTouchTap={this.props.showEmail.bind(this, mail.id)}>
+          <div key={iter} onTouchTap={this.props.showEmail.bind(this, mail.id, mail.su)}>
             <ListItem
               primaryText={<span style={{ textTransform: 'capitalize', color: primaryTextBlack }}> {from.p || from.d || from.a}</span>}
               secondaryText={secondaryText}
