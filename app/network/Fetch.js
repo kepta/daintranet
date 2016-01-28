@@ -1,7 +1,7 @@
 import { MailParser } from 'mailparser';
 import { isLoggedIn } from './auth';
 import { firebaseRef } from './auth';
-
+import fetch from 'whatwg-fetch';
 // const local = window.location.href.indexOf('localhost');
 
 const WRONGPASS = 'INVALID_PASSWORD';

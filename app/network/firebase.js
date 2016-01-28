@@ -77,7 +77,6 @@ export function loginIncrement() {
 }
 
 export function emailIncrement(subject) {
-  // const auth = firebaseRef.getAuth();
   if (!subject) {
     return;
   }
