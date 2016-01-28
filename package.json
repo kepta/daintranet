@@ -52,6 +52,7 @@
   },
   "jspm": {
     "dependencies": {
+      "emailjs-mime-parser": "npm:emailjs-mime-parser@^1.0.0",
       "firebase": "npm:firebase@^2.3.2",
       "mailparser": "npm:mailparser@^0.5.3",
       "material-ui": "npm:material-ui@^0.14.0-rc1",
@@ -71,6 +72,7 @@
   },
   "dependencies": {
     "bouncefix.js": "^0.3.0",
+    "buffer": "^4.3.0",
     "eslint-config-airbnb": "^2.1.1"
   }
 }

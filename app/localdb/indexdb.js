@@ -45,11 +45,11 @@ class IndexDB {
   set(id, email) {
     const transaction = this.db.transaction(INBOX, 'readwrite');
     transaction.oncomplete = (event) => {
-      console.debug("Success");
+      console.log("Success");
     };
 
     transaction.onerror = (event) => {
-      console.debug("Error");
+      console.log("Error");
     };
     const objectStore = transaction.objectStore(INBOX);
     objectStore.add({ id, email });
@@ -85,11 +85,11 @@ class IndexDB {
       }, (err) => {
         setTimeout(() => {
           fetchEmail(id, user).then((email) => {
-            console.debug('2nd try');
+            console.log('2nd try');
             this.set(id, email);
             res(email);
           }, (err2) => {
-            console.debug('3rd try');
+            console.log('3rd try');
             fetchEmail(id, user).then((email) => {
               this.set(id, email);
               res(email);

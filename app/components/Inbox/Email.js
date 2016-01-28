@@ -12,6 +12,7 @@ export default class Email extends React.Component {
   }
   componentDidMount() {
     DB.get(this.props.id, this.props.user).then((email) => {
+      console.log(email);
       this.setState({ email });
     });
   }

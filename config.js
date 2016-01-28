@@ -17,6 +17,7 @@ System.config({
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
+    "emailjs-mime-parser": "npm:emailjs-mime-parser@1.0.0",
     "firebase": "npm:firebase@2.3.2",
     "mailparser": "npm:mailparser@0.5.3",
     "material-ui": "npm:material-ui@0.14.0-rc1",
@@ -315,6 +316,16 @@ System.config({
       "hash.js": "npm:hash.js@1.0.3",
       "inherits": "npm:inherits@2.0.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:emailjs-mime-codec@1.0.1": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "emailjs-stringencoding": "npm:emailjs-stringencoding@1.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:emailjs-mime-parser@1.0.0": {
+      "emailjs-addressparser": "npm:emailjs-addressparser@1.0.1",
+      "emailjs-mime-codec": "npm:emailjs-mime-codec@1.0.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:encoding@0.1.11": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

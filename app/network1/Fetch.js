@@ -28,7 +28,7 @@ export function getIP() {
           try {
             const IP = JSON.parse(resp.text).ip;
             if (IP === '14.139.122.114') {
-              console.debug('You are using this app inside the college, hurray bandwidth saving : )');
+              console.log('You are using this app inside the college, hurray bandwidth saving : )');
               userFromCollege = true;
             }
           } catch (e) {

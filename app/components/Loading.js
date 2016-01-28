@@ -1,10 +1,7 @@
 import React from 'react';
 import Base from './Base';
 import LoadingDumb from './Loading.dumb';
-// import db from '../localdb/indexdb';
-// import {getInbox} from '../network/Fetch';
 import { login, isLoggedIn } from '../network/auth';
-// const LASTEMAILS = 8;
 
 export default class Loading extends Base {
   componentDidMount() {

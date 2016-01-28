@@ -20,7 +20,7 @@ if (loggedIn) {
   jwt = localStorage.getItem('firebase:jwt::amber-heat-8849');
   jwt = atob(jwt);
   jwt = jwt.slice(loggedIn.token.length);
-  console.debug('resuming state of', loggedIn.password.email);
+  console.log('resuming state of', loggedIn.password.email);
 }
 const initialLoginState = loggedIn ? {
   STATUS: LOGGING,

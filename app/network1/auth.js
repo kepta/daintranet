@@ -28,17 +28,17 @@ function createUser(user) {
     if (error) {
       switch (error.code) {
         case 'EMAIL_TAKEN':
-          console.debug('The new user account cannot be created because the email is already in use.');
+          console.log('The new user account cannot be created because the email is already in use.');
           break;
         case 'INVALID_EMAIL':
-          console.debug('The specified email is not a valid email.');
+          console.log('The specified email is not a valid email.');
           break;
         default:
-          console.debug('Error creating user:', error);
+          console.log('Error creating user:', error);
       }
       return rej(error);
     } else {
-      console.debug('Successfully created user account with uid:', userData.uid);
+      console.log('Successfully created user account with uid:', userData.uid);
       return res(userData);
     }
   }));
@@ -53,7 +53,7 @@ function setKeys(user, uid, ref) {
   });
 }
 function readUserData(authData) {
-  console.debug('reading user', authData);
+  console.log('reading user', authData);
   return new Promise((res, rej) => {
     firebaseRef.child('users').child(authData.uid).once('value', (snapshot) => {
       console.log(snapshot.val());
@@ -81,7 +81,7 @@ function authenticateUser(user) {
           return reject(e);
         }
       }
-      console.debug('login success');
+      console.log('login success');
       return resolve(authData);
     });
   });
