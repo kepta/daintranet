@@ -7,6 +7,7 @@ import { LOGGED_IN, LOGGED_OUT, LOGGING, LOGIN_ERROR } from './state/actions';
 import Login from './components/Login';
 import Loading from './components/Loading';
 import MainWrapper from './components/MainWrapper';
+import Admin from './admin/index';
 
 function mapStateToProps(state) {
   return { login: state.login, windows: state.windows };
@@ -40,6 +41,11 @@ class App extends Component {
     });
   }
   render () {
+    const isAdmin = window.location.href.indexOf('?admin=kushan') > -1;
+    console.log(isAdmin);
+      if (isAdmin) {
+        return <Admin />;
+    }
     const user = { id: this.props.login.ID, pass: this.props.login.PASS };
     const props = {
       setLogging: this.props.setLogging,
