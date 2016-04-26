@@ -35,6 +35,9 @@ export default class Folder extends React.Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
+  componentDidUpdate() {
+    document.getElementById('list-top').scrollIntoView();
+  }
   handleResize = (e) => {
     this.setState({ height: window.innerHeight });
   }
@@ -98,6 +101,7 @@ export default class Folder extends React.Component {
                 quickSearch={this.props.quickSearch}
                 addToFav={this.props.addToFav}
                 fav={this.props.fav}
+                ref="toolbar"
               />
               {this.displaySearch()}
               {this.displayIntranet()}

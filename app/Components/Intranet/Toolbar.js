@@ -123,7 +123,7 @@ export default class Toolbar extends React.Component {
     return (
       <div style={style.wrapper}>
         <div style={style.jumbo}>
-          <div style={style.header}>
+          <div style={style.header} id="list-top">
             <h1 className="intranet-heading">&nbsp;&nbsp;
               {this.getHeading(pathString)}
               <span>

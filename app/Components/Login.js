@@ -28,7 +28,6 @@ class Login extends React.Component {
       if (!pass) {
         return this.props.actions.setLogout();
       }
-      console.log(pass);
       // console.log(`Resuming session of ${isLogged.uid}`);
       this.props.actions.sessionResume(isLogged, pass);
     } else if (this.props.login.STATUS === LOGIN_ERROR) {

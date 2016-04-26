@@ -230,8 +230,7 @@ button:focus {outline:0;}
   width: 400px;
 }
 
-
-@media (max-width:350px) {
+@media (max-width:450px) {
 /* (960 * 12) / 9 */
   .navbar-open {
     max-width: 130px;
@@ -246,7 +245,7 @@ button:focus {outline:0;}
   }
 
   .dashboard-title {
-    font-size: 0.8em;
+    font-size: 0.6em;
   }
 }
 

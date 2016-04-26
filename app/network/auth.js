@@ -1,7 +1,9 @@
 import Firebase from 'firebase';
 import { fetchInbox } from './webmail';
-
+const date = new Date();
 export const firebaseRef = new Firebase('https://amber-heat-8849.firebaseio.com');
+const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900}`;
+const dateStringYest = `${date.getDate()}-${date.getMonth()+1}-${date.getYear()+1900}`;
 
 export function isLoggedIn() {
   const authData = firebaseRef.getAuth();
@@ -61,6 +63,45 @@ function authenticateUser(user) {
         return resolve(authData);
       }
     });
+  });
+}
+
+export function loginIncrement() {
+  const auth = firebaseRef.getAuth();
+  console.log('incrementing', auth);
+
+  const target = firebaseRef.child('users').child(auth.uid);
+  target.child('email').transaction(currentData => {
+    return (currentData || auth.password.email);
+  });
+  target.child(dateString).transaction((currentData) => {
+    return (currentData || 0) + 1;
+  }, (e) => {
+    if (e) {
+      console.error('loginincrement', e);
+    }
+  });
+}
+
+
+export function rateApp(rating, feedback) {
+  const auth = firebaseRef.getAuth();
+  if (!auth) {
+    return;
+  }
+  if (!rating && !feedback) {
+    return;
+  }
+
+  console.log('rating', rating, feedback);
+  const target = firebaseRef.child('feedback').child(auth.password.email.slice(0, 9));
+
+  target.transaction(() => {
+    return { rating, feedback}
+  }, (e) => {
+    if (e) {
+      console.error('loginincrement', e);
+    }
   });
 }
 

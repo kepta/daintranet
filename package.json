@@ -65,6 +65,7 @@
     "react-custom-scrollbars": "^4.0.0-beta.1",
     "react-dom": "^15.0.1",
     "react-loading": "0.0.9",
+    "react-rating": "^0.2.2",
     "react-router": "^2.3.0",
     "react-router-redux": "^4.0.2",
     "react-tap-event-plugin": "^1.0.0",

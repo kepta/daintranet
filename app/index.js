@@ -13,26 +13,26 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import Immutable from 'immutable';
 let oldState;
-
+import { logout } from './network/auth'
 // toggle this to switch off persistence
-const persistence = undefined; // false;
+const persistence = true; // false;
 
-// try {
-//   oldState = { reducer: JSON.parse(localStorage.getItem('redux1'), (k, v) => {
-//     if (k === 'tree' || k === 'location' || k === 'search' || k === 'quickSearch' || k === 'inbox' || k === 'fav') {
-//       return Immutable.fromJS(v);
-//     }
-//     return v;
-//   }) };
-// } catch (e) {
-//   if (e) {
-//     oldState = undefined;
-//   }
-// } finally {
-//   if (!oldState.reducer) {
-//     oldState = undefined;
-//   }
-// }
+try {
+  oldState = { reducer: JSON.parse(localStorage.getItem('redux1'), (k, v) => {
+    if (k === 'tree' || k === 'location' || k === 'search' || k === 'quickSearch' || k === 'inbox' || k === 'fav') {
+      return Immutable.fromJS(v);
+    }
+    return v;
+  }) };
+} catch (e) {
+  if (e) {
+    oldState = undefined;
+  }
+} finally {
+  if (!oldState.reducer) {
+    oldState = undefined;
+  }
+}
 let middleware = [thunkMiddleware];
 if (process.env.NODE_ENV !== 'production') {
   const createLogger = require('redux-logger');
@@ -54,16 +54,17 @@ const store = createStore(
   )
 );
 
-// window.onunload = () => {
-//   localStorage.setItem('redux1', JSON.stringify(store.getState().reducer));
-// };
+window.onunload = () => {
+  localStorage.setItem('redux1', JSON.stringify(store.getState().reducer));
+};
 //
-// window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
-//   window.onunload = undefined;
-//   localStorage.removeItem('redux1');
-//   // location.reload();
-//   return false;
-// };
+window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+  window.onunload = undefined;
+  logout();
+  localStorage.removeItem('redux1');
+  // location.reload();
+  return false;
+};
 
 const history = syncHistoryWithStore(browserHistory, store);
 const node = document.getElementById('app');
